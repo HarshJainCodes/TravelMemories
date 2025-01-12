@@ -9,12 +9,16 @@
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build --force",
-    "lint": "eslint . --fix"
+    "lint": "eslint . --fix",
+    "test": "vitest"
   },
   "dependencies": {
     "@mdi/font": "7.4.47",
+    "@vue/test-utils": "^2.4.6",
     "core-js": "^3.37.1",
+    "happy-dom": "^16.5.3",
     "roboto-fontface": "*",
+    "vitest": "^2.1.8",
     "vue": "^3.4.31",
     "vuetify": "^3.6.14"
   },

@@ -58,4 +58,13 @@ export default defineConfig({
       },
     },
   },
+  test: {
+    globals: true,
+    environment: 'happy-dom',
+    server: {
+      deps: {
+        inline: ['vuetify'],
+      },
+    },
+  }
 })
