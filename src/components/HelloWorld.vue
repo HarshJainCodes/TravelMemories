@@ -16,7 +16,7 @@
         </div>
 
         <h1 class="text-h2 font-weight-bold">
-          Memories
+          Memory
         </h1>
       </div>
 
