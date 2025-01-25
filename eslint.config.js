@@ -1,16 +1,13 @@
-/**
- * .eslint.js
- *
- * ESLint configuration file.
- */
-
+import js from '@eslint/js'
 import pluginVue from 'eslint-plugin-vue'
-import vueTsEslintConfig from '@vue/eslint-config-typescript'
+import pluginVitest from '@vitest/eslint-plugin'
+import pluginCypress from 'eslint-plugin-cypress/flat'
+import skipFormatting from '@vue/eslint-config-prettier/skip-formatting'
 
 export default [
   {
     name: 'app/files-to-lint',
-    files: ['**/*.{ts,mts,tsx,vue}'],
+    files: ['**/*.{js,mjs,jsx,vue}'],
   },
 
   {
@@ -18,19 +15,20 @@ export default [
     ignores: ['**/dist/**', '**/dist-ssr/**', '**/coverage/**'],
   },
 
-  ...pluginVue.configs['flat/recommended'],
-  ...vueTsEslintConfig(),
-
+  js.configs.recommended,
+  ...pluginVue.configs['flat/essential'],
+  
   {
-    rules: {
-      '@typescript-eslint/no-unused-expressions': [
-        'error',
-        {
-          allowShortCircuit: true,
-          allowTernary: true,
-        },
-      ],
-      'vue/multi-word-component-names': 'off',
-    }
-  }
+    ...pluginVitest.configs.recommended,
+    files: ['src/**/__tests__/*'],
+  },
+  
+  {
+    ...pluginCypress.configs.recommended,
+    files: [
+      'cypress/e2e/**/*.{cy,spec}.{js,ts,jsx,tsx}',
+      'cypress/support/**/*.{js,ts,jsx,tsx}'
+    ],
+  },
+  skipFormatting,
 ]

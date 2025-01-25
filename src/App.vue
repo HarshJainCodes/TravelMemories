@@ -1,11 +1,16 @@
 <template>
-  <v-app>
-    <v-main>
-      <router-view />
-    </v-main>
-  </v-app>
-</template>
+	<v-app>
+		<v-main>
+			<div class="w-100 ma-5">
 
-<script lang="ts" setup>
-  //
+			</div>
+		</v-main>
+	</v-app>
+</template>
+<script>
 </script>
+
+
+<style scoped>
+
+</style>
