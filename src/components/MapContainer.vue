@@ -28,8 +28,6 @@ export default defineComponent({
             })
 
             emit('map-instance', map.value);
-
-            console.log(import.meta.env)
         })
 
         return {
