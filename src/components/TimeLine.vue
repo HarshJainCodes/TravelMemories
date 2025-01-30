@@ -16,16 +16,18 @@
 </template>
 
 <script lang="ts">
+import { useImageGallary } from '@/stores/imageGallary';
 import { defineComponent, onMounted, ref } from 'vue'
 
 export default defineComponent({
     emits: ['on-click-timeline'],
     setup(props, { emit }) {
         const timelineData = ref([]);
+        const imageGallary = useImageGallary();
 
         const transformTitleIfShort = (title: string) => {
-            if (title.length < 30){
-                const remaining = 30 - title.length;
+            if (title.length < 20){
+                const remaining = 20 - title.length;
                 let updatedTitle = ""
                 for (var i = 0; i < remaining / 2; i++){
                     updatedTitle += '-'
@@ -57,6 +59,7 @@ export default defineComponent({
                 const allImageData = await allImageReq.json();
 
                 timelineData.value = allImageData;
+                imageGallary.allTripData = allImageData;
                 console.log(allImageData);
             }
         })

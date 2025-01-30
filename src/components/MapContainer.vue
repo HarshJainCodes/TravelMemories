@@ -1,9 +1,13 @@
 <template>
-    <div class="d-flex w-100 h-100">
+    <div class="d-flex w-100 h-100 position-relative">
         <div id="map" class="w-100" :class="{
             'map-mobile': mobile, 'map-lg': !mobile
         }">
         </div>
+
+        <image-gallary class="position-absolute imageGallary z-index-2" :class="{
+            'map-mobile': mobile, 'map-lg': !mobile
+        }"/>
     </div>
 </template>
 
@@ -11,8 +15,12 @@
 import { defineComponent, onMounted, ref } from 'vue'
 import { useDisplay } from 'vuetify/lib/framework.mjs';
 import mapboxgl from 'mapbox-gl';
+import ImageGallary from './ImageGallary.vue';
 
 export default defineComponent({
+    components: {
+        ImageGallary,
+    },
     emits: ['map-instance'],
     setup(props, { emit }) {
         const { mobile } = useDisplay();
@@ -50,7 +58,7 @@ export default defineComponent({
     height: 900px;
 }
 
-canvas {
+canvas, .imageGallary {
     border-radius: 20px;
 }
 </style>

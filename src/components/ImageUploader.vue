@@ -7,8 +7,11 @@
             <div :class="{
                 'w-50 mx-auto' : !mobile
             }">
-                <v-text-field label="Trip Title" class="pa-5" v-model="tripTitle">
-                </v-text-field>
+                <v-autocomplete v-model="tripTitle" label="Trip Title" class="pa-5" :items="imageGallary.allTripHeading"
+                    @update:search="onSearchValueChanged"
+                    @update:model-value="onClickExistingTripName"
+                    hide-no-data
+                ></v-autocomplete>
 
                 <v-text-field v-model="tripYear" label="Year" type="number" class="pa-5"></v-text-field>
 
@@ -30,18 +33,21 @@
                     </v-btn>
                 </div>
             </div>         
-            
         </v-card>
     </div>
 </template>
 
 <script>
+import { useImageGallary } from '@/stores/imageGallary';
 import { defineComponent, ref, watch } from 'vue'
+import { TYPE, useToast } from 'vue-toastification';
 import { useDisplay } from 'vuetify/lib/framework.mjs';
 
 export default defineComponent({
     setup() {
         const { mobile } = useDisplay();
+        const imageGallary = useImageGallary();
+        const toast = useToast()
 
         const tripTitle = ref('');
         const tripYear = ref(0);
@@ -73,19 +79,39 @@ export default defineComponent({
             })
 
             if (req.status === 200){
-                console.log('images uploaded successfully')
+                toast('Images Uploaded Successfully', {
+                    type: TYPE.SUCCESS,
+                })
             }else{
-                console.log('some error occured')
+                toast('Some error occured in uploading the image', {
+                    type: TYPE.ERROR
+                })
+            }
+        }
+
+        const onSearchValueChanged = (title) => {
+            tripTitle.value = title
+        }
+
+        const onClickExistingTripName = (name) => {
+            const existingTrip = imageGallary.allTripData.find(x => x.tripTitle == name);
+            if (existingTrip != undefined) {
+                locationCoords.value.lat = existingTrip.lat;
+                locationCoords.value.lon = existingTrip.lon;
+                tripYear.value = existingTrip.year
             }
         }
 
         return {
             tripTitle,
             tripYear,
+            imageGallary,
             locationCoords,
             mobile,
             onFilesChanged,
-            onUploadImage
+            onUploadImage,
+            onSearchValueChanged,
+            onClickExistingTripName
         }
     },
 })
