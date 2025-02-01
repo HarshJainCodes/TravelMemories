@@ -58,7 +58,7 @@ export default defineComponent({
                 },
                 getIcon: d => 'marker',
                 getPosition: d => [d.lon, d.lat],
-                getSize: () => map.value.getZoom() * map.value.getZoom() * 0.8,
+                getSize: () => Math.max(map.value.getZoom() * map.value.getZoom() * 0.8, 20),
                 onClick: (icon) => {
                     emit('on-click-timeline', icon.object)
                 },
@@ -70,7 +70,9 @@ export default defineComponent({
             map.value = new mapboxgl.Map({
                 container: 'map',
                 interactive: true,
-                style: 'mapbox://styles/mapbox/streets-v12',
+                style: 'mapbox://styles/mapbox/streets-v11',
+                center: [80, 20],
+                zoom: 5,
             })
 
             map.value.on('move', () => {
