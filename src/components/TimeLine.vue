@@ -60,7 +60,6 @@ export default defineComponent({
 
                 timelineData.value = allImageData;
                 imageGallary.allTripData = allImageData;
-                console.log(allImageData);
             }
         })
 

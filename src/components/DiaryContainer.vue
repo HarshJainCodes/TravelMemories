@@ -6,7 +6,10 @@
             'width-lg': mdAndUp,
             'width-sm': mobile
         }">
-            <map-container @map-instance="onReceiveMapInstance"></map-container>
+            <map-container 
+                @map-instance="onReceiveMapInstance" 
+                @on-click-timeline="onClickTimeline"
+            ></map-container>
         </div>
 
         <div class="d-flex rounded-xl" :class="{
@@ -24,6 +27,7 @@ import MapContainer from './MapContainer.vue';
 import TimeLine from './TimeLine.vue';
 import { useDisplay } from 'vuetify/lib/framework.mjs';
 import { useImageGallary } from '@/stores/imageGallary';
+import { MAPBOX_FLY_DURATION } from './Constants';
 
 export default defineComponent({
     components: {
@@ -41,12 +45,12 @@ export default defineComponent({
         }
 
         const onClickTimeline = (imageData) => {
-            console.log(imageData);
             imageGallary.setTrip(imageData);
 
             mapInstance.value.flyTo({
                 center: [imageData.lon, imageData.lat],
                 zoom: 8,
+                duration: MAPBOX_FLY_DURATION,
             })
         }
 

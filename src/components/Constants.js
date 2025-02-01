@@ -1,0 +1,1 @@
+export const MAPBOX_FLY_DURATION = 2000

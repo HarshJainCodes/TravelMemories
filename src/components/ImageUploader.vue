@@ -63,7 +63,9 @@ export default defineComponent({
 
         const onUploadImage = async () => {
             if (selectedFiles.value.length === 0){
-                console.log('select atleast one image');
+                toast('Select Atleast one image', {
+                    type: TYPE.ERROR
+                })
                 return;
             }
 

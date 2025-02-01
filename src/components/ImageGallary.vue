@@ -1,5 +1,5 @@
 <template>
-    <div  v-if="imageGallary.tripName" class="d-flex flex-column w-100 h-100 blurred-overlay pa-5">
+    <div  v-if="imageGallary.tripName && imageGallary.showImagesOnMap" class="d-flex flex-column w-100 h-100 blurred-overlay pa-5">
         <!-- this will be the heading  -->
         <div class="d-flex w-100">
             <v-spacer />
