@@ -34,7 +34,9 @@ export default defineComponent({
         const map = ref(null);
         mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN
 
-        const mapCenter = ref([]);
+        const mapCenter = ref({
+            lng: 20, lat: 80
+        });
 
         const deckLayers = computed(() => [
             new IconLayer({
@@ -70,9 +72,9 @@ export default defineComponent({
             map.value = new mapboxgl.Map({
                 container: 'map',
                 interactive: true,
-                style: 'mapbox://styles/mapbox/streets-v11',
+                style: 'mapbox://styles/mapbox/streets-v12',
                 center: [80, 20],
-                zoom: 5,
+                zoom: 3,
             })
 
             map.value.on('move', () => {
