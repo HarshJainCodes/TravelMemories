@@ -30,6 +30,10 @@ export const useImageGallary = defineStore('image-gallary', () => {
         }
     })
 
+    watch(allTripData, (atd) => {
+        console.log(atd);
+    })
+
     return {
         selectedTrip,
         tripName,
