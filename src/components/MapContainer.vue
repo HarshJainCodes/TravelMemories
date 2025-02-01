@@ -8,13 +8,24 @@
             'map-mobile': mobile, 'map-lg': !mobile
         }"/>
 
-        <div class="position-absolute d-flex w-100 h-100 align-end pa-5 text-h6" style="pointer-events: none;">
-            <div class="px-1">
-                Latitude: {{ mouseCoordinates.lat }}
+        <div class="position-absolute d-flex w-100 h-100 align-end pa-5" style="pointer-events: none;">
+            <div class="d-flex text-h6" v-if="!mobile">
+                <div class="px-1">
+                    Latitude: {{ mouseCoordinates.lat }}
+                </div>
+        
+                <div>
+                    Longitude: {{ mouseCoordinates.lng }}
+                </div>
             </div>
-    
-            <div>
-                Longitude: {{ mouseCoordinates.lng }}
+            <div class="d-flex" v-else>
+                <div class="px-1">
+                    Latitude: {{ touchCoordinates.lat }}
+                </div>
+        
+                <div>
+                    Longitude: {{ touchCoordinates.lng }}
+                </div>
             </div>
         </div>
     </div>
@@ -45,8 +56,11 @@ export default defineComponent({
         const map = ref(null);
 
         const mouseCoordinates = ref({
-            lat: 0,
-            lng: 0,
+            lng: 20, lat: 80
+        })
+
+        const touchCoordinates = ref({
+            lng: 20, lat: 80
         })
 
         const mapCenter = ref({
@@ -126,9 +140,15 @@ export default defineComponent({
             })
 
             map.value.on('mousemove', (e) => {
-                mouseCoordinates.value.lat = e.lngLat.lat.toFixed(6),
+                mouseCoordinates.value.lat = e.lngLat.lat.toFixed(6)
                 mouseCoordinates.value.lng = e.lngLat.lng.toFixed(6)
             })
+
+            map.value.on('touchmove', () => {
+                touchCoordinates.value.lat = Number(mapCenter.value.lat.toFixed(4))
+                touchCoordinates.value.lng = Number(mapCenter.value.lng.toFixed(4))
+            })
+
 
             deckOverlay = new DeckOverlay({
                 layers: deckLayers.value,
@@ -140,7 +160,6 @@ export default defineComponent({
         })
 
         watch(deckLayers, (dl) => {
-            console.log(dl);
             deckOverlay.setProps({
                 layers: dl,
             })
@@ -149,6 +168,7 @@ export default defineComponent({
         return {
             mobile,
             mouseCoordinates,
+            touchCoordinates,
         }
     },
 })
