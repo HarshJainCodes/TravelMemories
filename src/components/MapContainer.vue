@@ -8,7 +8,7 @@
             'map-mobile': mobile, 'map-lg': !mobile
         }"/>
 
-        <div class="position-absolute d-flex w-100 h-100 align-end pa-5" style="pointer-events: none;">
+        <div v-if="!(imageGallary.tripName && imageGallary.showImagesOnMap)" class="position-absolute d-flex w-100 h-100 align-end pa-5" style="pointer-events: none;">
             <div class="d-flex text-h6" v-if="!mobile">
                 <div class="px-1">
                     Latitude: {{ mouseCoordinates.lat }}
@@ -167,6 +167,7 @@ export default defineComponent({
 
         return {
             mobile,
+            imageGallary,
             mouseCoordinates,
             touchCoordinates,
         }
