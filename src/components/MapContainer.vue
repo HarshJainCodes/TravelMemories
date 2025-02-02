@@ -263,7 +263,7 @@ export default defineComponent({
 }
 
 .map-lg { 
-    height: 800px;
+    height: 900px;
 }
 
 canvas, .imageGallary {
