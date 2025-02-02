@@ -4,7 +4,7 @@
 			'bg-black': uiMode.mode === UIMode.Dark
 		}">
 			<top-navigation />
-			<div class="w-100 h-100 ma-5">
+			<div class="w-100 h-100">
 				<router-view v-slot="{ Component }">
 					<keep-alive>
 						<component :is="Component"></component>
