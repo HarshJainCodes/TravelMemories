@@ -29,11 +29,7 @@ export const useImageGallary = defineStore('image-gallary', () => {
             }, MAPBOX_FLY_DURATION);
         }
     })
-
-    watch(allTripData, (atd) => {
-        console.log(atd);
-    })
-
+    
     return {
         selectedTrip,
         tripName,
