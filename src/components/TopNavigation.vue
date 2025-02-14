@@ -51,6 +51,9 @@
                     </template>
 
                     <v-list density="compact">
+                        <v-list-item @click="onClickLogin" density="compact" slim>
+                            Login
+                        </v-list-item>
                         <v-list-item @click="onClickUpload" density='compact' slim>
                             Upload
                         </v-list-item>
