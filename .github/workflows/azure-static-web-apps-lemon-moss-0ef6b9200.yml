@@ -42,6 +42,8 @@ jobs:
           ###### End of Repository/Build Configurations ######
         env:
           VITE_MAPBOX_TOKEN: ${{ secrets.VITE_MAPBOX_TOKEN }}
+          VITE_GOOGLE_CLIENT_ID: ${{ secrets.VITE_GOOGLE_CLIENT_ID }}
+          VITE_APPLICATION_INSIGHTS_CONN_STRING: ${{ secrets.VITE_APPLICATION_INSIGHTS_CONN_STRING }}
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
