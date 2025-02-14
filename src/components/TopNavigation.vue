@@ -13,7 +13,10 @@
             </div>
 
             <div class="d-flex h-100 align-center" v-if="!mobile">
-                <div class="text-h6 ml-15 navItem" @click="onClickUpload">
+                <div v-if="!userDetails.isLoggedIn" @click="onClickLogin" class="text-h6 ml-15 navItem">
+                    Login
+                </div>
+                <div class="text-h6 ml-2 navItem" @click="onClickUpload">
                     Upload
                 </div>
     
@@ -63,6 +66,7 @@ import { UIMode, useUIMode } from '@/stores/UIMode';
 import { defineComponent } from 'vue';
 import { useDisplay } from 'vuetify/lib/framework.mjs';
 import { useRouter } from 'vue-router';
+import { useUserDetails } from '@/stores/userDetails';
 
 export default defineComponent({
     name: 'topNavigation',
@@ -70,6 +74,7 @@ export default defineComponent({
         const { mdAndUp, mobile } = useDisplay();
         const uiMode = useUIMode();
         const router = useRouter();
+        const userDetails = useUserDetails();
 
         const onClickGithub = () => {
             window.open('https://github.com/HarshJainCodes/TravelMemories', '_blank')
@@ -77,6 +82,12 @@ export default defineComponent({
 
         const onClickUpload = () => {
             router.push('upload')
+        }
+
+        const onClickLogin = () => {
+            router.push({
+                name: 'login',
+            })
         }
 
         const onClickTitle = () => {
@@ -88,9 +99,11 @@ export default defineComponent({
             mobile,
             uiMode,
             UIMode,
+            userDetails,
             onClickTitle,
             onClickGithub,
             onClickUpload,
+            onClickLogin,
         }
     }
 })

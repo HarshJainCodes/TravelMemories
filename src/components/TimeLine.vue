@@ -52,7 +52,8 @@ export default defineComponent({
 
         onMounted(async () => {
             const allImageReq = await fetch('https://travelmemories.azurewebsites.net/ImageUpload/AllTripData', {
-                method: 'GET'
+                method: 'GET',
+                credentials: 'include'
             });
 
             if (allImageReq.status === 200){
