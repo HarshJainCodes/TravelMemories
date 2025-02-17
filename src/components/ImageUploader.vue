@@ -78,6 +78,7 @@ export default defineComponent({
             const req = await fetch(`https://travelmemories.azurewebsites.net/ImageUpload?tripTitle=${tripTitle.value}&year=${tripYear.value}&lat=${locationCoords.value.lat}&lon=${locationCoords.value.lon}`, {
                 method: 'POST',
                 body: formData,
+                credentials: 'include',
             })
 
             if (req.status === 200){
