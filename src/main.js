@@ -8,14 +8,11 @@ import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import { aliases, mdi } from 'vuetify/iconsets/mdi'
 import '@mdi/font/css/materialdesignicons.css'; // Ensure this is imported
+import 'corecomponentsHJ/dist/hjcorecomponents.css'
 
 import Toast from "vue-toastification";
 // Import the CSS or use your own!
 import "vue-toastification/dist/index.css";
-
-// google login
-import vue3GoogleLogin from 'vue3-google-login'
-
 
 import App from './App.vue'
 import router from './router'
@@ -38,8 +35,8 @@ app.use(createPinia())
 app.use(router)
 app.use(vuetify)
 app.use(Toast)
-app.use(vue3GoogleLogin, {
-    clientId: import.meta.env.VITE_GOOGLE_CLIENT_ID
-})
+// app.use(vue3GoogleLogin, {
+//     clientId: import.meta.env.VITE_GOOGLE_CLIENT_ID
+// })
 
 app.mount('#app')

@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 
 export const useUserDetails = defineStore('userDetails', () => {
     const userName = ref('');
@@ -9,6 +9,20 @@ export const useUserDetails = defineStore('userDetails', () => {
     function setIsLoggedIn(val) {
         isLoggedIn.value = val
     }
+
+    onMounted(async () => {
+        if (isLoggedIn.value === false){
+            // check if it is logged in
+            const req = await fetch('https://travelmemories.azurewebsites.net/ImageUpload/CheckLogin', {
+                method: 'GET',
+                credentials: 'include'
+            });
+
+            if (req.status === 200){
+                isLoggedIn.value = true;
+            }
+        }
+    })
 
     return {
         userName,

@@ -122,5 +122,8 @@ export default defineComponent({
 
 
 <style scoped>
-
+.v-autocomplete__content{
+    height: 300px !important;
+    overflow-y: scroll !important;
+}
 </style>
