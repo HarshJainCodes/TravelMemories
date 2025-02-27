@@ -17,7 +17,15 @@
         <v-window v-model="currWindow" class="w-100 fill-height" :show-arrows="!mobile">
             <v-window-item class="w-100 h-100" v-for="url in imageGallary.selectedTrip.imageUrls" :key="url">
                 <v-img :src="url">
-                </v-img>                
+                    <template #placeholder>
+                        <div class="w-100 h-100 d-flex justify-center align-center">
+                            <v-progress-circular 
+                                indeterminate
+                                color="grey-lighten-4" 
+                            />
+                        </div>
+                    </template>
+                </v-img>
             </v-window-item>
         </v-window>
         <div class="d-flex w-100 justify-center">
