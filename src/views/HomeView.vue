@@ -10,7 +10,7 @@
                     <v-divider class="w-33 ma-5" thickness="5" color="teal-lighten-1" opacity="100"></v-divider>
 
                     <div class="text-h5 text-teal-lighten-2">
-                        Tired to find your photo scattered among 1000 others? <br> See where all you have visited on the map
+                        Tired to find your photo scattered among 1000 others ? <br> See where all you have visited on the map
                          so that its easier to find photos.
                     </div>
 
