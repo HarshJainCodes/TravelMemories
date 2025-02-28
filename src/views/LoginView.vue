@@ -11,6 +11,7 @@
 <script>
 import { defineComponent, onActivated, ref } from 'vue'
 import { useUserDetails } from '@/stores/userDetails';
+import { useRouter } from 'vue-router';
 import { LoginPage } from 'corecomponentsHJ';
 
 export default defineComponent({
