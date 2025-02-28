@@ -1,5 +1,5 @@
 <template>
-    <login-page :google-client-id="googleClientId"
+    <login-page v-if="isSafeToShowLoginPage" :google-client-id="googleClientId"
         @on-google-authenticated="onGoogleAuthenticated"
     >
         <template #topHeading>
@@ -9,10 +9,10 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent, onActivated, ref } from 'vue'
 import { useUserDetails } from '@/stores/userDetails';
 import { useToast } from 'vue-toastification';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { LoginPage } from 'corecomponentsHJ';
 
 export default defineComponent({
@@ -21,6 +21,8 @@ export default defineComponent({
     },
     setup() {
         const userDetails = useUserDetails();
+        const router = useRouter();
+        const isSafeToShowLoginPage = ref(false);
 
         const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
@@ -46,12 +48,20 @@ export default defineComponent({
                 const response = await googleLoginCall.json();
                 userDetails.setIsLoggedIn(true);
                 userDetails.userName = response.userName
+                router.push('/MyCollection');
             }
         }
+
+        onActivated(async () => {
+            // if you are already logged in then you dont need to be seeing login page
+            await userDetails.reDirectFromLogin();
+            isSafeToShowLoginPage.value = true;
+        })
 
         return {
             googleClientId,
             onGoogleAuthenticated,
+            isSafeToShowLoginPage,
         }
     },
 })

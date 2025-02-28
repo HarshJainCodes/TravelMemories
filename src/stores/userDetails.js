@@ -20,6 +20,14 @@ export const useUserDetails = defineStore('userDetails', () => {
         }
     }
 
+    const reDirectFromLogin = async () => {
+        await checkLogin();
+        if (isLoggedIn.value){
+            router.push('/MyCollection');
+        }
+        return true;
+    }
+
     const checkLogin = async () => {
         if (isLoggedIn.value === false){
             // check if it is logged in
@@ -44,5 +52,6 @@ export const useUserDetails = defineStore('userDetails', () => {
         userProfilePicUrl,
         setIsLoggedIn,
         reDirectIfNotLoggedIn,
+        reDirectFromLogin,
     }
 })
