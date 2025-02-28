@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex w-100 h-100 align-center ma-5" v-if="userDetails.isLoggedIn" :class="{
+    <div class="d-flex w-100 h-100 align-center pl-5" v-if="userDetails.isLoggedIn" :class="{
         'flex-column': mobile
     }">
         <div class="d-flex" :class="{
