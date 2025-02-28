@@ -1,6 +1,6 @@
 <template>
-    <div class="d-flex w-100 h-100 px-5 landing_container position-relative">
-        <v-row class="w-100 h-100" style="z-index: 2;">
+    <div class="d-flex w-100 h-100 px-5">
+        <v-row class="w-100 h-100">
             <v-col cols="4">
                 <div class="w-100 h-100 d-flex justify-center align-center flex-column text-teal-lighten-1 text-center text-h2">
                     <div class="w-100">
@@ -14,7 +14,7 @@
                          so that its easier to find photos.
                     </div>
 
-                    <v-btn class="ma-5" variant="outlined" append-icon="mdi-chevron-right">
+                    <v-btn class="ma-5" variant="outlined" append-icon="mdi-chevron-right" @click="onClickStartCreating">
                         Start Creating
                     </v-btn>
                 </div>
@@ -31,17 +31,29 @@
 
 <script>
 import { defineComponent } from 'vue'
-// import DiaryContainer from '@/components/DiaryContainer.vue';
 import world_map from '@/assets/images/world_map.png'
+import { useRouter } from 'vue-router';
+import { useUserDetails } from '@/stores/userDetails';
 
 export default defineComponent({
     name: 'HomeView',
     components: {
-        // DiaryContainer,
     },
     setup() {
+        const router = useRouter();
+        const userDetails = useUserDetails();
+
+        const onClickStartCreating = () => {
+            if (!userDetails.isLoggedIn){
+                router.push('/Login');
+            }else{
+                router.push('MyCollection')
+            }
+        }
+
         return {
             world_map,
+            onClickStartCreating,
         }
     },
 })

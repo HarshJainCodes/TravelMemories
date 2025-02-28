@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex w-100 h-100 align-center" :class="{
+    <div class="d-flex w-100 h-100 align-center ma-5" v-if="userDetails.isLoggedIn" :class="{
         'flex-column': mobile
     }">
         <div class="d-flex" :class="{
@@ -22,12 +22,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, onActivated, ref } from 'vue'
 import MapContainer from './MapContainer.vue';
 import TimeLine from './TimeLine.vue';
 import { useDisplay } from 'vuetify/lib/framework.mjs';
 import { useImageGallary } from '@/stores/imageGallary';
 import { MAPBOX_FLY_DURATION } from './Constants';
+import { useUserDetails } from '@/stores/userDetails';
 
 export default defineComponent({
     components: {
@@ -39,6 +40,7 @@ export default defineComponent({
         const mapInstance = ref(null);
         
         const imageGallary = useImageGallary();
+        const userDetails = useUserDetails();
 
         const onReceiveMapInstance = (mapInst) => {
             mapInstance.value = mapInst;
@@ -54,10 +56,15 @@ export default defineComponent({
             })
         }
 
+        onActivated(() => {
+            userDetails.reDirectIfNotLoggedIn();
+        })
+
         return {
             mobile,
             mdAndUp,
             mdAndDown,
+            userDetails,
             onReceiveMapInstance,
             onClickTimeline,
         }
