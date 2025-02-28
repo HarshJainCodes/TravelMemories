@@ -17,7 +17,7 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
-        external: ['corecomponentsHJ/dist/hjcorecomponents.css']
+        external: ['corecomponentsHJ/dist/hjcorecomponents.css', 'corecomponentsHJ']
     }
   }
 })
