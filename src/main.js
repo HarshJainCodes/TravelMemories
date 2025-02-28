@@ -8,7 +8,7 @@ import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import { aliases, mdi } from 'vuetify/iconsets/mdi'
 import '@mdi/font/css/materialdesignicons.css'; // Ensure this is imported
-import 'corecomponentsHJ/dist/hjcorecomponents.css'
+// import 'corecomponentsHJ/dist/hjcorecomponents.css'
 
 import Toast from "vue-toastification";
 // Import the CSS or use your own!
