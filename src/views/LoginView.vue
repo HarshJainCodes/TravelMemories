@@ -12,7 +12,7 @@
 import { defineComponent, onActivated, ref } from 'vue'
 import { useUserDetails } from '@/stores/userDetails';
 import { useRouter } from 'vue-router';
-import { LoginPage } from 'corecomponentsHJ';
+import { LoginPage } from 'corecomponentshj';
 
 export default defineComponent({
     components: {
