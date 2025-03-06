@@ -1,8 +1,8 @@
 <template>
-    <div class="w-100 h-100 d-flex align-center flex-column">
+    <div class="w-100 h-100 d-flex align-center flex-column pa-5">
 
         <v-card class="w-50 h-100" elevation="4" :class="{
-            'w-75': mobile
+            'w-75': mobile,
         }">
             <div :class="{
                 'w-50 mx-auto' : !mobile
@@ -22,13 +22,17 @@
                         <v-text-field label="locationY" type="number" v-model="locationCoords.lon"></v-text-field>
                     </div>
                 </div>
-    
-                <div class="d-flex w-100 justify-center flex-column">
-                    <div class="pa-5" style="border: 2px dotted green;">
-                        <label for="input">Upload your photos here</label>
-                        <input class="pa-1" type="file" accept="image/*" multiple @change="onFilesChanged">
-                    </div>
-                    <v-btn class="ma-2" @click="onUploadImage">
+
+                <v-file-upload
+                    v-model="selectedFiles"
+                    multiple
+                    clearable
+                    accept="image/*"
+                    show-size
+                    @update:model-value="onFilesChanged"
+                />
+                <div class="d-flex w-100 justify-center">
+                    <v-btn class="ma-5 mx-auto" @click="onUploadImage">
                         Upload Images
                     </v-btn>
                 </div>
@@ -39,7 +43,8 @@
 
 <script>
 import { useImageGallary } from '@/stores/imageGallary';
-import { defineComponent, ref, watch } from 'vue'
+import { useUserDetails } from '@/stores/userDetails';
+import { defineComponent, onMounted, ref } from 'vue'
 import { TYPE, useToast } from 'vue-toastification';
 import { useDisplay } from 'vuetify/lib/framework.mjs';
 
@@ -48,6 +53,7 @@ export default defineComponent({
         const { mobile } = useDisplay();
         const imageGallary = useImageGallary();
         const toast = useToast()
+        const userDetails = useUserDetails();
 
         const tripTitle = ref('');
         const tripYear = ref(0);
@@ -57,12 +63,20 @@ export default defineComponent({
         })
         const selectedFiles = ref([]);
 
-        const onFilesChanged = (event) => {
-            selectedFiles.value = Array.from(event.target.files);
+        const onFilesChanged = (files) => {
+            files.forEach((file) => {
+                if (!(file.type.startsWith('image') || (file.name.endsWith('.HEIC')))) {
+                    toast("Only Images are supported", {
+                        type: TYPE.ERROR
+                    })
+                    selectedFiles.value = [];
+                    return;
+                }
+            })
         }
 
         const onUploadImage = async () => {
-            if (selectedFiles.value.length === 0){
+            if (selectedFiles.value.length === 0) {
                 toast('Select Atleast one image', {
                     type: TYPE.ERROR
                 })
@@ -105,12 +119,17 @@ export default defineComponent({
             }
         }
 
+        onMounted(() => {
+            userDetails.reDirectIfNotLoggedIn();
+        })
+
         return {
             tripTitle,
             tripYear,
             imageGallary,
             locationCoords,
             mobile,
+            selectedFiles,
             onFilesChanged,
             onUploadImage,
             onSearchValueChanged,

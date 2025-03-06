@@ -15,7 +15,7 @@
             <v-spacer></v-spacer>
 
             <div class="d-flex h-100 align-center" v-if="!mobile">
-                <div class="text-h6 ml-2 navItem" @click="onClickUpload">
+                <div v-if="userDetails.isLoggedIn" class="text-h6 ml-2 navItem" @click="onClickUpload">
                     Upload
                 </div>
     
@@ -53,7 +53,7 @@
                         <v-list-item @click="onClickLogin" density="compact" slim>
                             Login
                         </v-list-item>
-                        <v-list-item @click="onClickUpload" density='compact' slim>
+                        <v-list-item v-if="userDetails.isLoggedIn" @click="onClickUpload" density='compact' slim>
                             Upload
                         </v-list-item>
                     </v-list>
