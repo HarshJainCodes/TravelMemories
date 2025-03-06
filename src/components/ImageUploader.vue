@@ -2,7 +2,7 @@
     <div class="w-100 h-100 d-flex align-center flex-column pa-5">
 
         <v-card class="w-50 h-100" elevation="4" :class="{
-            'w-75': mobile,
+            'w-100': mobile,
         }">
             <div :class="{
                 'w-50 mx-auto' : !mobile
@@ -23,18 +23,26 @@
                     </div>
                 </div>
 
-                <v-file-upload
-                    v-model="selectedFiles"
-                    multiple
-                    clearable
-                    accept="image/*"
-                    show-size
-                    @update:model-value="onFilesChanged"
-                />
-                <div class="d-flex w-100 justify-center">
-                    <v-btn class="ma-5 mx-auto" @click="onUploadImage">
-                        Upload Images
-                    </v-btn>
+                <div class="pa-5">
+                    <v-file-upload
+                        class="pa-5"
+                        v-model="selectedFiles"
+                        multiple
+                        clearable
+                        accept="image/*"
+                        show-size
+                        :density="mobile ? 'comfortable' : 'default'"
+                        @update:model-value="onFilesChanged"
+                    >
+                        <template #title>
+                            Upload Images Here
+                        </template>
+                    </v-file-upload>
+                    <div class="d-flex w-100 justify-center">
+                        <v-btn class="ma-5 mx-auto" @click="onUploadImage">
+                            Upload Images
+                        </v-btn>
+                    </div>
                 </div>
             </div>         
         </v-card>
