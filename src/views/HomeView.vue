@@ -14,7 +14,7 @@
                          so that its easier to find photos.
                     </div>
 
-                    <v-btn class="ma-5" variant="outlined" append-icon="mdi-chevron-right" @click="onClickStartCreating">
+                    <v-btn data-qa-id="start-creating-btn" class="ma-5" variant="outlined" append-icon="mdi-chevron-right" @click="onClickStartCreating">
                         Start Creating
                     </v-btn>
                 </div>
