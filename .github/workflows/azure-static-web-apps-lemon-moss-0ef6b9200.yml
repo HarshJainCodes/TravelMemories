@@ -30,17 +30,10 @@ jobs:
       - name: Run Unit Tests
         run: npm run test:unit
 
-      - name: Start Application for Cypress Tests
-        run: npm run dev # Use the correct start command for your app
-        env:
-          VITE_MAPBOX_TOKEN: ${{ secrets.VITE_MAPBOX_TOKEN }}
-          VITE_GOOGLE_CLIENT_ID: ${{ secrets.VITE_GOOGLE_CLIENT_ID }}
-          VITE_APPLICATION_INSIGHTS_CONN_STRING: ${{ secrets.VITE_APPLICATION_INSIGHTS_CONN_STRING }}
-
       - name: Run Cypress Tests
         uses: cypress-io/github-action@v6
         with:
-          start: npm run dev
+          start: npm run dev &
           wait-on: 'http://localhost:5173' # Adjust based on your app
           wait-on-timeout: 60 # Wait for app to start
   build_and_deploy_job:
