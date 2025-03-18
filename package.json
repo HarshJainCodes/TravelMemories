@@ -22,7 +22,7 @@
     "vue-router": "^4.5.0",
     "vue-toastification": "^2.0.0-rc.5",
     "vuetify": "^3.7.7",
-    "corecomponentshj": "1.1.4"
+    "corecomponentshj": "1.1.7"
   },
   "devDependencies": {
     "@eslint/js": "^9.18.0",

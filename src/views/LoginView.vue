@@ -1,6 +1,7 @@
 <template>
     <login-page v-if="isSafeToShowLoginPage" :google-client-id="googleClientId"
         @on-google-authenticated="onGoogleAuthenticated"
+        @on-click-login-or-register="onClickLoginOrRegister"
     >
         <template #topHeading>
             Your Unique Photo Diary With The Power Of Map Visualization
@@ -8,11 +9,12 @@
     </login-page>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent, onActivated, ref } from 'vue'
 import { useUserDetails } from '@/stores/userDetails';
 import { useRouter } from 'vue-router';
-import { LoginPage } from 'corecomponentshj';
+import { LoginPage, LoginModes } from 'corecomponentshj';
+import { TYPE, useToast } from 'vue-toastification';
 
 export default defineComponent({
     components: {
@@ -21,7 +23,9 @@ export default defineComponent({
     setup() {
         const userDetails = useUserDetails();
         const router = useRouter();
+        const toast = useToast();
         const isSafeToShowLoginPage = ref(false);
+
 
         const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
@@ -51,6 +55,61 @@ export default defineComponent({
             }
         }
 
+        const onClickLoginOrRegister = async (event) => {
+            if (event.currentView == LoginModes.CreateAccount) {
+                const call = await fetch('https://travelmemories.azurewebsites.net/auth/Register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application/json; charset=UTF-8'
+                    },
+                    body: JSON.stringify({
+                        userName: event.userName,
+                        email: event.email,
+                        password: event.password,
+                    }),
+                    credentials: 'include',
+                })
+
+                if (call.status == 200) {
+                    const res = await call.json();
+                    userDetails.setIsLoggedIn(true);
+                    console.log(res);
+                    userDetails.userName = res.userName
+                    router.push('/MyCollection');
+                } else if (call.status == 400) {
+                    const errorMsg = await call.text()
+                    toast(errorMsg, {
+                        type: TYPE.ERROR
+                    });
+                }
+            }else {
+                const call = await fetch('https://travelmemories.azurewebsites.net/auth/Login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application/json; charset=UTF-8'
+                    },
+                    body: JSON.stringify({
+                        userName: event.userName,
+                        email: event.email,
+                        password: event.password,
+                    }),
+                    credentials: 'include',
+                })
+
+                if (call.status == 200) {
+                    const res = await call.json();
+                    userDetails.setIsLoggedIn(true);
+                    userDetails.userName = res.userName
+                    router.push('/MyCollection');
+                } else {
+                    const errorMsg = await call.text()
+                    toast(errorMsg, {
+                        type: TYPE.ERROR
+                    });
+                }
+            }
+        }
+
         onActivated(async () => {
             // if you are already logged in then you dont need to be seeing login page
             await userDetails.reDirectFromLogin();
@@ -59,8 +118,9 @@ export default defineComponent({
 
         return {
             googleClientId,
-            onGoogleAuthenticated,
             isSafeToShowLoginPage,
+            onGoogleAuthenticated,
+            onClickLoginOrRegister,
         }
     },
 })
