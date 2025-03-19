@@ -15,7 +15,7 @@
             <v-spacer></v-spacer>
 
             <div class="d-flex h-100 align-center" v-if="!mobile">
-                <div v-if="userDetails.isLoggedIn" class="text-h6 ml-2 navItem" @click="onClickUpload">
+                <div v-if="userDetails.isLoggedIn" class="text-h6 ml-2 navItem" @click="onClickUpload" data-qa-id="upload-btn">
                     Upload
                 </div>
     

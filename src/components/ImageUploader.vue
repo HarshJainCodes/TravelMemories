@@ -11,20 +11,22 @@
                     @update:search="onSearchValueChanged"
                     @update:model-value="onClickExistingTripName"
                     hide-no-data
+                    data-qa-id="trip-title-searchbar"
                 ></v-autocomplete>
 
-                <v-text-field v-model="tripYear" label="Year" type="number" class="pa-5"></v-text-field>
+                <v-text-field v-model="tripYear" label="Year" class="pa-5" data-qa-id="trip-year"></v-text-field>
 
                 <div class="d-flex pa-5 flex-column">
                     Location Coordinates
                     <div class="d-flex">
-                        <v-text-field class="mx-1" type="number" label="locationX" v-model="locationCoords.lat"></v-text-field>
-                        <v-text-field label="locationY" type="number" v-model="locationCoords.lon"></v-text-field>
+                        <v-text-field class="mx-1" type="number" label="locationX" v-model="locationCoords.lat" data-qa-id="location-x"></v-text-field>
+                        <v-text-field label="locationY" type="number" v-model="locationCoords.lon" data-qa-id="location-y"></v-text-field>
                     </div>
                 </div>
 
                 <div class="pa-5">
                     <v-file-upload
+                        data-qa-id="file-upload"
                         class="pa-5"
                         v-model="selectedFiles"
                         multiple
@@ -39,7 +41,7 @@
                         </template>
                     </v-file-upload>
                     <div class="d-flex w-100 justify-center">
-                        <v-btn class="ma-5 mx-auto" @click="onUploadImage">
+                        <v-btn class="ma-5 mx-auto" @click="onUploadImage" data-qa-id="upload-images">
                             Upload Images
                         </v-btn>
                     </div>
