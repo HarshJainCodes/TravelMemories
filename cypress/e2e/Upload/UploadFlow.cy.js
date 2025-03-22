@@ -15,8 +15,12 @@ describe('should be able to upload photos', () => {
         cy.get('[data-qa-id="trip-year"]').clear()
         cy.get('[data-qa-id="trip-year"]').type('2025')
 
-        cy.get('[data-qa-id="location-x"]').type('27.120121')
-        cy.get('[data-qa-id="location-y"]').type('78.123232')
+        // cy.get('[data-qa-id="location-x"]').type('27.120121')
+        // cy.get('[data-qa-id="location-y"]').type('78.123232')
+
+        cy.get('#map-container-image-uploader').click({
+            position: 'center'
+        })
 
         cy.get('[data-qa-id="file-upload"]').selectFile('cypress/fixtures/test_upload_img.jpg', {
             action: 'drag-drop'

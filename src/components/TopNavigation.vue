@@ -50,7 +50,7 @@
                     </template>
 
                     <v-list density="compact">
-                        <v-list-item @click="onClickLogin" density="compact" slim>
+                        <v-list-item v-if="!userDetails.isLoggedIn" @click="onClickLogin" density="compact" slim>
                             Login
                         </v-list-item>
                         <v-list-item v-if="userDetails.isLoggedIn" @click="onClickUpload" density='compact' slim>

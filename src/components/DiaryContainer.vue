@@ -51,7 +51,7 @@ export default defineComponent({
 
             mapInstance.value.flyTo({
                 center: [imageData.lon, imageData.lat],
-                zoom: 8,
+                zoom: 15,
                 duration: MAPBOX_FLY_DURATION,
             })
         }

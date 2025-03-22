@@ -114,7 +114,7 @@ export default defineComponent({
                 },
                 getIcon: d => 'marker',
                 getPosition: d => [d.lon, d.lat],
-                getSize: () => Math.max(map.value.getZoom() * map.value.getZoom() * 0.8, 20),
+                getSize: () => Math.max(map.value.getZoom() * map.value.getZoom() * 0.3, 20),
                 onClick: (icon) => {
                     emit('on-click-timeline', icon.object)
                 },

@@ -5,9 +5,9 @@
             'w-100': mobile,
         }">
             <div :class="{
-                'w-50 mx-auto' : !mobile
+                'w-75 mx-auto' : !mobile
             }">
-                <v-autocomplete v-model="tripTitle" label="Trip Title" class="pa-5" :items="imageGallary.allTripHeading"
+                <v-autocomplete v-model="tripTitle" label="Select Trip" class="pa-5" :items="imageGallary.allTripHeading"
                     @update:search="onSearchValueChanged"
                     @update:model-value="onClickExistingTripName"
                     hide-no-data
@@ -15,12 +15,15 @@
                 ></v-autocomplete>
 
                 <v-text-field v-model="tripYear" label="Year" class="pa-5" data-qa-id="trip-year"></v-text-field>
-
-                <div class="d-flex pa-5 flex-column">
-                    Location Coordinates
-                    <div class="d-flex">
-                        <v-text-field class="mx-1" type="number" label="locationX" v-model="locationCoords.lat" data-qa-id="location-x"></v-text-field>
-                        <v-text-field label="locationY" type="number" v-model="locationCoords.lon" data-qa-id="location-y"></v-text-field>
+                
+                <div class="w-100 pa-5" :class="{
+                    'map-height': !mobile,
+                    'map-height-mobile': mobile
+                }">
+                    <div id="map-container-image-uploader" class="w-100 h-100 d-flex justify-center">
+                        <div class="pa-2 ma-3 text-green bg-white position-absolute d-flex justify-center">
+                            Select / Click Location On Map
+                        </div>
                     </div>
                 </div>
 
@@ -54,9 +57,11 @@
 <script>
 import { useImageGallary } from '@/stores/imageGallary';
 import { useUserDetails } from '@/stores/userDetails';
-import { defineComponent, onMounted, ref } from 'vue'
+import mapboxgl from 'mapbox-gl';
+import { defineComponent, onMounted, ref, watch } from 'vue'
 import { TYPE, useToast } from 'vue-toastification';
 import { useDisplay } from 'vuetify/lib/framework.mjs';
+import { MAPBOX_FLY_DURATION } from './Constants';
 
 export default defineComponent({
     setup() {
@@ -72,6 +77,9 @@ export default defineComponent({
             lon: null,
         })
         const selectedFiles = ref([]);
+
+        mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN
+        const map = ref(null);
 
         const onFilesChanged = (files) => {
             files.forEach((file) => {
@@ -131,7 +139,29 @@ export default defineComponent({
 
         onMounted(() => {
             userDetails.reDirectIfNotLoggedIn();
+
+            // initialize map
+            map.value = new mapboxgl.Map({
+                container: 'map-container-image-uploader',
+                interactive: true,
+                style: 'mapbox://styles/mapbox/streets-v11',
+                center: [80, 20],
+                zoom: 3,
+            })
+
+            map.value.on('click', (e) => {
+                locationCoords.value.lat = e.lngLat.lat;
+                locationCoords.value.lon = e.lngLat.lng;
+            })
         })
+
+        watch(locationCoords, (lc) => {
+            map.value.flyTo({
+                center: [lc.lon, lc.lat],
+                zoom: 10,
+                duration: MAPBOX_FLY_DURATION,
+            })
+        }, { deep: true })
 
         return {
             tripTitle,
@@ -154,5 +184,13 @@ export default defineComponent({
 .v-autocomplete__content{
     height: 300px !important;
     overflow-y: scroll !important;
+}
+
+.map-height {
+    height: 600px;
+}
+
+.map-height-mobile {
+    height: 400px;
 }
 </style>
