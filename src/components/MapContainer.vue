@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex w-100 h-100 position-relative">
+    <div class="d-flex w-100 h-100 position-relative overflow-hidden">
         <div id="map" class="w-100" :class="{
             'map-mobile': mobile, 'map-lg': !mobile
         }" />
@@ -9,7 +9,6 @@
                 :style="{
                     'top': trips[0].x + 'px', 'left': trips[0].y + 'px'
                 }"
-                v-if="trips[0].x >= 0 && trips[0].y >= 0 && trips[0].y + 10 <= mapRectBoundingBox.width && trips[0].x <= mapRectBoundingBox.height"
             >
                 <v-list-item v-for="trip in trips" :key="trip.tripTitle" @click="$emit('on-click-timeline', trip)" density="compact">
                     {{ trip.tripTitle }}
