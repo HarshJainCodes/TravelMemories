@@ -4,7 +4,7 @@
             'map-mobile': mobile, 'map-lg': !mobile
         }" />
 
-        <div v-for="trips in groupedTripData" :key="trips.tripTitle" class="z-index-1">
+        <div v-for="(trips) in groupedTripData" :key="trips.tripTitle" class="z-index-1">
             <v-list class="position-absolute overflow-y" max-height="200"
                 :style="{
                     'top': trips[0].x + 'px', 'left': trips[0].y + 'px'
@@ -21,7 +21,7 @@
             'map-mobile': mobile, 'map-lg': !mobile
         }"/>
 
-        <div v-if="!(imageGallary.tripName && imageGallary.showImagesOnMap)" class="position-absolute d-flex w-100 h-100 align-end pa-5" style="pointer-events: none;">
+        <div v-if="!(tripName && showImagesOnMap)" class="position-absolute d-flex w-100 h-100 align-end pa-5" style="pointer-events: none;">
             <div class="d-flex text-h6" v-if="!mobile">
                 <div class="px-1">
                     Latitude: {{ mouseCoordinates.lat }}
@@ -51,8 +51,8 @@ import mapboxgl from 'mapbox-gl';
 import ImageGallary from './ImageGallary.vue';
 import {MapboxOverlay as DeckOverlay} from '@deck.gl/mapbox';
 import { IconLayer } from '@deck.gl/layers';
-import { useImageGallary } from '@/stores/imageGallary';
 import svgIcon from '../assets/logo.svg'
+import { useImages } from './Queries';
 
 export default defineComponent({
     components: {
@@ -61,19 +61,16 @@ export default defineComponent({
     emits: ['map-instance', 'on-click-timeline'],
     setup(props, { emit }) {
         const { mobile } = useDisplay();
-        const imageGallary = useImageGallary();
+        const { allTripData, tripName, showImagesOnMap } = useImages();
 
-        let deckOverlay = ref(null);
         let mapRectBoundingBox = ref({
             width: 0,
             height: 0
         });
 
-        const allTripsScreenCoords = ref(imageGallary.allTripData.map((td) => ({
-            ...td,
-            x: getTextCoords([td.lon, td.lat])[1],
-            y: getTextCoords([td.lon, td.lat])[0],
-        })))
+        const getTextCoords = (coords) => {
+            return deckOverlay._deck.viewManager._viewports[0].project([coords[0], coords[1]])
+        }
 
         mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN
         const map = ref(null);
@@ -95,7 +92,7 @@ export default defineComponent({
         const deckLayers = computed(() => [
             new IconLayer({
                 id: 'places-icon',
-                data: imageGallary.allTripData.filter(d => {
+                data: allTripData.value.filter(d => {
                     const cameraPos = mapCenter.value; // Get current map center
                     const cameraLngLat = [cameraPos.lng, cameraPos.lat];
                     if (!cameraLngLat) return true;
@@ -122,9 +119,11 @@ export default defineComponent({
             }),
         ])
 
-        const getTextCoords = (coords) => {
-            return deckOverlay.value._deck.viewManager._viewports[0].project([coords[0], coords[1]])
-        }
+        const deckOverlay = new DeckOverlay({
+            layers: deckLayers.value,
+        });
+
+        const allTripsScreenCoords = ref({})
 
         const distance = (x1, y1, x2, y2) => {
             return Math.sqrt((y2 - y1) * (y2 - y1) + (x2 - x1) * (x2 - x1))
@@ -133,9 +132,9 @@ export default defineComponent({
         const groupPlacesAccordingToZoom = () => {
             groupedTripData.value = [];
             const alreadySeenPlaces = new Map();
-                imageGallary.allTripData.forEach((trip, index) => {
+                allTripData.value.forEach((trip, index) => {
                     const groupedArr = []
-                    imageGallary.allTripData.forEach((tripOther, indexOther) => {
+                    allTripData.value.forEach((tripOther, indexOther) => {
                         if (index !== indexOther) {
                             if (alreadySeenPlaces.get(tripOther.tripTitle)){
                                 return;
@@ -186,7 +185,7 @@ export default defineComponent({
             // mapbox events
             map.value.on('move', () => {
                 mapCenter.value = map.value.getCenter()
-                allTripsScreenCoords.value = imageGallary.allTripData.map((td) => ({
+                allTripsScreenCoords.value = allTripData.value.map((td) => ({
                     ...td,
                     x: getTextCoords([td.lon, td.lat])[1],
                     y: getTextCoords([td.lon, td.lat])[0],
@@ -209,40 +208,33 @@ export default defineComponent({
                 touchCoordinates.value.lng = Number(mapCenter.value.lng.toFixed(4))
             })
 
-
-            deckOverlay.value = new DeckOverlay({
-                layers: deckLayers.value,
-            });
-
-            map.value.addControl(deckOverlay.value);
+            map.value.addControl(deckOverlay);
             map.value.addControl(new mapboxgl.NavigationControl());
-            emit('map-instance', map.value);
-        })
 
-        watch(deckLayers, (dl) => {
-            deckOverlay.value.setProps({
-                layers: dl,
-            })
-        })
-
-        watch(() => imageGallary.allTripData, () => {
             setTimeout(() => {
-                allTripsScreenCoords.value = imageGallary.allTripData.map((td) => ({
+                allTripsScreenCoords.value = allTripData.value.map((td) => ({
                     ...td,
                     x: getTextCoords([td.lon, td.lat])[1],
                     y: getTextCoords([td.lon, td.lat])[0],
                 }))
 
-                // will do some things here that will group closer coords together
                 groupPlacesAccordingToZoom()
-            }, 500);
+            }, 1000); // TODO: get rid of this 1000, need to come with an efficient way here!
+            emit('map-instance', map.value);
+        })
+
+        watch(deckLayers, (dl) => {
+            deckOverlay.setProps({
+                layers: dl,
+            })
         })
 
         return {
             map,
             mobile,
             mapRectBoundingBox,
-            imageGallary,
+            showImagesOnMap,
+            tripName,
             mouseCoordinates,
             touchCoordinates,
             allTripsScreenCoords,

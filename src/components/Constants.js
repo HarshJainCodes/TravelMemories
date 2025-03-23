@@ -1,1 +1,1 @@
-export const MAPBOX_FLY_DURATION = 2000
+export const MAPBOX_FLY_DURATION = 4000

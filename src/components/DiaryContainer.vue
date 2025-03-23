@@ -26,9 +26,9 @@ import { defineComponent, onActivated, ref } from 'vue'
 import MapContainer from './MapContainer.vue';
 import TimeLine from './TimeLine.vue';
 import { useDisplay } from 'vuetify/lib/framework.mjs';
-import { useImageGallary } from '@/stores/imageGallary';
 import { MAPBOX_FLY_DURATION } from './Constants';
 import { useUserDetails } from '@/stores/userDetails';
+import { useImages } from './Queries';
 
 export default defineComponent({
     components: {
@@ -39,7 +39,7 @@ export default defineComponent({
         const { mdAndUp, mdAndDown, mobile } = useDisplay()
         const mapInstance = ref(null);
         
-        const imageGallary = useImageGallary();
+        const { setTrip } = useImages();
         const userDetails = useUserDetails();
 
         const onReceiveMapInstance = (mapInst) => {
@@ -47,7 +47,7 @@ export default defineComponent({
         }
 
         const onClickTimeline = (imageData) => {
-            imageGallary.setTrip(imageData);
+            setTrip(imageData);
 
             mapInstance.value.flyTo({
                 center: [imageData.lon, imageData.lat],

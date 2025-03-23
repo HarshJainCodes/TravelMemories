@@ -1,7 +1,7 @@
 <template>
     <div class="w-100 h-100 d-flex flex-column overflow-y-scroll timeline-scroll-behaviour">
-        <v-timeline v-if="timelineData.length" side="end" class="w-100 pr-4">
-            <v-timeline-item class="w-100" v-for="imageData in timelineData" :key="imageData.tripTitle" size="small">
+        <v-timeline v-if="allTripData.length" side="end" class="w-100 pr-4">
+            <v-timeline-item class="w-100" v-for="imageData in allTripData" :key="imageData.tripTitle" size="small">
                 <div class="w-100 h-100">
                     <div class="text-h6 w-100">{{ transformTitleIfShort(imageData.tripTitle) }} </div>
                     <v-card class="w-100" height="200" @click="onClickTimelineCard(imageData)">
@@ -16,14 +16,13 @@
 </template>
 
 <script lang="ts">
-import { useImageGallary } from '@/stores/imageGallary';
-import { defineComponent, onMounted, ref } from 'vue'
+import { defineComponent } from 'vue'
+import { useImages } from './Queries';
 
 export default defineComponent({
     emits: ['on-click-timeline'],
     setup(props, { emit }) {
-        const timelineData = ref([]);
-        const imageGallary = useImageGallary();
+        const { allTripData } = useImages();
 
         const transformTitleIfShort = (title: string) => {
             if (title.length < 20){
@@ -50,22 +49,8 @@ export default defineComponent({
             emit('on-click-timeline', imageData);
         }
 
-        onMounted(async () => {
-            const allImageReq = await fetch('https://travelmemories.azurewebsites.net/ImageUpload/AllTripData', {
-                method: 'GET',
-                credentials: 'include'
-            });
-
-            if (allImageReq.status === 200){
-                const allImageData = await allImageReq.json();
-
-                timelineData.value = allImageData;
-                imageGallary.allTripData = allImageData;
-            }
-        })
-
         return {
-            timelineData,
+            allTripData,
             onClickTimelineCard,
             transformTitleIfShort,
         }

@@ -7,7 +7,7 @@
             <div :class="{
                 'w-75 mx-auto' : !mobile
             }">
-                <v-autocomplete v-model="tripTitle" label="Select Trip" class="pa-5" :items="imageGallary.allTripHeading"
+                <v-autocomplete v-model="tripTitle" label="Select Trip" class="pa-5" :items="allTripHeading"
                     @update:search="onSearchValueChanged"
                     @update:model-value="onClickExistingTripName"
                     hide-no-data
@@ -55,20 +55,39 @@
 </template>
 
 <script>
-import { useImageGallary } from '@/stores/imageGallary';
 import { useUserDetails } from '@/stores/userDetails';
 import mapboxgl from 'mapbox-gl';
 import { defineComponent, onMounted, ref, watch } from 'vue'
 import { TYPE, useToast } from 'vue-toastification';
 import { useDisplay } from 'vuetify/lib/framework.mjs';
 import { MAPBOX_FLY_DURATION } from './Constants';
+import { useImages, uploadImageQueryFunc } from './Queries';
+import { useQueryClient, useMutation } from '@tanstack/vue-query';
 
 export default defineComponent({
     setup() {
         const { mobile } = useDisplay();
-        const imageGallary = useImageGallary();
+        const { allTripData, allTripHeading } = useImages();
         const toast = useToast()
         const userDetails = useUserDetails();
+        const queryClient = useQueryClient();
+
+        const uploadImage = useMutation({
+            mutationFn: uploadImageQueryFunc,
+            onSuccess: () => {
+                queryClient.invalidateQueries({
+                    queryKey: ['imageData']
+                })
+                toast('Images Uploaded Successfully', {
+                    type: TYPE.SUCCESS,
+                })
+            },
+            onError: () => {
+                toast('Some error occured in uploading the image', {
+                    type: TYPE.ERROR
+                })
+            }
+        })
 
         const tripTitle = ref('');
         const tripYear = ref(0);
@@ -101,27 +120,12 @@ export default defineComponent({
                 return;
             }
 
-            const formData = new FormData();
-
-            selectedFiles.value.forEach((file) => {
-                formData.append('images', file);
-            })
-
-            const req = await fetch(`https://travelmemories.azurewebsites.net/ImageUpload?tripTitle=${tripTitle.value}&year=${tripYear.value}&lat=${locationCoords.value.lat}&lon=${locationCoords.value.lon}`, {
-                method: 'POST',
-                body: formData,
-                credentials: 'include',
-            })
-
-            if (req.status === 200){
-                toast('Images Uploaded Successfully', {
-                    type: TYPE.SUCCESS,
-                })
-            }else{
-                toast('Some error occured in uploading the image', {
-                    type: TYPE.ERROR
-                })
-            }
+            uploadImage.mutate({
+                tripTitle,
+                tripYear,
+                locationCoords,
+                selectedFiles
+            });
         }
 
         const onSearchValueChanged = (title) => {
@@ -129,7 +133,7 @@ export default defineComponent({
         }
 
         const onClickExistingTripName = (name) => {
-            const existingTrip = imageGallary.allTripData.find(x => x.tripTitle == name);
+            const existingTrip = allTripData.value.find(x => x.tripTitle == name);
             if (existingTrip != undefined) {
                 locationCoords.value.lat = existingTrip.lat;
                 locationCoords.value.lon = existingTrip.lon;
@@ -166,10 +170,10 @@ export default defineComponent({
         return {
             tripTitle,
             tripYear,
-            imageGallary,
             locationCoords,
             mobile,
             selectedFiles,
+            allTripHeading,
             onFilesChanged,
             onUploadImage,
             onSearchValueChanged,

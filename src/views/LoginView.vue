@@ -73,7 +73,6 @@ export default defineComponent({
                 if (call.status == 200) {
                     const res = await call.json();
                     userDetails.setIsLoggedIn(true);
-                    console.log(res);
                     userDetails.userName = res.userName
                     router.push('/MyCollection');
                 } else if (call.status == 400) {

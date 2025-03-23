@@ -17,6 +17,9 @@ import Toast from "vue-toastification";
 // Import the CSS or use your own!
 import "vue-toastification/dist/index.css";
 
+// vue query
+import { VueQueryPlugin } from '@tanstack/vue-query'
+
 import App from './App.vue'
 import router from './router'
 
@@ -41,8 +44,6 @@ app.use(createPinia())
 app.use(router)
 app.use(vuetify)
 app.use(Toast)
-// app.use(vue3GoogleLogin, {
-//     clientId: import.meta.env.VITE_GOOGLE_CLIENT_ID
-// })
+app.use(VueQueryPlugin)
 
 app.mount('#app')
