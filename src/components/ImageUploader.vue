@@ -1,6 +1,5 @@
 <template>
     <div class="w-100 h-100 d-flex align-center flex-column pa-5">
-
         <v-card class="w-50 h-100" elevation="4" :class="{
             'w-100': mobile,
         }">
@@ -44,8 +43,13 @@
                         </template>
                     </v-file-upload>
                     <div class="d-flex w-100 justify-center">
-                        <v-btn class="ma-5 mx-auto" @click="onUploadImage" data-qa-id="upload-images">
+                        <v-btn class="ma-5 mx-auto" @click="onUploadImage" data-qa-id="upload-images"
+                            :disabled="isPending"
+                        >
                             Upload Images
+                            <template #append>
+                                <v-progress-circular v-if="isPending" indeterminate/>
+                            </template>
                         </v-btn>
                     </div>
                 </div>
@@ -88,6 +92,8 @@ export default defineComponent({
                 })
             }
         })
+
+        const { isPending } = uploadImage;
 
         const tripTitle = ref('');
         const tripYear = ref(0);
@@ -174,6 +180,7 @@ export default defineComponent({
             mobile,
             selectedFiles,
             allTripHeading,
+            isPending,
             onFilesChanged,
             onUploadImage,
             onSearchValueChanged,
