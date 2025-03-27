@@ -3,6 +3,10 @@ import pluginVue from 'eslint-plugin-vue'
 import pluginVitest from '@vitest/eslint-plugin'
 import pluginCypress from 'eslint-plugin-cypress/flat'
 import skipFormatting from '@vue/eslint-config-prettier/skip-formatting'
+import vue from 'eslint-plugin-vue';
+import tseslint from '@typescript-eslint/eslint-plugin';
+import tsParser from '@typescript-eslint/parser';
+import prettier from 'eslint-config-prettier';
 
 export default [
   {
@@ -31,4 +35,26 @@ export default [
     ],
   },
   skipFormatting,
+  {
+    files: ['**/*.ts', '**/*.vue'],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+      },
+    },
+    plugins: {
+      vue,
+      '@typescript-eslint': tseslint,
+    },
+    rules: {
+      ...vue.configs['vue3-recommended'].rules,
+      ...tseslint.configs.recommended.rules,
+      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/explicit-module-boundary-types': 'off',
+      'vue/multi-word-component-names': 'off',
+    },
+  },
+  prettier,
 ]

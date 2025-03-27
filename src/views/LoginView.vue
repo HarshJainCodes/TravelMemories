@@ -15,6 +15,7 @@ import { useUserDetails } from '@/stores/userDetails';
 import { useRouter } from 'vue-router';
 import { LoginPage, LoginModes } from 'corecomponentshj';
 import { TYPE, useToast } from 'vue-toastification';
+import type { CallbackTypes } from 'vue3-google-login';
 
 export default defineComponent({
     components: {
@@ -26,11 +27,10 @@ export default defineComponent({
         const toast = useToast();
         const isSafeToShowLoginPage = ref(false);
 
-
         const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
         // google login methods
-        const onGoogleAuthenticated = async (res) => {
+        const onGoogleAuthenticated: CallbackTypes.TokenResponseCallback = async (res) => {
             const google_jwt = res.access_token;
 
             const googleLoginCall = await fetch(
@@ -55,7 +55,7 @@ export default defineComponent({
             }
         }
 
-        const onClickLoginOrRegister = async (event) => {
+        const onClickLoginOrRegister = async (event: {currentView: LoginModes, userName: string, email: string, password: string}) => {
             if (event.currentView == LoginModes.CreateAccount) {
                 const call = await fetch('https://travelmemories.azurewebsites.net/auth/Register', {
                     method: 'POST',

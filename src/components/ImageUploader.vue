@@ -58,7 +58,7 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
 import { useUserDetails } from '@/stores/userDetails';
 import mapboxgl from 'mapbox-gl';
 import { defineComponent, onMounted, ref, watch } from 'vue'
@@ -67,6 +67,7 @@ import { useDisplay } from 'vuetify/lib/framework.mjs';
 import { MAPBOX_FLY_DURATION } from './Constants';
 import { useImages, uploadImageQueryFunc } from './Queries';
 import { useQueryClient, useMutation } from '@tanstack/vue-query';
+import { Ref } from 'vue';
 
 export default defineComponent({
     setup() {
@@ -95,7 +96,7 @@ export default defineComponent({
 
         const { isPending } = uploadImage;
 
-        const tripTitle = ref('');
+        const tripTitle: Ref<string> = ref('');
         const tripYear = ref(0);
         const locationCoords = ref({
             lat: null,
