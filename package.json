@@ -11,7 +11,8 @@
     "test:e2e": "start-server-and-test preview http://localhost:4173 'cypress run --e2e'",
     "test:e2e:dev": "start-server-and-test 'vite dev --port 4173' http://localhost:4173 'cypress open --e2e'",
     "lint": "eslint . --fix",
-    "format": "prettier --write src/"
+    "format": "prettier --write src/",
+    "prepare": "husky"
   },
   "dependencies": {
     "@microsoft/applicationinsights-web": "^3.3.4",
@@ -40,6 +41,7 @@
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-cypress": "^4.1.0",
     "eslint-plugin-vue": "^9.33.0",
+    "husky": "^9.1.7",
     "jsdom": "^26.0.0",
     "prettier": "^3.4.2",
     "start-server-and-test": "^2.0.10",
