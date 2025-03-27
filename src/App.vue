@@ -1,8 +1,11 @@
 <template>
 	<v-app>
-		<v-main class="w-100 h-100 d-flex align-center flex-column" :class="{
-			'bg-black': uiMode.mode === UIMode.Dark
-		}">
+		<v-main
+			class="w-100 h-100 d-flex align-center flex-column"
+			:class="{
+				'bg-black': uiMode.mode === UIMode.Dark,
+			}"
+		>
 			<top-navigation />
 			<div class="w-100 h-100">
 				<router-view v-slot="{ Component }">
@@ -26,16 +29,14 @@ export default defineComponent({
 		TopNavigation,
 	},
 	setup() {
-		const uiMode = useUIMode()
+		const uiMode = useUIMode();
 
 		return {
 			uiMode,
 			UIMode,
-		}
-	}
-})
-
+		};
+	},
+});
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

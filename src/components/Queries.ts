@@ -1,81 +1,84 @@
-import { useQuery } from "@tanstack/vue-query";
-import { computed, Ref, ref } from "vue";
-import { tripData, tripUploadPayload } from "./types";
+import { useQuery } from '@tanstack/vue-query';
+import { computed, Ref, ref } from 'vue';
+import { tripData, tripUploadPayload } from './types';
 
 const DEFAULT_OPTIONS = {
-    cacheTime: Infinity,
-    staleTime: Infinity,
-    refetchOnMount: false,
-}
+	cacheTime: Infinity,
+	staleTime: Infinity,
+	refetchOnMount: false,
+};
 
 const imageDataQueryFunc = async (): Promise<tripData[]> => {
-    const response = await fetch('https://travelmemories.azurewebsites.net/ImageUpload/AllTripData', {
-        method: 'GET',
-        credentials: 'include'
-    });
+	const response = await fetch('https://travelmemories.azurewebsites.net/ImageUpload/AllTripData', {
+		method: 'GET',
+		credentials: 'include',
+	});
 
-    if (!response.ok) {
-        throw new Error("Failed to fetch image data");
-    }
+	if (!response.ok) {
+		throw new Error('Failed to fetch image data');
+	}
 
-    return response.json();
+	return response.json();
 };
 
 export const uploadImageQueryFunc = async (tripData: tripUploadPayload) => {
-    const { tripTitle, tripYear, locationCoords, selectedFiles } = tripData;
+	const { tripTitle, tripYear, locationCoords, selectedFiles } = tripData;
 
-    const formData = new FormData();
+	const formData = new FormData();
 
-    selectedFiles.value.forEach((file) => {
-        formData.append('images', file);
-    })
+	selectedFiles.value.forEach((file) => {
+		formData.append('images', file);
+	});
 
-    const res = await fetch(`https://travelmemories.azurewebsites.net/ImageUpload?tripTitle=${tripTitle.value}&year=${tripYear.value}&lat=${locationCoords.value.lat}&lon=${locationCoords.value.lon}`, {
-        method: 'POST',
-        body: formData,
-        credentials: 'include',
-    })
+	const res = await fetch(
+		`https://travelmemories.azurewebsites.net/ImageUpload?tripTitle=${tripTitle.value}&year=${tripYear.value}&lat=${locationCoords.value.lat}&lon=${locationCoords.value.lon}`,
+		{
+			method: 'POST',
+			body: formData,
+			credentials: 'include',
+		},
+	);
 
-    return res.json();
-}
+	return res.json();
+};
 
 const useImagesQuery = () => {
-    return useQuery({
-        queryKey: ['imageData'],
-        queryFn: imageDataQueryFunc,
-        ...DEFAULT_OPTIONS,
-    })
-}
+	return useQuery({
+		queryKey: ['imageData'],
+		queryFn: imageDataQueryFunc,
+		...DEFAULT_OPTIONS,
+	});
+};
 
 const selectedTrip: Ref<tripData> = ref({
-    email: '',
-    imageUrls: [],
-    lat: 0,
-    lon: 0,
-    tripTitle: '',
-    year: 0,
+	email: '',
+	imageUrls: [],
+	lat: 0,
+	lon: 0,
+	tripTitle: '',
+	year: 0,
 });
 const showImagesOnMap = ref(false);
 const lastChosenPlace = ref('');
 
 export const useImages = () => {
-    const images = useImagesQuery();
+	const images = useImagesQuery();
 
-    const allTripData = computed(() => images.data.value || []);
-    const tripName = computed(() => selectedTrip.value.tripTitle);
-    const allTripHeading = computed(() => allTripData.value.map(x => x.tripTitle))
+	const allTripData = computed(() => images.data.value || []);
+	const tripName = computed(() => selectedTrip.value.tripTitle);
+	const allTripHeading = computed(() => allTripData.value.map((x) => x.tripTitle));
 
-    const setTrip = (trip: tripData) => {
-        selectedTrip.value = trip;
-    }
+	const setTrip = (trip: tripData) => {
+		selectedTrip.value = trip;
+	};
 
-    return {
-        allTripData,
-        tripName,
-        showImagesOnMap,
-        allTripHeading,
-        selectedTrip,
-        lastChosenPlace,
-        setTrip
-    }
-}
+	return {
+		allTripData,
+		tripName,
+		showImagesOnMap,
+		allTripHeading,
+		selectedTrip,
+		lastChosenPlace,
+		setTrip,
+	};
+};

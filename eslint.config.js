@@ -54,6 +54,8 @@ export default [
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       'vue/multi-word-component-names': 'off',
+      'no-console': 'error',
+      indent: ['error', 4]
     },
   },
   prettier,
