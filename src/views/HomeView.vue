@@ -7,7 +7,12 @@
 				>
 					<div class="w-100">View Photos With Power Of Map</div>
 
-					<v-divider class="w-33 ma-5" thickness="5" color="teal-lighten-1" opacity="1"></v-divider>
+					<v-divider
+						class="w-33 ma-5"
+						thickness="5"
+						color="teal-lighten-1"
+						opacity="1"
+					></v-divider>
 
 					<div class="text-h5 text-teal-lighten-2">
 						Tired to find your photo scattered among 1000 others ? <br />
@@ -42,7 +47,12 @@
 			<v-spacer></v-spacer>
 
 			<div class="w-100 text-h4">View Photos With Power Of Map</div>
-			<v-divider class="w-50 ma-5" thickness="5" color="teal-lighten-1" opacity="0.4"></v-divider>
+			<v-divider
+				class="w-50 ma-5"
+				thickness="5"
+				color="teal-lighten-1"
+				opacity="0.4"
+			></v-divider>
 
 			<div class="text-h6 text-teal-lighten-2 text-center">
 				Tired to find your photo scattered among 1000 others ? <br />

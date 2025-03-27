@@ -37,8 +37,13 @@
 						'map-height-mobile': mobile,
 					}"
 				>
-					<div id="map-container-image-uploader" class="w-100 h-100 d-flex justify-center">
-						<div class="pa-2 ma-3 text-green bg-white position-absolute d-flex justify-center">
+					<div
+						id="map-container-image-uploader"
+						class="w-100 h-100 d-flex justify-center"
+					>
+						<div
+							class="pa-2 ma-3 text-green bg-white position-absolute d-flex justify-center"
+						>
 							Select / Click Location On Map
 						</div>
 					</div>

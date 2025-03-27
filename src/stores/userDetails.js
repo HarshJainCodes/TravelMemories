@@ -31,10 +31,13 @@ export const useUserDetails = defineStore('userDetails', () => {
 	const checkLogin = async () => {
 		if (isLoggedIn.value === false) {
 			// check if it is logged in
-			const req = await fetch('https://travelmemories.azurewebsites.net/ImageUpload/CheckLogin', {
-				method: 'GET',
-				credentials: 'include',
-			});
+			const req = await fetch(
+				'https://travelmemories.azurewebsites.net/ImageUpload/CheckLogin',
+				{
+					method: 'GET',
+					credentials: 'include',
+				},
+			);
 
 			if (req.status === 200) {
 				isLoggedIn.value = true;

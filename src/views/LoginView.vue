@@ -5,7 +5,9 @@
 		@on-google-authenticated="onGoogleAuthenticated"
 		@on-click-login-or-register="onClickLoginOrRegister"
 	>
-		<template #topHeading> Your Unique Photo Diary With The Power Of Map Visualization </template>
+		<template #topHeading>
+			Your Unique Photo Diary With The Power Of Map Visualization
+		</template>
 	</login-page>
 </template>
 

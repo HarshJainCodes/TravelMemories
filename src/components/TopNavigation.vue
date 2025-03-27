@@ -42,7 +42,11 @@
 			<div class="d-flex pa-1">
 				<v-icon
 					class="mx-2"
-					:icon="uiMode.mode === UIMode.Light ? 'mdi-white-balance-sunny' : 'mdi-weather-night'"
+					:icon="
+						uiMode.mode === UIMode.Light
+							? 'mdi-white-balance-sunny'
+							: 'mdi-weather-night'
+					"
 					:size="mobile ? 'large' : 'x-large'"
 					@click="uiMode.toggleMode"
 				>
@@ -58,7 +62,8 @@
 
 				<v-menu v-if="mobile">
 					<template v-slot:activator="{ props }">
-						<v-icon icon="mdi-menu" :size="mobile ? 'large' : 'x-large'" v-bind="props"> </v-icon>
+						<v-icon icon="mdi-menu" :size="mobile ? 'large' : 'x-large'" v-bind="props">
+						</v-icon>
 					</template>
 
 					<v-list density="compact">

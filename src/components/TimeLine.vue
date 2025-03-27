@@ -8,7 +8,9 @@
 				size="small"
 			>
 				<div class="w-100 h-100">
-					<div class="text-h6 w-100">{{ transformTitleIfShort(imageData.tripTitle) }}</div>
+					<div class="text-h6 w-100">
+						{{ transformTitleIfShort(imageData.tripTitle) }}
+					</div>
 					<v-card class="w-100" height="200" @click="onClickTimelineCard(imageData)">
 						<v-img class="w-100 h-100" :src="imageData.imageUrls[0]"> </v-img>
 					</v-card>

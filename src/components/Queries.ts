@@ -9,10 +9,13 @@ const DEFAULT_OPTIONS = {
 };
 
 const imageDataQueryFunc = async (): Promise<tripData[]> => {
-	const response = await fetch('https://travelmemories.azurewebsites.net/ImageUpload/AllTripData', {
-		method: 'GET',
-		credentials: 'include',
-	});
+	const response = await fetch(
+		'https://travelmemories.azurewebsites.net/ImageUpload/AllTripData',
+		{
+			method: 'GET',
+			credentials: 'include',
+		},
+	);
 
 	if (!response.ok) {
 		throw new Error('Failed to fetch image data');
