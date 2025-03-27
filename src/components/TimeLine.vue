@@ -18,6 +18,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useImages } from './Queries';
+import { tripData } from './types';
 
 export default defineComponent({
     emits: ['on-click-timeline'],
@@ -40,7 +41,7 @@ export default defineComponent({
             return title;
         }
 
-        const onClickTimelineCard = (imageData) => {
+        const onClickTimelineCard = (imageData: tripData) => {
             window.scrollTo({
                 behavior: 'smooth',
                 top: 0,

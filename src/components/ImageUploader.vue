@@ -98,16 +98,16 @@ export default defineComponent({
 
         const tripTitle: Ref<string> = ref('');
         const tripYear = ref(0);
-        const locationCoords = ref({
+        const locationCoords: Ref<{ lat: number, lon: number}> | any = ref({
             lat: null,
             lon: null,
         })
         const selectedFiles = ref([]);
 
         mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN
-        const map = ref(null);
+        const map: mapboxgl.Map = ref(null);
 
-        const onFilesChanged = (files) => {
+        const onFilesChanged = (files: File[]) => {
             files.forEach((file) => {
                 if (!(file.type.startsWith('image') || (file.name.endsWith('.HEIC')))) {
                     toast("Only Images are supported", {
@@ -135,11 +135,11 @@ export default defineComponent({
             });
         }
 
-        const onSearchValueChanged = (title) => {
+        const onSearchValueChanged = (title: string) => {
             tripTitle.value = title
         }
 
-        const onClickExistingTripName = (name) => {
+        const onClickExistingTripName = (name: string) => {
             const existingTrip = allTripData.value.find(x => x.tripTitle == name);
             if (existingTrip != undefined) {
                 locationCoords.value.lat = existingTrip.lat;

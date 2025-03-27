@@ -4,7 +4,7 @@
             'map-mobile': mobile, 'map-lg': !mobile
         }" />
 
-        <div v-for="(trips) in groupedTripData" :key="trips.tripTitle" class="z-index-1">
+        <div v-for="(trips, index) in groupedTripData" :key="index" class="z-index-1">
             <v-list class="position-absolute overflow-y" max-height="200"
                 :style="{
                     'top': trips[0].x + 'px', 'left': trips[0].y + 'px'
@@ -44,7 +44,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref, watch } from 'vue'
+import { computed, defineComponent, onMounted, Ref, ref, watch } from 'vue'
 import { useDisplay } from 'vuetify/lib/framework.mjs';
 import mapboxgl from 'mapbox-gl';
 import ImageGallary from './ImageGallary.vue';
@@ -52,6 +52,7 @@ import {MapboxOverlay as DeckOverlay} from '@deck.gl/mapbox';
 import { IconLayer } from '@deck.gl/layers';
 import svgIcon from '../assets/logo.svg'
 import { useImages } from './Queries';
+import { tripOnMap } from './types';
 
 export default defineComponent({
     components: {
@@ -62,17 +63,14 @@ export default defineComponent({
         const { mobile } = useDisplay();
         const { allTripData, tripName, showImagesOnMap } = useImages();
 
-        let mapRectBoundingBox = ref({
-            width: 0,
-            height: 0
-        });
+        let mapRectBoundingBox: Ref<DOMRect | undefined> = ref(new DOMRect());
 
-        const getTextCoords = (coords) => {
+        const getTextCoords = (coords: [number, number]): [number, number] => {
             return deckOverlay._deck.viewManager._viewports[0].project([coords[0], coords[1]])
         }
 
         mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN
-        const map = ref(null);
+        const map: mapboxgl.Map = ref(null);
 
         const mouseCoordinates = ref({
             lng: 20, lat: 80
@@ -86,7 +84,7 @@ export default defineComponent({
             lng: 20, lat: 80
         });
 
-        const groupedTripData = ref([]);
+        const groupedTripData: Ref<tripOnMap[][]> = ref([]);
 
         const deckLayers = computed(() => [
             new IconLayer({
@@ -124,7 +122,7 @@ export default defineComponent({
 
         const allTripsScreenCoords = ref({})
 
-        const distance = (x1, y1, x2, y2) => {
+        const distance = (x1: number, y1: number, x2: number, y2: number): number => {
             return Math.sqrt((y2 - y1) * (y2 - y1) + (x2 - x1) * (x2 - x1))
         }
 
@@ -132,7 +130,7 @@ export default defineComponent({
             groupedTripData.value = [];
             const alreadySeenPlaces = new Map();
                 allTripData.value.forEach((trip, index) => {
-                    const groupedArr = []
+                    const groupedArr: tripOnMap[] = []
                     allTripData.value.forEach((tripOther, indexOther) => {
                         if (index !== indexOther) {
                             if (alreadySeenPlaces.get(tripOther.tripTitle)){
@@ -178,7 +176,7 @@ export default defineComponent({
             })
 
             map.value.on('load', () => {
-                mapRectBoundingBox.value = document.getElementById('map').getBoundingClientRect();
+                mapRectBoundingBox.value = document.getElementById('map')?.getBoundingClientRect();
             })
 
             // mapbox events

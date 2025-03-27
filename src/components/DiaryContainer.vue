@@ -29,6 +29,7 @@ import { useDisplay } from 'vuetify/lib/framework.mjs';
 import { MAPBOX_FLY_DURATION } from './Constants';
 import { useUserDetails } from '@/stores/userDetails';
 import { useImages } from './Queries';
+import mapboxgl from 'mapbox-gl';
 
 export default defineComponent({
     components: {
@@ -37,7 +38,7 @@ export default defineComponent({
     },
     setup() {
         const { mdAndUp, mdAndDown, mobile } = useDisplay()
-        const mapInstance = ref(null);
+        const mapInstance: mapboxgl.Map = ref(null);
         
         const { setTrip } = useImages();
         const userDetails = useUserDetails();

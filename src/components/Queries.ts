@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/vue-query";
-import { computed, ref } from "vue";
+import { computed, Ref, ref } from "vue";
+import { tripData, tripUploadPayload } from "./types";
 
 const DEFAULT_OPTIONS = {
     cacheTime: Infinity,
@@ -7,7 +8,7 @@ const DEFAULT_OPTIONS = {
     refetchOnMount: false,
 }
 
-const imageDataQueryFunc = async () => {
+const imageDataQueryFunc = async (): Promise<tripData[]> => {
     const response = await fetch('https://travelmemories.azurewebsites.net/ImageUpload/AllTripData', {
         method: 'GET',
         credentials: 'include'
@@ -20,7 +21,7 @@ const imageDataQueryFunc = async () => {
     return response.json();
 };
 
-export const uploadImageQueryFunc = async (tripData) => {
+export const uploadImageQueryFunc = async (tripData: tripUploadPayload) => {
     const { tripTitle, tripYear, locationCoords, selectedFiles } = tripData;
 
     const formData = new FormData();
@@ -29,11 +30,13 @@ export const uploadImageQueryFunc = async (tripData) => {
         formData.append('images', file);
     })
 
-    await fetch(`https://travelmemories.azurewebsites.net/ImageUpload?tripTitle=${tripTitle.value}&year=${tripYear.value}&lat=${locationCoords.value.lat}&lon=${locationCoords.value.lon}`, {
+    const res = await fetch(`https://travelmemories.azurewebsites.net/ImageUpload?tripTitle=${tripTitle.value}&year=${tripYear.value}&lat=${locationCoords.value.lat}&lon=${locationCoords.value.lon}`, {
         method: 'POST',
         body: formData,
         credentials: 'include',
     })
+
+    return res.json();
 }
 
 const useImagesQuery = () => {
@@ -44,7 +47,14 @@ const useImagesQuery = () => {
     })
 }
 
-const selectedTrip = ref({});
+const selectedTrip: Ref<tripData> = ref({
+    email: '',
+    imageUrls: [],
+    lat: 0,
+    lon: 0,
+    tripTitle: '',
+    year: 0,
+});
 const showImagesOnMap = ref(false);
 const lastChosenPlace = ref('');
 
@@ -55,7 +65,7 @@ export const useImages = () => {
     const tripName = computed(() => selectedTrip.value.tripTitle);
     const allTripHeading = computed(() => allTripData.value.map(x => x.tripTitle))
 
-    const setTrip = (trip) => {
+    const setTrip = (trip: tripData) => {
         selectedTrip.value = trip;
     }
 
