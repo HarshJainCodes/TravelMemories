@@ -1,3 +1,5 @@
+![Build Status](https://github.com/HarshJainCodes/TravelMemories/actions/workflows/azure-static-web-apps-lemon-moss-0ef6b9200.yml/badge.svg)
+
 # travel-memories
 
 This template should help get you started developing with Vue 3 in Vite.
