@@ -166,9 +166,9 @@ export default defineComponent({
 		const onClickExistingTripName = (name: string) => {
 			const existingTrip = allTripData.value.find((x) => x.tripTitle == name);
 			if (existingTrip != undefined) {
-				locationCoords.value.lat = existingTrip.lat
-				locationCoords.value.lon = existingTrip.lon
-				tripYear.value = existingTrip.year
+				locationCoords.value.lat = existingTrip.lat;
+				locationCoords.value.lon = existingTrip.lon;
+				tripYear.value = existingTrip.year;
 			}
 		};
 
