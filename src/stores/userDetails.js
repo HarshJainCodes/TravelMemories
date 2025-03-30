@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { BACKEND_URL } from '@/components/Queries';
 
 export const useUserDetails = defineStore('userDetails', () => {
 	const router = useRouter();
@@ -30,14 +31,10 @@ export const useUserDetails = defineStore('userDetails', () => {
 
 	const checkLogin = async () => {
 		if (isLoggedIn.value === false) {
-			// check if it is logged in
-			const req = await fetch(
-				'https://travelmemories.azurewebsites.net/ImageUpload/CheckLogin',
-				{
-					method: 'GET',
-					credentials: 'include',
-				},
-			);
+			const req = await fetch(`${BACKEND_URL}/ImageUpload/CheckLogin`, {
+				method: 'GET',
+				credentials: 'include',
+			});
 
 			if (req.status === 200) {
 				isLoggedIn.value = true;

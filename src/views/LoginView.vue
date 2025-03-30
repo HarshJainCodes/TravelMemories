@@ -18,6 +18,7 @@ import { useRouter } from 'vue-router';
 import { LoginPage, LoginModes } from 'corecomponentshj';
 import { TYPE, useToast } from 'vue-toastification';
 import type { CallbackTypes } from 'vue3-google-login';
+import { BACKEND_URL } from '@/components/Queries';
 
 export default defineComponent({
 	components: {
@@ -35,20 +36,16 @@ export default defineComponent({
 		const onGoogleAuthenticated: CallbackTypes.TokenResponseCallback = async (res) => {
 			const google_jwt = res.access_token;
 
-			const googleLoginCall = await fetch(
-				'https://travelmemories.azurewebsites.net/auth/googleLogin',
-				{
-					//  'https://localhost:7221/auth/googleLogin', {
-					method: 'POST',
-					headers: {
-						'Content-type': 'application/json; charset=UTF-8',
-					},
-					body: JSON.stringify({
-						idToken: google_jwt,
-					}),
-					credentials: 'include',
+			const googleLoginCall = await fetch(`${BACKEND_URL}/auth/googleLogin`, {
+				method: 'POST',
+				headers: {
+					'Content-type': 'application/json; charset=UTF-8',
 				},
-			);
+				body: JSON.stringify({
+					idToken: google_jwt,
+				}),
+				credentials: 'include',
+			});
 
 			if (googleLoginCall.status === 200) {
 				const response = await googleLoginCall.json();
@@ -65,7 +62,7 @@ export default defineComponent({
 			password: string;
 		}) => {
 			if (event.currentView == LoginModes.CreateAccount) {
-				const call = await fetch('https://travelmemories.azurewebsites.net/auth/Register', {
+				const call = await fetch(`${BACKEND_URL}/auth/Register`, {
 					method: 'POST',
 					headers: {
 						'Content-type': 'application/json; charset=UTF-8',
@@ -90,7 +87,7 @@ export default defineComponent({
 					});
 				}
 			} else {
-				const call = await fetch('https://travelmemories.azurewebsites.net/auth/Login', {
+				const call = await fetch(`${BACKEND_URL}/auth/Login`, {
 					method: 'POST',
 					headers: {
 						'Content-type': 'application/json; charset=UTF-8',

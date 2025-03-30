@@ -30,11 +30,14 @@
 					Upload
 				</div>
 
-				<div class="text-h6 mx-2 navItem">Courses</div>
-
-				<div class="text-h6 mx-2 navItem">Goodies</div>
-
-				<div class="text-h6 mx-2 navItem">About</div>
+				<div
+					v-if="userDetails.isLoggedIn"
+					@click="onClickLogout"
+					data-qa-id="logout-btn"
+					class="text-h6 mx-2 navItem"
+				>
+					Logout
+				</div>
 			</div>
 
 			<v-spacer />
@@ -83,6 +86,14 @@
 						>
 							Upload
 						</v-list-item>
+						<v-list-item
+							v-if="userDetails.isLoggedIn"
+							@click="onClickLogout"
+							slim
+							density="compact"
+						>
+							Logout
+						</v-list-item>
 					</v-list>
 				</v-menu>
 			</div>
@@ -96,6 +107,7 @@ import { defineComponent } from 'vue';
 import { useDisplay } from 'vuetify/lib/framework.mjs';
 import { useRouter } from 'vue-router';
 import { useUserDetails } from '@/stores/userDetails';
+import { BACKEND_URL } from './Queries';
 
 export default defineComponent({
 	name: 'topNavigation',
@@ -123,6 +135,18 @@ export default defineComponent({
 			router.push('/');
 		};
 
+		const onClickLogout = async () => {
+			const call = await fetch(`${BACKEND_URL}/auth/Logout`, {
+				method: 'GET',
+				credentials: 'include',
+			});
+
+			if (call.status === 200) {
+				userDetails.isLoggedIn = false;
+				userDetails.reDirectIfNotLoggedIn();
+			}
+		};
+
 		return {
 			mdAndUp,
 			mobile,
@@ -133,6 +157,7 @@ export default defineComponent({
 			onClickGithub,
 			onClickUpload,
 			onClickLogin,
+			onClickLogout,
 		};
 	},
 });
