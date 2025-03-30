@@ -51,6 +51,7 @@ export default defineComponent({
 				const response = await googleLoginCall.json();
 				userDetails.setIsLoggedIn(true);
 				userDetails.userName = response.userName;
+                userDetails.userEmail = response.email;
 				router.push('/MyCollection');
 			}
 		};
@@ -79,6 +80,7 @@ export default defineComponent({
 					const res = await call.json();
 					userDetails.setIsLoggedIn(true);
 					userDetails.userName = res.userName;
+                    userDetails.userEmail = res.email;
 					router.push('/MyCollection');
 				} else if (call.status == 400) {
 					const errorMsg = await call.text();
@@ -104,6 +106,7 @@ export default defineComponent({
 					const res = await call.json();
 					userDetails.setIsLoggedIn(true);
 					userDetails.userName = res.userName;
+                    userDetails.userEmail = res.email;
 					router.push('/MyCollection');
 				} else {
 					const errorMsg = await call.text();

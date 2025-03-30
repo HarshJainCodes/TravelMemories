@@ -50,13 +50,13 @@ export const uploadImageQueryFunc = async (tripData: tripUploadPayload) => {
 
 const useImagesQuery = () => {
 	const userDetails = useUserDetails();
-	const userName = computed(() => userDetails.userName);
+	const userEmail = computed(() => userDetails.userEmail);
 
 	return useQuery({
-		queryKey: ['imageData', userName],
+		queryKey: ['imageData', userEmail],
 		queryFn: imageDataQueryFunc,
 		...DEFAULT_OPTIONS,
-		enabled: () => userName.value !== '',
+		enabled: () => userEmail.value !== '',
 	});
 };
 
