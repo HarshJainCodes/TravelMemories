@@ -25,18 +25,18 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 Cypress.Commands.add('loginAndVisitMap', () => {
-    cy.visit('/')
-    cy.get('[data-qa-id="start-creating-btn"]').click()
-    
-    cy.get('[data-qa-id="login-hyperlink"]').click()
+	cy.visit('/');
+	cy.get('[data-qa-id="start-creating-btn"]').click();
 
-    cy.get('[data-qa-id="username-field"]').type('cypress user')
-    cy.get('[data-qa-id="email-field"]').type('cypressuserhj@gmail.com')
-    cy.get('[data-qa-id="password-field"]').type('hjcypress')
+	cy.get('[data-qa-id="login-hyperlink"]').click();
 
-    cy.intercept('https://travelmemories.azurewebsites.net/auth/Login').as('loginRequest')
-    cy.get('[data-qa-id="login-action-btn"]').click()
-    cy.wait('@loginRequest').its('response.statusCode').should('eq', 200)
+	cy.get('[data-qa-id="username-field"]').type('cypress user');
+	cy.get('[data-qa-id="email-field"]').type('cypressuserhj@gmail.com');
+	cy.get('[data-qa-id="password-field"]').type('hjcypress');
 
-    cy.get('#map').should('exist')
-})
+	cy.intercept('https://travelmemories.azurewebsites.net/auth/Login').as('loginRequest');
+	cy.get('[data-qa-id="login-action-btn"]').click();
+	cy.wait('@loginRequest').its('response.statusCode').should('eq', 200);
+
+	cy.get('#map').should('exist');
+});
