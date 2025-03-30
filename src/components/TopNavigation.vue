@@ -143,7 +143,7 @@ export default defineComponent({
 
 			if (call.status === 200) {
 				userDetails.isLoggedIn = false;
-				userDetails.reDirectIfNotLoggedIn();
+				await userDetails.reDirectIfNotLoggedIn();
 			}
 		};
 

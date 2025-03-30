@@ -37,7 +37,9 @@ export const useUserDetails = defineStore('userDetails', () => {
 			});
 
 			if (req.status === 200) {
+				const res = await req.text();
 				isLoggedIn.value = true;
+				userName.value = res;
 			}
 		}
 	};
