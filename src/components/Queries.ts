@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/vue-query';
 import { computed, Ref, ref } from 'vue';
 import { tripData, tripUploadPayload } from './types';
-import { useUserDetails } from '@/stores/userDetails'
+import { useUserDetails } from '@/stores/userDetails';
 
 const PROD_URL = 'https://travelmemories.azurewebsites.net';
 const LOCAL_URL = 'https://localhost:7221';
@@ -49,14 +49,14 @@ export const uploadImageQueryFunc = async (tripData: tripUploadPayload) => {
 };
 
 const useImagesQuery = () => {
-    const userDetails = useUserDetails();
-    const userName = computed(() => userDetails.userName);
+	const userDetails = useUserDetails();
+	const userName = computed(() => userDetails.userName);
 
 	return useQuery({
 		queryKey: ['imageData', userName],
 		queryFn: imageDataQueryFunc,
 		...DEFAULT_OPTIONS,
-        enabled: () => userName.value !== ''
+		enabled: () => userName.value !== '',
 	});
 };
 

@@ -57,7 +57,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, Ref, ref, watch } from 'vue';
+import { computed, defineComponent, onActivated, Ref, ref, watch } from 'vue';
 import { useDisplay } from 'vuetify/lib/framework.mjs';
 import mapboxgl from 'mapbox-gl';
 import ImageGallary from './ImageGallary.vue';
@@ -77,10 +77,6 @@ export default defineComponent({
 		const { allTripData, tripName, showImagesOnMap } = useImages();
 
 		let mapRectBoundingBox: Ref<DOMRect | undefined> = ref(new DOMRect());
-
-		const getTextCoords = (coords: [number, number]): [number, number] => {
-			return deckOverlay._deck.viewManager._viewports[0].project([coords[0], coords[1]]);
-		};
 
 		mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN;
 		const map: mapboxgl.Map = ref(null);
@@ -138,7 +134,9 @@ export default defineComponent({
 			layers: deckLayers.value,
 		});
 
-		const allTripsScreenCoords = ref({});
+		const getTextCoords = (coords: [number, number]): [number, number] => {
+			return deckOverlay._deck.viewManager._viewports[0].project([coords[0], coords[1]]);
+		};
 
 		const distance = (x1: number, y1: number, x2: number, y2: number): number => {
 			return Math.sqrt((y2 - y1) * (y2 - y1) + (x2 - x1) * (x2 - x1));
@@ -189,7 +187,17 @@ export default defineComponent({
 			});
 		};
 
-		onMounted(() => {
+		onActivated(() => {
+			if (map.value) {
+				const interval = setInterval(() => {
+					try {
+						groupPlacesAccordingToZoom();
+						clearInterval(interval);
+					} catch {}
+				}, 10);
+				return;
+			}
+
 			map.value = new mapboxgl.Map({
 				container: 'map',
 				interactive: true,
@@ -198,49 +206,39 @@ export default defineComponent({
 				zoom: 3,
 			});
 
-			map.value.on('load', () => {
-				mapRectBoundingBox.value = document.getElementById('map')?.getBoundingClientRect();
-			});
-
-			// mapbox events
-			map.value.on('move', () => {
-				mapCenter.value = map.value.getCenter();
-				allTripsScreenCoords.value = allTripData.value.map((td) => ({
-					...td,
-					x: getTextCoords([td.lon, td.lat])[1],
-					y: getTextCoords([td.lon, td.lat])[0],
-				}));
-
-				groupPlacesAccordingToZoom();
+			map.value.on('mousemove', (e) => {
+				mouseCoordinates.value.lat = e.lngLat.lat.toFixed(6);
+				mouseCoordinates.value.lng = e.lngLat.lng.toFixed(6);
 			});
 
 			map.value.on('zoom', () => {
 				mapCenter.value = map.value.getCenter();
 			});
 
-			map.value.on('mousemove', (e) => {
-				mouseCoordinates.value.lat = e.lngLat.lat.toFixed(6);
-				mouseCoordinates.value.lng = e.lngLat.lng.toFixed(6);
+			map.value.on('touchmove', () => {
+				const mapCenter = map.value.getCenter();
+				touchCoordinates.value.lat = Number(mapCenter.lat.toFixed(4));
+				touchCoordinates.value.lng = Number(mapCenter.lng.toFixed(4));
 			});
 
-			map.value.on('touchmove', () => {
-				touchCoordinates.value.lat = Number(mapCenter.value.lat.toFixed(4));
-				touchCoordinates.value.lng = Number(mapCenter.value.lng.toFixed(4));
+			map.value.on('move', () => {
+				mapCenter.value = map.value.getCenter();
+				groupPlacesAccordingToZoom();
 			});
 
 			map.value.addControl(deckOverlay);
 			map.value.addControl(new mapboxgl.NavigationControl());
 
-			setTimeout(() => {
-				allTripsScreenCoords.value = allTripData.value.map((td) => ({
-					...td,
-					x: getTextCoords([td.lon, td.lat])[1],
-					y: getTextCoords([td.lon, td.lat])[0],
-				}));
-
-				groupPlacesAccordingToZoom();
-			}, 1000); // TODO: get rid of this 1000, need to come with an efficient way here!
 			emit('map-instance', map.value);
+		});
+
+		watch(allTripData, () => {
+			const interval = setInterval(() => {
+				try {
+					groupPlacesAccordingToZoom();
+					clearInterval(interval);
+				} catch {}
+			}, 10);
 		});
 
 		watch(deckLayers, (dl) => {
@@ -257,9 +255,7 @@ export default defineComponent({
 			tripName,
 			mouseCoordinates,
 			touchCoordinates,
-			allTripsScreenCoords,
 			groupedTripData,
-			getTextCoords,
 		};
 	},
 });
