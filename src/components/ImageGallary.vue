@@ -23,7 +23,7 @@
 				<v-img :src="url">
 					<template #placeholder>
 						<div class="w-100 h-100 d-flex justify-center align-center">
-							<v-progress-circular indeterminate color="grey-lighten-4" />
+							<v-progress-circular indeterminate color="black" />
 						</div>
 					</template>
 				</v-img>

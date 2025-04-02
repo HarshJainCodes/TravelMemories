@@ -12,7 +12,13 @@
 						{{ transformTitleIfShort(imageData.tripTitle) }}
 					</div>
 					<v-card class="w-100" height="200" @click="onClickTimelineCard(imageData)">
-						<v-img class="w-100 h-100" :src="imageData.imageUrls[0]"> </v-img>
+						<v-img class="w-100 h-100" :src="imageData.imageUrls[0]">
+							<template #placeholder>
+								<div class="w-100 h-100 d-flex justify-center align-center">
+									<v-progress-circular indeterminate color="teal-lighten-3" />
+								</div>
+							</template>
+						</v-img>
 					</v-card>
 				</div>
 			</v-timeline-item>
