@@ -9,24 +9,26 @@
 			}"
 		/>
 
-		<div v-for="(trips, index) in groupedTripData" :key="index" class="z-index-1">
-			<v-list
-				class="position-absolute overflow-y"
-				max-height="200"
-				:style="{
-					top: trips[0].x + 'px',
-					left: trips[0].y + 'px',
-				}"
-			>
-				<v-list-item
-					v-for="trip in trips"
-					:key="trip.tripTitle"
-					@click="$emit('on-click-timeline', trip)"
-					density="compact"
+		<div v-if="showLocationCards">
+			<div v-for="(trips, index) in groupedTripData" :key="index" class="z-index-1">
+				<v-list
+					class="position-absolute overflow-y"
+					max-height="200"
+					:style="{
+						top: trips[0].x + 'px',
+						left: trips[0].y + 'px',
+					}"
 				>
-					{{ trip.tripTitle }}
-				</v-list-item>
-			</v-list>
+					<v-list-item
+						v-for="trip in trips"
+						:key="trip.tripTitle"
+						@click="$emit('on-click-timeline', trip)"
+						density="compact"
+					>
+						{{ trip.tripTitle }}
+					</v-list-item>
+				</v-list>
+			</div>
 		</div>
 
 		<image-gallary
@@ -36,6 +38,14 @@
 				'map-lg': !mobile,
 			}"
 		/>
+
+		<div class="position-absolute d-flex w-100 align-center justify-end">
+			<v-switch v-model="showLocationCards" inset color="teal-darken-1">
+				<template #label>
+					<div class="text-h6">Show Location Cards</div>
+				</template>
+			</v-switch>
+		</div>
 
 		<div
 			v-if="!(tripName && showImagesOnMap)"
@@ -75,6 +85,7 @@ export default defineComponent({
 	setup(props, { emit }) {
 		const { mobile } = useDisplay();
 		const { allTripData, tripName, showImagesOnMap } = useImages();
+		const showLocationCards = ref(true);
 
 		let mapRectBoundingBox: Ref<DOMRect | undefined> = ref(new DOMRect());
 
@@ -256,6 +267,7 @@ export default defineComponent({
 			mouseCoordinates,
 			touchCoordinates,
 			groupedTripData,
+			showLocationCards,
 		};
 	},
 });
