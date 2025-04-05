@@ -1,6 +1,10 @@
 <template>
 	<div class="w-100 h-100 d-flex flex-column">
-		<v-timeline v-if="allTripData.length" side="end" class="w-100 pr-4 overflow-y-scroll timeline-scroll-behaviour">
+		<v-timeline
+			v-if="allTripData.length"
+			side="end"
+			class="w-100 pr-4 overflow-y-scroll timeline-scroll-behaviour"
+		>
 			<v-timeline-item
 				class="w-100"
 				v-for="imageData in allTripData"
@@ -23,19 +27,22 @@
 				</div>
 			</v-timeline-item>
 		</v-timeline>
-        <div v-else class="h-100 w-100">
-            <div class="d-flex h-100 justify-center align-center flex-column">
-                <div class="w-100">
-                    <v-img class="w-100" :src="no_image">
-                    </v-img>
-                </div>
-                <div class="d-flex justify-center align-center mt-5">
-                    <v-btn variant="outlined" color="teal-lighten-1" @click="onClickUploadFirstImage">
-                        Upload Image
-                    </v-btn>
-                </div>
-            </div>
-        </div>
+		<div v-else class="h-100 w-100">
+			<div class="d-flex h-100 justify-center align-center flex-column">
+				<div class="w-100">
+					<v-img class="w-100" :src="no_image"> </v-img>
+				</div>
+				<div class="d-flex justify-center align-center mt-5">
+					<v-btn
+						variant="outlined"
+						color="teal-lighten-1"
+						@click="onClickUploadFirstImage"
+					>
+						Upload Image
+					</v-btn>
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -43,14 +50,14 @@
 import { defineComponent } from 'vue';
 import { useImages } from './Queries';
 import { tripData } from './types';
-import no_image from '@/assets/images/no_image.png'
+import no_image from '@/assets/images/no_image.png';
 import { useRouter } from 'vue-router';
 
 export default defineComponent({
 	emits: ['on-click-timeline'],
 	setup(props, { emit }) {
 		const { allTripData } = useImages();
-        const router = useRouter();
+		const router = useRouter();
 
 		const transformTitleIfShort = (title: string) => {
 			if (title.length < 20) {
@@ -77,16 +84,16 @@ export default defineComponent({
 			emit('on-click-timeline', imageData);
 		};
 
-        const onClickUploadFirstImage = () => {
-            router.push('/Upload')
-        }
+		const onClickUploadFirstImage = () => {
+			router.push('/Upload');
+		};
 
 		return {
 			allTripData,
-            no_image,
+			no_image,
 			onClickTimelineCard,
 			transformTitleIfShort,
-            onClickUploadFirstImage,
+			onClickUploadFirstImage,
 		};
 	},
 });
