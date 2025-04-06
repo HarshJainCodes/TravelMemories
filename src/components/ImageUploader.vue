@@ -101,7 +101,7 @@ export default defineComponent({
 		const toast = useToast();
 		const userDetails = useUserDetails();
 		const queryClient = useQueryClient();
-        const router = useRouter();
+		const router = useRouter();
 
 		const uploadImage = useMutation({
 			mutationFn: uploadImageQueryFunc,
@@ -112,7 +112,7 @@ export default defineComponent({
 				toast('Images Uploaded Successfully', {
 					type: TYPE.SUCCESS,
 				});
-                router.push('/MyCollection');
+				router.push('/MyCollection');
 			},
 			onError: () => {
 				toast('Some error occured in uploading the image', {

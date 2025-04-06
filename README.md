@@ -1,59 +1,49 @@
-![Build Status](https://github.com/HarshJainCodes/TravelMemories/actions/workflows/azure-static-web-apps-lemon-moss-0ef6b9200.yml/badge.svg)
+# Travel Diary
 
-# travel-memories
+<p align="center">
+    <img width="600" alt="Travel Diary" src="src/assets/images/readme_image.png">
+</p>
+<p align="center">
+    <strong>
+        <em>Travel Diary</em> is a tool that lets you visualize all your memories and places you have visited on the map.<br>
+        Just upload the images and associate them to a particular location from the map and you are done.
+    </strong>
+</p>
+<p align="center">
+    <img alt="Build Status" src="https://github.com/HarshJainCodes/TravelMemories/actions/workflows/azure-static-web-apps-lemon-moss-0ef6b9200.yml/badge.svg">
+</p>
 
-This template should help get you started developing with Vue 3 in Vite.
+## Usage
 
-## Recommended IDE Setup
+To start uploading images, you need to create an account.
+You can do this by:
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+1. Logging in with Google (preferred)
+2. Creating a unique username and password
 
-## Customize configuration
+Once logged in, head to the `/Upload` page to upload your images:
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+1. Select an existing collection from the "Trip Select" dropdown or create a new one
+2. Choose a location on the map where the event took place
+3. Upload your images
+4. Visualize them on the map
 
-## Project Setup
+Once uploaded, you can view your images in two ways:
 
-```sh
-npm install
-```
+- On the **timeline** on the right-hand side
+- As **data cards** on the map
 
-### Compile and Hot-Reload for Development
+Click on either to view the images within that collection.
 
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
-
-```sh
-npm run test:e2e:dev
-```
-
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
-
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
-
-```sh
-npm run build
-npm run test:e2e
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+<p align="center">
+    <img width="600" alt="see images on map" src="src/assets/images/readme_image2.png">
+</p>
+<h6 align="center">
+    You can view all your collections on the sidebar on the right.
+</h6>
+<p align="center">
+    <img width="600" alt="click on a collection" src="src/assets/images/readme_image3.png">
+</p>
+<h6 align="center">
+    On Clicking on a collection, you can browse the images of that collection.
+</h6>
