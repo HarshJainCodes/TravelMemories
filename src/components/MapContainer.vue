@@ -39,7 +39,7 @@
 			}"
 		/>
 
-		<div class="position-absolute d-flex w-100 align-center justify-end">
+		<div class="position-absolute d-flex align-center">
 			<v-switch v-model="showLocationCards" inset color="teal-darken-1">
 				<template #label>
 					<div class="text-h6">Show Location Cards</div>

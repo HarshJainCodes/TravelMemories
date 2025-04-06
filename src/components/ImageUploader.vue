@@ -92,6 +92,7 @@ import { MAPBOX_FLY_DURATION } from './Constants';
 import { useImages, uploadImageQueryFunc } from './Queries';
 import { useQueryClient, useMutation } from '@tanstack/vue-query';
 import { Ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
 	setup() {
@@ -100,6 +101,7 @@ export default defineComponent({
 		const toast = useToast();
 		const userDetails = useUserDetails();
 		const queryClient = useQueryClient();
+        const router = useRouter();
 
 		const uploadImage = useMutation({
 			mutationFn: uploadImageQueryFunc,
@@ -110,6 +112,7 @@ export default defineComponent({
 				toast('Images Uploaded Successfully', {
 					type: TYPE.SUCCESS,
 				});
+                router.push('/MyCollection');
 			},
 			onError: () => {
 				toast('Some error occured in uploading the image', {

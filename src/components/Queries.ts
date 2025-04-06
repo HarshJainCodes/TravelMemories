@@ -45,7 +45,7 @@ export const uploadImageQueryFunc = async (tripData: tripUploadPayload) => {
 		},
 	);
 
-	return res.json();
+	return res.text();
 };
 
 const useImagesQuery = () => {
