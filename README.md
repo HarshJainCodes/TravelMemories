@@ -47,3 +47,33 @@ Click on either to view the images within that collection.
 <h6 align="center">
     On Clicking on a collection, you can browse the images of that collection.
 </h6>
+
+# For Local Development
+
+## Frontend
+
+1. Clone this repo
+2. run `npm i`
+3. Create a `.env` file at the root of the project and add these variables <br>
+   3.1 `VITE_MAPBOX_TOKEN` The public key of Mapbox. This is necessary if you want to load the map <br>
+   3.2 `VITE_APPLICATION_INSIGHTS_CONN_STRING` Application insights string to track some telemetricks <br>
+   3.3 `VITE_GOOGLE_CLIENT_ID` If you want to run your own login with google <br>
+
+4. run `npm run dev` This will start the development server at `http://localhost:5173`
+
+## Backend
+
+In the `Queries.ts` there are two variables, `LOCAL_URL`, `PROD_URL`, replace these with your backend local and prod url.
+
+Steps to run the backend locally
+
+1. Clone the [Backend repo]('https://github.com/HarshJainCodes/TravelMemoriesBackend')
+2. In `appsettings.json` add these variables <br>
+   2.1 `APPLICATIONINSIGHTS_CONNECTION_STRING` Application insights string to track some telemetrics. <br>
+   2.2 `ImageSqlServer` The SQL Server connection string. Metadata of images will be stored here. <br>
+   2.3 `BlobStorage_ConnectionString` The Blob Storage connection string. All the images will be stored here. <br>
+   2.4 `BlobStorage_ContainerName` The container name of the blob storage. <br>
+   2.5 `IssuerSigningKeySecretText` To Sign your JWT Tokens.
+3. In the Program.cs Add Cors Policy to whitelist your frontend URLS.
+4. Apply Migrations to your SQL Database using `Update-Database`.
+5. Run the project.
