@@ -126,8 +126,8 @@ export default defineComponent({
 		const tripTitle: Ref<string> = ref('');
 		const tripYear = ref(0);
 		const locationCoords: Ref<{ lat: number; lon: number }> | any = ref({
-			lat: null,
-			lon: null,
+			lat: 21.151093,
+			lon: 79.11267,
 		});
 		const selectedFiles = ref([]);
 
@@ -153,6 +153,18 @@ export default defineComponent({
 				});
 				return;
 			}
+            if (tripTitle.value === '') {
+                toast('Enter a Valid Trip Title', {
+					type: TYPE.ERROR,
+				});
+                return;
+            }
+            if (tripYear.value <= 1900) {
+                toast('Enter a Valid Year', {
+					type: TYPE.ERROR,
+				});
+                return;
+            }
 
 			uploadImage.mutate({
 				tripTitle,
