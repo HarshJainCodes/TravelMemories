@@ -153,18 +153,18 @@ export default defineComponent({
 				});
 				return;
 			}
-            if (tripTitle.value === '') {
-                toast('Enter a Valid Trip Title', {
+			if (tripTitle.value === '') {
+				toast('Enter a Valid Trip Title', {
 					type: TYPE.ERROR,
 				});
-                return;
-            }
-            if (tripYear.value <= 1900) {
-                toast('Enter a Valid Year', {
+				return;
+			}
+			if (tripYear.value <= 1900) {
+				toast('Enter a Valid Year', {
 					type: TYPE.ERROR,
 				});
-                return;
-            }
+				return;
+			}
 
 			uploadImage.mutate({
 				tripTitle,
