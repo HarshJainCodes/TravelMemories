@@ -61,7 +61,6 @@
 						:density="mobile ? 'comfortable' : 'default'"
 						@update:model-value="onFilesChanged"
 					>
-						<template #title> Upload Images Here </template>
 					</v-file-upload>
 					<div class="d-flex w-100 justify-center">
 						<v-btn
