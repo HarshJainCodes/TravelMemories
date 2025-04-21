@@ -6,7 +6,7 @@ import { useUserDetails } from '@/stores/userDetails';
 const PROD_URL = 'https://travelmemories.azurewebsites.net';
 const LOCAL_URL = 'https://localhost:7221';
 
-export const BACKEND_URL = PROD_URL;
+export const BACKEND_URL = LOCAL_URL;
 
 const DEFAULT_OPTIONS = {
 	cacheTime: Infinity,
@@ -37,7 +37,7 @@ export const uploadImageQueryFunc = async (tripData: tripUploadPayload) => {
 	});
 
 	const res = await fetch(
-		`${PROD_URL}/ImageUpload?tripTitle=${tripTitle.value}&year=${tripYear.value}&lat=${locationCoords.value.lat}&lon=${locationCoords.value.lon}`,
+		`${BACKEND_URL}/ImageUpload?tripTitle=${tripTitle.value}&year=${tripYear.value}&lat=${locationCoords.value.lat}&lon=${locationCoords.value.lon}`,
 		{
 			method: 'POST',
 			body: formData,
