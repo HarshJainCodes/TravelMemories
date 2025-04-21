@@ -6,7 +6,7 @@ import { useUserDetails } from '@/stores/userDetails';
 const PROD_URL = 'https://travelmemories.azurewebsites.net';
 const LOCAL_URL = 'https://localhost:7221';
 
-export const BACKEND_URL = LOCAL_URL;
+export const BACKEND_URL = PROD_URL;
 
 const DEFAULT_OPTIONS = {
 	cacheTime: Infinity,
