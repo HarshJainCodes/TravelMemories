@@ -53,6 +53,9 @@ export default defineComponent({
 				userDetails.setIsLoggedIn(true);
 				userDetails.userName = response.userName;
 				userDetails.userEmail = response.email;
+                toast(userDetails.userName, {
+                    type: TYPE.SUCCESS
+                })
 				router.push('/MyCollection');
 			}
 			if (googleLoginCall.status === 401) {
