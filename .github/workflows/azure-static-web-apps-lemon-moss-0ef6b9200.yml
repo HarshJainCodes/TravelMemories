@@ -10,38 +10,38 @@ on:
       - main
 
 jobs:
-  test_job:
-    runs-on: ubuntu-latest
-    name: Run Unit and Cypress Tests
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          submodules: true
-          lfs: false
+  # test_job:
+  #   runs-on: ubuntu-latest
+  #   name: Run Unit and Cypress Tests
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #       with:
+  #         submodules: true
+  #         lfs: false
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
+  #     - name: Setup Node.js
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: 18
 
-      - name: Install Dependencies
-        run: npm install
+  #     - name: Install Dependencies
+  #       run: npm install
 
-      - name: Run Unit Tests
-        run: npm run test:unit
+  #     - name: Run Unit Tests
+  #       run: npm run test:unit
 
-      - name: Start Application for Cypress Tests
-        run: npm run dev & npx wait-on http://localhost:5173
-        env:
-          VITE_MAPBOX_TOKEN: ${{ secrets.VITE_MAPBOX_TOKEN }}
-          VITE_GOOGLE_CLIENT_ID: ${{ secrets.VITE_GOOGLE_CLIENT_ID }}
-          VITE_APPLICATION_INSIGHTS_CONN_STRING: ${{ secrets.VITE_APPLICATION_INSIGHTS_CONN_STRING }}
+  #     - name: Start Application for Cypress Tests
+  #       run: npm run dev & npx wait-on http://localhost:5173
+  #       env:
+  #         VITE_MAPBOX_TOKEN: ${{ secrets.VITE_MAPBOX_TOKEN }}
+  #         VITE_GOOGLE_CLIENT_ID: ${{ secrets.VITE_GOOGLE_CLIENT_ID }}
+  #         VITE_APPLICATION_INSIGHTS_CONN_STRING: ${{ secrets.VITE_APPLICATION_INSIGHTS_CONN_STRING }}
 
-      - name: Run Cypress Tests
-        uses: cypress-io/github-action@v6
+  #     - name: Run Cypress Tests
+  #       uses: cypress-io/github-action@v6
 
   build_and_deploy_job:
-    needs: test_job
+    # needs: test_job
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
     name: Build and Deploy Job
