@@ -19,6 +19,7 @@ import { LoginPage, LoginModes } from 'corecomponentshj';
 import { TYPE, useToast } from 'vue-toastification';
 import type { CallbackTypes } from 'vue3-google-login';
 import { BACKEND_URL } from '@/components/Queries';
+import appinsights from '../appInsights';
 
 export default defineComponent({
 	components: {
@@ -53,6 +54,14 @@ export default defineComponent({
 				userDetails.userName = response.userName;
 				userDetails.userEmail = response.email;
 				router.push('/MyCollection');
+			}
+			if (googleLoginCall.status === 401) {
+				toast('Not able to authenticate', {
+					type: TYPE.ERROR,
+				});
+				appinsights.trackException({
+					exception: new Error('Not able to login after google login'),
+				});
 			}
 		};
 
