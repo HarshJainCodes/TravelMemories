@@ -11,6 +11,7 @@ export const useUserDetails = defineStore('userDetails', () => {
 
 	const isLoggedIn = ref(false);
 	const userProfilePicUrl = ref('');
+	const hasCompletedLoginCall = ref(false);
 
 	function setIsLoggedIn(val) {
 		isLoggedIn.value = val;
@@ -43,11 +44,13 @@ export const useUserDetails = defineStore('userDetails', () => {
 			});
 
 			if (req.status === 200) {
-				const res = await req.text();
+				const res = await req.json();
 				isLoggedIn.value = true;
-				userEmail.value = res;
+				userEmail.value = res.userEmail;
+				userProfilePicUrl.value = res.profilePicUrl;
 			}
 		}
+		hasCompletedLoginCall.value = true;
 	};
 
 	onMounted(async () => {
@@ -59,6 +62,7 @@ export const useUserDetails = defineStore('userDetails', () => {
 		isLoggedIn,
 		userProfilePicUrl,
 		userEmail,
+		hasCompletedLoginCall,
 		setUserEmail,
 		setIsLoggedIn,
 		reDirectIfNotLoggedIn,
