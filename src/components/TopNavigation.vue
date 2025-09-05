@@ -185,7 +185,11 @@ export default defineComponent({
 	<div class="w-100 top-nav">
 		<div class="d-flex mx-auto" style="width: 80%">
 			<div class="w-100 py-5 d-flex align-center">
-				<div class="text-h5 font-weight-bold text-teal-lighten-2">
+				<div
+					class="text-h5 font-weight-bold text-teal-lighten-2"
+					@click="clickOnWebsiteName"
+					style="cursor: pointer"
+				>
 					<v-icon icon="mdi-airplane" color="teal-lighten-1"></v-icon>
 					<span> Travel Memories </span>
 				</div>
@@ -220,18 +224,16 @@ export default defineComponent({
 					</v-btn>
 
 					<div v-if="!isLoggedIn" class="d-flex">
-						<v-btn variant="outlined" color="teal-lighten-1" class="mx-2">
+						<v-btn
+							variant="outlined"
+							color="teal-lighten-1"
+							class="mx-2"
+							@click="onClickLogin"
+						>
 							<template #prepend>
 								<v-icon icon="mdi-arrow-collapse-right"></v-icon>
 							</template>
 							Sign In
-						</v-btn>
-
-						<v-btn variant="tonal" color="teal-lighten-1" class="mx-2">
-							<template #prepend>
-								<v-icon icon="mdi-account-plus-outline"></v-icon>
-							</template>
-							Sign up
 						</v-btn>
 					</div>
 
@@ -279,18 +281,16 @@ export default defineComponent({
 					</div>
 
 					<div class="d-flex py-4">
-						<v-btn variant="outlined" color="teal-lighten-1" class="mx-2">
+						<v-btn
+							variant="outlined"
+							color="teal-lighten-1"
+							class="mx-2"
+							@click="onClickLogin"
+						>
 							<template #prepend>
 								<v-icon icon="mdi-arrow-collapse-right"></v-icon>
 							</template>
 							Sign In
-						</v-btn>
-
-						<v-btn variant="tonal" color="teal-lighten-1" class="mx-2">
-							<template #prepend>
-								<v-icon icon="mdi-account-plus-outline"></v-icon>
-							</template>
-							Sign up
 						</v-btn>
 					</div>
 				</div>
@@ -304,19 +304,33 @@ import { useUserDetails } from '@/stores/userDetails';
 import { defineComponent, ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useDisplay } from 'vuetify';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
 	name: 'TopNavigation',
 	setup() {
-		const showMobileNavLinks = ref(false);
-
 		const { hasCompletedLoginCall, isLoggedIn, userProfilePicUrl } =
 			storeToRefs(useUserDetails());
 
+		const router = useRouter();
 		const { mobile } = useDisplay();
+
+		const showMobileNavLinks = ref(false);
 
 		const toggleShowMobileNavLinks = () => {
 			showMobileNavLinks.value = !showMobileNavLinks.value;
+		};
+
+		const clickOnWebsiteName = () => {
+			router.push({
+				name: 'home',
+			});
+		};
+
+		const onClickLogin = () => {
+			router.push({
+				name: 'login',
+			});
 		};
 
 		return {
@@ -326,6 +340,8 @@ export default defineComponent({
 			mobile,
 			showMobileNavLinks,
 			toggleShowMobileNavLinks,
+			onClickLogin,
+			clickOnWebsiteName,
 		};
 	},
 });
