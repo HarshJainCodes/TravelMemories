@@ -18,6 +18,7 @@
 					color="teal-lighten-1"
 					size="xxx-large"
 				></v-icon>
+				 
 				<span class="text-teal-lighten-1 font-weight-bold" style="font-size: x-large">
 					Welcome To Travel Memories
 				</span>
@@ -91,6 +92,7 @@ export default defineComponent({
 		// google login methods
 		const onGoogleAuthenticated: CallbackTypes.TokenResponseCallback = async (res) => {
 			const google_jwt = res.access_token;
+			console.log('Hi');
 
 			const googleLoginCall = await fetch(`${BACKEND_URL}/auth/googleLogin`, {
 				method: 'POST',
