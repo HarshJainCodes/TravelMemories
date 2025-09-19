@@ -47,7 +47,9 @@ export const useUserDetails = defineStore('userDetails', () => {
 				const res = await req.json();
 				isLoggedIn.value = true;
 				userEmail.value = res.userEmail;
+				userName.value = res.userName;
 				userProfilePicUrl.value = res.profilePicUrl;
+				console.log('response', res);
 			}
 		}
 		hasCompletedLoginCall.value = true;

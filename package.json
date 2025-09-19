@@ -17,7 +17,7 @@
 	"dependencies": {
 		"@microsoft/applicationinsights-web": "^3.3.4",
 		"@tanstack/vue-query": "^5.69.0",
-		"corecomponentshj": "1.1.9",
+		"corecomponentshj": "1.2.1",
 		"deck.gl": "^9.1.0",
 		"mapbox-gl": "^2.6.1",
 		"pinia": "^2.3.1",
@@ -26,7 +26,8 @@
 		"vue-router": "^4.5.0",
 		"vue-toastification": "^2.0.0-rc.5",
 		"vue3-google-login": "^2.0.34",
-		"vuetify": "^3.7.7"
+		"vuetify": "^3.7.7",
+		"yalc": "^1.0.0-pre.53"
 	},
 	"devDependencies": {
 		"@eslint/js": "^9.18.0",

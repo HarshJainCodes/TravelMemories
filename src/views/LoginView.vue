@@ -1,82 +1,28 @@
 <template>
-	<!-- <login-page
-		v-if="isSafeToShowLoginPage"
+	<login-page-v-2
+		website-name="Travel Memories"
+		mini-title="Travel Diary"
 		:google-client-id="googleClientId"
 		@on-google-authenticated="onGoogleAuthenticated"
-		@on-click-login-or-register="onClickLoginOrRegister"
-	>
-		<template #topHeading>
-			Your Unique Photo Diary With The Power Of Map Visualization
-		</template>
-	</login-page> -->
-	<div class="w-100 h-100 d-flex justify-center align-center bg-teal-lighten-5">
-		<v-card style="width: 450px; height: 420px" elevation="10" class="rounded-xl">
-			<div class="d-flex flex-column justify-center align-center h-100">
-				<v-icon
-					class="ma-5"
-					icon="mdi-airplane"
-					color="teal-lighten-1"
-					size="xxx-large"
-				></v-icon>
-				<span class="text-teal-lighten-1 font-weight-bold" style="font-size: x-large">
-					Welcome To Travel Memories
-				</span>
-				<span style="font-size: 14px; color: rgb(75 85 99)">
-					Sign in to continue to your Travel Diary
-				</span>
-
-				<div class="my-10">
-					<v-tabs v-model="currentLoginTab" color="teal-lighten-1">
-						<v-tab> Google Sign In </v-tab>
-						<v-tab> Email Sign In </v-tab>
-					</v-tabs>
-
-					<v-window class="w-100" v-model="currentLoginTab">
-						<v-window-item class="w-100">
-							<google-login
-								:client-id="googleClientId"
-								popup-type="TOKEN"
-								ux-mode="redirect"
-								class="pa-5"
-							>
-								<template #default>
-									<v-btn
-										prepend-icon="mdi-google"
-										size="large"
-										color="teal-lighten-1"
-									>
-										Continue With Google
-									</v-btn>
-								</template>
-							</google-login>
-						</v-window-item>
-
-						<v-window-item> Hello </v-window-item>
-					</v-window>
-				</div>
-				<span style="font-size: 12px; color: rgb(75 85 99)">
-					By signing in, you agree to our Terms of Service and Privacy Policy
-				</span>
-			</div>
-		</v-card>
-	</div>
+		@on-send-verification-code="onSendVerficationCode"
+		@on-click-verify-otp="onClickVerifyOtp"
+		@on-click-resend-otp="onClickResendOtp"
+	></login-page-v-2>
 </template>
 
 <script lang="ts">
 import { defineComponent, onActivated, ref } from 'vue';
 import { useUserDetails } from '@/stores/userDetails';
 import { useRouter } from 'vue-router';
-import { LoginPage, LoginModes } from 'corecomponentshj';
+import { LoginPageV2, LoginModes } from 'corecomponentshj';
 import { TYPE, useToast } from 'vue-toastification';
 import type { CallbackTypes } from 'vue3-google-login';
 import { BACKEND_URL } from '@/components/Queries';
 import appinsights from '../appInsights';
-import { GoogleLogin } from 'vue3-google-login';
 
 export default defineComponent({
 	components: {
-		LoginPage,
-		GoogleLogin,
+		LoginPageV2,
 	},
 	setup() {
 		const userDetails = useUserDetails();
@@ -108,9 +54,7 @@ export default defineComponent({
 				userDetails.setIsLoggedIn(true);
 				userDetails.userName = response.userName;
 				userDetails.userEmail = response.email;
-				toast(userDetails.userName, {
-					type: TYPE.SUCCESS,
-				});
+				userDetails.userProfilePicUrl = response.profilePictureURL;
 				router.push('/MyCollection');
 			}
 			if (googleLoginCall.status === 401) {
@@ -184,6 +128,47 @@ export default defineComponent({
 			}
 		};
 
+		const onSendVerficationCode = async (email: String) => {
+			const sendVerficationCall = await fetch(`${BACKEND_URL}/EmailService`, {
+				method: 'POST',
+				body: JSON.stringify({
+					receiverEmail: email,
+				}),
+				headers: {
+					'Content-type': 'application/json; charset=UTF-8',
+				},
+			});
+		};
+
+		const onClickVerifyOtp = async ({ enteredEmail, enteredOtp }) => {
+			console.log(enteredEmail, enteredOtp);
+
+			const verifyOtpRequest = await fetch(`${BACKEND_URL}/EmailService/VerifyOtp`, {
+				method: 'POST',
+				body: JSON.stringify({
+					email: enteredEmail,
+					otp: enteredOtp,
+				}),
+				headers: {
+					'Content-type': 'application/json; charset=UTF-8',
+				},
+				credentials: 'include',
+			});
+
+			if (verifyOtpRequest.status === 200) {
+				router.push('/MyCollection');
+			} else {
+				toast('Invalid or expired OTP', {
+					type: TYPE.ERROR,
+				});
+			}
+		};
+
+		const onClickResendOtp = async (enteredEmail) => {
+			console.log('sending otp');
+			await onSendVerficationCode(enteredEmail);
+		};
+
 		onActivated(async () => {
 			// if you are already logged in then you dont need to be seeing login page
 			await userDetails.reDirectFromLogin();
@@ -196,6 +181,9 @@ export default defineComponent({
 			isSafeToShowLoginPage,
 			onGoogleAuthenticated,
 			onClickLoginOrRegister,
+			onSendVerficationCode,
+			onClickVerifyOtp,
+			onClickResendOtp,
 		};
 	},
 });

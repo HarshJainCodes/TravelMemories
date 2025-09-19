@@ -199,11 +199,14 @@ export default defineComponent({
 				class="w-100 py-5 d-flex justify-center align-center"
 				style="color: #374151; font-weight: 500; font-size: 14px"
 			>
-				<span class="px-3 nav-links"> Image Editor </span>
-				<span class="px-3 nav-links"> Showcase </span>
-				<span class="px-3 nav-links"> Github </span>
-				<span class="px-3 nav-links"> Pricing </span>
-				<span class="px-3 nav-links"> API </span>
+				<span
+					class="px-3 nav-links"
+					v-for="link in MIDDLE_NAV_LINKS"
+					:key="link.name"
+					@click="onClickMiddleNavLink(link)"
+				>
+					{{ link.name }}
+				</span>
 			</div>
 			<div v-if="!mobile" class="w-100 py-5 d-flex align-center justify-end">
 				<div v-if="hasCompletedLoginCall" class="d-flex align-center">
@@ -237,14 +240,76 @@ export default defineComponent({
 						</v-btn>
 					</div>
 
-					<v-img
+					<v-menu
 						v-if="isLoggedIn"
-						rounded
-						:src="userProfilePicUrl"
-						width="40"
-						class="rounded-circle mx-2"
+						style="font-family: 'Geist', 'Geist fallback', sans-serif"
 					>
-					</v-img>
+						<template #activator="{ props }">
+							<v-img
+								v-bind="props"
+								rounded
+								:src="demo_user_img"
+								width="40"
+								class="rounded-circle mx-2"
+							>
+							</v-img>
+						</template>
+
+						<v-card elevation="4">
+							<v-list density="compact">
+								<v-list-item @click="() => {}">
+									<div class="d-flex align-center">
+										<v-img
+											rounded
+											:src="userProfilePicUrl"
+											max-width="40"
+											class="rounded-circle mx-2"
+										>
+										</v-img>
+										<div class="d-flex flex-column">
+											<div class="text-blue-grey-darken-1">
+												{{ userName }}
+											</div>
+											<div
+												style="font-size: 12px"
+												class="text-blue-grey-lighten-1"
+											>
+												{{ userEmail }}
+											</div>
+										</div>
+									</div>
+								</v-list-item>
+								<v-list-item>
+									<v-divider class="w-100" />
+								</v-list-item>
+								<v-list-item @click="() => {}">
+									<div class="d-flex w-100">
+										<v-icon icon="mdi-wallet-bifold-outline"></v-icon>
+										<div class="w-100 px-3">Subscription Management</div>
+									</div>
+								</v-list-item>
+								<v-list-item @click="() => {}">
+									<div class="d-flex w-100">
+										<v-icon icon="mdi-cash-multiple"></v-icon>
+										<div class="w-100 px-3">Invoices</div>
+									</div>
+								</v-list-item>
+								<v-list-item>
+									<v-divider class="w-100"></v-divider>
+								</v-list-item>
+								<v-list-item @click="() => {}">
+									<div
+										class="d-flex w-100"
+										style="cursor: pointer"
+										@click="onClickLogout"
+									>
+										<v-icon icon="mdi-logout" color="pink-darken-1"></v-icon>
+										<div class="w-100 px-3 text-pink-darken-1">Sign Out</div>
+									</div>
+								</v-list-item>
+							</v-list>
+						</v-card>
+					</v-menu>
 				</div>
 			</div>
 			<div v-if="mobile" class="d-flex justify-end align-center">
@@ -305,12 +370,16 @@ import { defineComponent, ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useDisplay } from 'vuetify';
 import { useRouter } from 'vue-router';
+import { BACKEND_URL } from './Queries';
+import demo_user_img from '../assets/images/demo-user.png';
+import { MIDDLE_NAV_LINKS } from './Constants/TopNavigation';
 
 export default defineComponent({
 	name: 'TopNavigation',
 	setup() {
-		const { hasCompletedLoginCall, isLoggedIn, userProfilePicUrl } =
+		const { hasCompletedLoginCall, isLoggedIn, userProfilePicUrl, userEmail, userName } =
 			storeToRefs(useUserDetails());
+		const { reDirectIfNotLoggedIn } = useUserDetails();
 
 		const router = useRouter();
 		const { mobile } = useDisplay();
@@ -333,15 +402,41 @@ export default defineComponent({
 			});
 		};
 
+		const onClickLogout = async () => {
+			const call = await fetch(`${BACKEND_URL}/auth/Logout`, {
+				method: 'GET',
+				credentials: 'include',
+			});
+
+			if (call.status === 200) {
+				isLoggedIn.value = false;
+				await reDirectIfNotLoggedIn();
+			}
+		};
+
+		const onClickMiddleNavLink = (link) => {
+			if (link.external) {
+				window.open(link.link, '_blank');
+			} else {
+				router.push(link.link);
+			}
+		};
+
 		return {
 			isLoggedIn,
 			hasCompletedLoginCall,
+			userEmail,
+			userName,
 			userProfilePicUrl,
 			mobile,
 			showMobileNavLinks,
+			demo_user_img,
+			MIDDLE_NAV_LINKS,
 			toggleShowMobileNavLinks,
 			onClickLogin,
 			clickOnWebsiteName,
+			onClickLogout,
+			onClickMiddleNavLink,
 		};
 	},
 });
