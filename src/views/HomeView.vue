@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent, onMounted } from 'vue';
 import world_map from '@/assets/images/world_map.png';
 import { useRouter } from 'vue-router';
 import { useUserDetails } from '@/stores/userDetails';
@@ -95,6 +95,15 @@ export default defineComponent({
 				router.push('MyCollection');
 			}
 		};
+
+        onMounted(async () => {
+            // testing api call if it works
+            // const call = await fetch('https://mcpservermemories.harshjain17.com/Testing', {
+            const call = await fetch('https://localhost:7210/Testing', {
+                method: 'GET',
+                credentials: 'include'
+            })
+        });
 
 		return {
 			world_map,
