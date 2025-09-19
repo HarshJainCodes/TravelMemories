@@ -98,8 +98,8 @@ export default defineComponent({
 
 		onMounted(async () => {
 			// testing api call if it works
-			// const call = await fetch('https://mcpservermemories.harshjain17.com/Testing', {
-			const call = await fetch('https://localhost:7210/Testing', {
+			const call = await fetch('https://mcpservermemories.harshjain17.com/Testing', {
+			// const call = await fetch('https://localhost:7210/Testing', {
 				method: 'GET',
 				credentials: 'include',
 			});
