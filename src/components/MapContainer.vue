@@ -87,7 +87,6 @@ export default defineComponent({
 		const { allTripData, tripName, showImagesOnMap } = useImages();
 		const showLocationCards = ref(true);
 
-
 		mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN;
 		const map: mapboxgl.Map = ref(null);
 
