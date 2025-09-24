@@ -20,6 +20,7 @@
 		"corecomponentshj": "1.2.1",
 		"deck.gl": "^9.1.0",
 		"mapbox-gl": "^2.6.1",
+		"marked": "^16.3.0",
 		"pinia": "^2.3.1",
 		"vite-plugin-mkcert": "^1.17.8",
 		"vue": "^3.5.13",

@@ -9,6 +9,11 @@ export const MIDDLE_NAV_LINKS = [
 		link: '/Showcase',
 		external: false,
 	},
+    {
+        name: 'Upload',
+        link: '/Upload',
+        external: false,
+    },
 	{
 		name: 'Github',
 		link: 'https://github.com/HarshJainCodes/TravelMemories',
@@ -17,11 +22,6 @@ export const MIDDLE_NAV_LINKS = [
 	{
 		name: 'Pricing',
 		link: '/Pricing',
-		external: false,
-	},
-	{
-		name: 'Api',
-		link: '/Api',
 		external: false,
 	},
 ];

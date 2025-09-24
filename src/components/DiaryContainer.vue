@@ -6,26 +6,44 @@
 		}"
 	>
 		<div
-			class="d-flex"
+			class="d-flex flex-column w-100 h-100"
 			:class="{
 				'width-lg': mdAndUp,
 				'width-sm': mobile,
 			}"
 		>
-			<map-container
-				@map-instance="onReceiveMapInstance"
-				@on-click-timeline="onClickTimeline"
-			></map-container>
-		</div>
+			<div class="w-100 d-flex justify-center">
+				<v-tabs v-model="currentWindow">
+					<v-tab :value="0"> Explore Map </v-tab>
+					<v-tab :value="1"> Chat with AI </v-tab>
+				</v-tabs>
+			</div>
+			<v-window class="w-100 h-100" v-model="currentWindow">
+				<v-window-item :value="0" class="w-100 h-100">
+					<div class="d-flex w-100 h-100">
+						<map-container
+							@map-instance="onReceiveMapInstance"
+							@on-click-timeline="onClickTimeline"
+						></map-container>
 
-		<div
-			class="d-flex rounded-xl"
-			:class="{
-				'timeline-lg': !mobile,
-				'timeline-mobile': mobile,
-			}"
-		>
-			<time-line @on-click-timeline="onClickTimeline" />
+						<div
+							class="d-flex rounded-xl"
+							:class="{
+								'timeline-lg': !mobile,
+								'timeline-mobile': mobile,
+							}"
+						>
+							<time-line @on-click-timeline="onClickTimeline" />
+						</div>
+					</div>
+				</v-window-item>
+
+				<v-window-item :value="1" class="w-100 h-100">
+					<div class="w-100 h-100">
+						<chat-container />
+					</div>
+				</v-window-item>
+			</v-window>
 		</div>
 	</div>
 </template>
@@ -39,15 +57,19 @@ import { MAPBOX_FLY_DURATION } from './Constants';
 import { useUserDetails } from '@/stores/userDetails';
 import { useImages } from './Queries';
 import mapboxgl from 'mapbox-gl';
+import ChatContainer from './ChatComponent/ChatContainer.vue';
 
 export default defineComponent({
 	components: {
 		MapContainer,
 		TimeLine,
+		ChatContainer,
 	},
 	setup() {
 		const { mdAndUp, mdAndDown, mobile } = useDisplay();
 		const mapInstance: mapboxgl.Map = ref(null);
+
+		const currentWindow = ref(0);
 
 		const { setTrip } = useImages();
 		const userDetails = useUserDetails();
@@ -75,6 +97,7 @@ export default defineComponent({
 			mdAndUp,
 			mdAndDown,
 			userDetails,
+			currentWindow,
 			onReceiveMapInstance,
 			onClickTimeline,
 		};

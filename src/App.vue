@@ -7,7 +7,7 @@
 			}"
 		>
 			<top-navigation v-if="showNavBar" />
-			<div class="w-100 h-100">
+			<div class="w-100 fill-height">
 				<router-view v-slot="{ Component }">
 					<keep-alive>
 						<component :is="Component"></component>

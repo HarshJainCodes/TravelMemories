@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent, onMounted } from 'vue';
 import world_map from '@/assets/images/world_map.png';
 import { useRouter } from 'vue-router';
 import { useUserDetails } from '@/stores/userDetails';
@@ -95,6 +95,19 @@ export default defineComponent({
 				router.push('MyCollection');
 			}
 		};
+
+		onMounted(async () => {
+			const call = await fetch('https://localhost:7210/Testing', {
+				method: 'POST',
+				credentials: 'include',
+				body: JSON.stringify({
+					prompt: 'Can you tell me about computed property in vue in short ?',
+				}),
+				headers: {
+					'Content-type': 'application/json; charset=UTF-8',
+				},
+			});
+		});
 
 		return {
 			world_map,
