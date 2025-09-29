@@ -103,7 +103,7 @@ export default defineComponent({
 			});
 			scrollToBottom();
 
-			const call = await fetch('https://localhost:7210/Testing', {
+			const call = await fetch('https://mcpservermemories.harshjain17.com/Testing', {
 				method: 'POST',
 				credentials: 'include',
 				body: JSON.stringify({
