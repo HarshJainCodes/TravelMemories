@@ -37,7 +37,6 @@ export default defineComponent({
 		// google login methods
 		const onGoogleAuthenticated: CallbackTypes.TokenResponseCallback = async (res) => {
 			const google_jwt = res.access_token;
-			console.log('Hi');
 
 			const googleLoginCall = await fetch(`${BACKEND_URL}/auth/googleLogin`, {
 				method: 'POST',

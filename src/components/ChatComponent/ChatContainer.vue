@@ -83,7 +83,6 @@ export default defineComponent({
 
 		const scrollToBottom = () => {
 			if (chatContainerRef.value !== null) {
-				console.log(chatContainerRef.value);
 				nextTick(() => {
 					chatContainerRef.value!.scrollTo({
 						top: chatContainerRef.value!.scrollHeight,
