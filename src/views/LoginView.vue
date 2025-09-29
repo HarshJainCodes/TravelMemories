@@ -1,21 +1,20 @@
 <template>
-	<login-page
-		v-if="isSafeToShowLoginPage"
+	<login-page-v-2
+		website-name="Travel Memories"
+		mini-title="Travel Diary"
 		:google-client-id="googleClientId"
 		@on-google-authenticated="onGoogleAuthenticated"
-		@on-click-login-or-register="onClickLoginOrRegister"
-	>
-		<template #topHeading>
-			Your Unique Photo Diary With The Power Of Map Visualization
-		</template>
-	</login-page>
+		@on-send-verification-code="onSendVerficationCode"
+		@on-click-verify-otp="onClickVerifyOtp"
+		@on-click-resend-otp="onClickResendOtp"
+	></login-page-v-2>
 </template>
 
 <script lang="ts">
 import { defineComponent, onActivated, ref } from 'vue';
 import { useUserDetails } from '@/stores/userDetails';
 import { useRouter } from 'vue-router';
-import { LoginPage, LoginModes } from 'corecomponentshj';
+import { LoginPageV2, LoginModes } from 'corecomponentshj';
 import { TYPE, useToast } from 'vue-toastification';
 import type { CallbackTypes } from 'vue3-google-login';
 import { BACKEND_URL } from '@/components/Queries';
@@ -23,19 +22,22 @@ import appinsights from '../appInsights';
 
 export default defineComponent({
 	components: {
-		LoginPage,
+		LoginPageV2,
 	},
 	setup() {
 		const userDetails = useUserDetails();
 		const router = useRouter();
 		const toast = useToast();
-		const isSafeToShowLoginPage = ref(false);
 
 		const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+
+		const isSafeToShowLoginPage = ref(false);
+		const currentLoginTab = ref(0);
 
 		// google login methods
 		const onGoogleAuthenticated: CallbackTypes.TokenResponseCallback = async (res) => {
 			const google_jwt = res.access_token;
+			console.log('Hi');
 
 			const googleLoginCall = await fetch(`${BACKEND_URL}/auth/googleLogin`, {
 				method: 'POST',
@@ -53,9 +55,7 @@ export default defineComponent({
 				userDetails.setIsLoggedIn(true);
 				userDetails.userName = response.userName;
 				userDetails.userEmail = response.email;
-				toast(userDetails.userName, {
-					type: TYPE.SUCCESS,
-				});
+				userDetails.userProfilePicUrl = response.profilePictureURL;
 				router.push('/MyCollection');
 			}
 			if (googleLoginCall.status === 401) {
@@ -129,6 +129,47 @@ export default defineComponent({
 			}
 		};
 
+		const onSendVerficationCode = async (email: String) => {
+			const sendVerficationCall = await fetch(`${BACKEND_URL}/EmailService`, {
+				method: 'POST',
+				body: JSON.stringify({
+					receiverEmail: email,
+				}),
+				headers: {
+					'Content-type': 'application/json; charset=UTF-8',
+				},
+			});
+		};
+
+		const onClickVerifyOtp = async ({ enteredEmail, enteredOtp }) => {
+			console.log(enteredEmail, enteredOtp);
+
+			const verifyOtpRequest = await fetch(`${BACKEND_URL}/EmailService/VerifyOtp`, {
+				method: 'POST',
+				body: JSON.stringify({
+					email: enteredEmail,
+					otp: enteredOtp,
+				}),
+				headers: {
+					'Content-type': 'application/json; charset=UTF-8',
+				},
+				credentials: 'include',
+			});
+
+			if (verifyOtpRequest.status === 200) {
+				router.push('/MyCollection');
+			} else {
+				toast('Invalid or expired OTP', {
+					type: TYPE.ERROR,
+				});
+			}
+		};
+
+		const onClickResendOtp = async (enteredEmail) => {
+			console.log('sending otp');
+			await onSendVerficationCode(enteredEmail);
+		};
+
 		onActivated(async () => {
 			// if you are already logged in then you dont need to be seeing login page
 			await userDetails.reDirectFromLogin();
@@ -136,10 +177,14 @@ export default defineComponent({
 		});
 
 		return {
+			currentLoginTab,
 			googleClientId,
 			isSafeToShowLoginPage,
 			onGoogleAuthenticated,
 			onClickLoginOrRegister,
+			onSendVerficationCode,
+			onClickVerifyOtp,
+			onClickResendOtp,
 		};
 	},
 });

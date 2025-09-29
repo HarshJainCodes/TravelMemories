@@ -97,11 +97,15 @@ export default defineComponent({
 		};
 
 		onMounted(async () => {
-			// testing api call if it works
 			const call = await fetch('https://mcpservermemories.harshjain17.com/Testing', {
-			// const call = await fetch('https://localhost:7210/Testing', {
-				method: 'GET',
+				method: 'POST',
 				credentials: 'include',
+				body: JSON.stringify({
+					prompt: 'Can you tell me about computed property in vue in short ?',
+				}),
+				headers: {
+					'Content-type': 'application/json; charset=UTF-8',
+				},
 			});
 		});
 

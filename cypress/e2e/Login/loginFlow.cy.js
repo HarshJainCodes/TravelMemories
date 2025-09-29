@@ -1,3 +1,5 @@
+const PROD_URL = 'https://memoriesbackend.harshjain17.com';
+
 describe('is able to login', () => {
 	beforeEach(() => {
 		cy.visit('/');
@@ -9,9 +11,7 @@ describe('is able to login', () => {
 		cy.get('[data-qa-id="email-field"]').type('harshjain17may@gmail.com');
 		cy.get('[data-qa-id="password-field"]').type('something');
 
-		cy.intercept('https://travelmemories.azurewebsites.net/auth/Register').as(
-			'registerRequest',
-		);
+		cy.intercept(`${PROD_URL}/auth/Register`).as('registerRequest');
 		cy.get('[data-qa-id="login-action-btn"]').click();
 		cy.wait('@registerRequest').its('response.statusCode').should('eq', 400);
 		cy.contains('User With This Email Already Exists').should('exist');
@@ -24,7 +24,7 @@ describe('is able to login', () => {
 		cy.get('[data-qa-id="email-field"]').type('cypressuserhj123@gmail.com');
 		cy.get('[data-qa-id="password-field"]').type('hjcypress');
 
-		cy.intercept('https://travelmemories.azurewebsites.net/auth/Login').as('loginRequest');
+		cy.intercept(`${PROD_URL}/auth/Login`).as('loginRequest');
 		cy.get('[data-qa-id="login-action-btn"]').click();
 		cy.wait('@loginRequest').its('response.statusCode').should('eq', 404);
 		cy.contains('User With This Email Does Not Exist').should('exist');
@@ -37,7 +37,7 @@ describe('is able to login', () => {
 		cy.get('[data-qa-id="email-field"]').type('cypressuserhj@gmail.com');
 		cy.get('[data-qa-id="password-field"]').type('hjcypresswrong');
 
-		cy.intercept('https://travelmemories.azurewebsites.net/auth/Login').as('loginRequest');
+		cy.intercept(`${PROD_URL}/auth/Login`).as('loginRequest');
 		cy.get('[data-qa-id="login-action-btn"]').click();
 		cy.wait('@loginRequest').its('response.statusCode').should('eq', 400);
 		cy.contains('Incorrect Email or Password').should('exist');
@@ -49,7 +49,7 @@ describe('is able to login', () => {
 
 	it.only('should be redirect to login when clicks on upload button', () => {
 		cy.loginAndVisitMap();
-		cy.intercept('https://travelmemories.azurewebsites.net/auth/Logout').as('logoutRequest');
+		cy.intercept(`${PROD_URL}/auth/Logout`).as('logoutRequest');
 		cy.get('[data-qa-id="logout-btn"]').click();
 		cy.wait('@logoutRequest').its('response.statusCode').should('eq', 200);
 		cy.contains('WELCOME BACK').should('exist');

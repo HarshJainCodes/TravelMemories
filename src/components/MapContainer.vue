@@ -87,8 +87,6 @@ export default defineComponent({
 		const { allTripData, tripName, showImagesOnMap } = useImages();
 		const showLocationCards = ref(true);
 
-		let mapRectBoundingBox: Ref<DOMRect | undefined> = ref(new DOMRect());
-
 		mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN;
 		const map: mapboxgl.Map = ref(null);
 
@@ -261,7 +259,6 @@ export default defineComponent({
 		return {
 			map,
 			mobile,
-			mapRectBoundingBox,
 			showImagesOnMap,
 			tripName,
 			mouseCoordinates,

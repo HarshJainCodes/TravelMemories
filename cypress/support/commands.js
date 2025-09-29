@@ -23,6 +23,7 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+const PROD_URL = 'https://memoriesbackend.harshjain17.com';
 
 Cypress.Commands.add('loginAndVisitMap', () => {
 	cy.visit('/');
@@ -34,7 +35,7 @@ Cypress.Commands.add('loginAndVisitMap', () => {
 	cy.get('[data-qa-id="email-field"]').type('cypressuserhj@gmail.com');
 	cy.get('[data-qa-id="password-field"]').type('hjcypress');
 
-	cy.intercept('https://travelmemories.azurewebsites.net/auth/Login').as('loginRequest');
+	cy.intercept(`${PROD_URL}/auth/Login`).as('loginRequest');
 	cy.get('[data-qa-id="login-action-btn"]').click();
 	cy.wait('@loginRequest').its('response.statusCode').should('eq', 200);
 
