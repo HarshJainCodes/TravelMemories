@@ -96,19 +96,6 @@ export default defineComponent({
 			}
 		};
 
-		onMounted(async () => {
-			const call = await fetch('https://mcpservermemories.harshjain17.com/Testing', {
-				method: 'POST',
-				credentials: 'include',
-				body: JSON.stringify({
-					prompt: 'Can you tell me about computed property in vue in short ?',
-				}),
-				headers: {
-					'Content-type': 'application/json; charset=UTF-8',
-				},
-			});
-		});
-
 		return {
 			world_map,
 			mobile,
