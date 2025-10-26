@@ -13,7 +13,7 @@
 <script lang="ts">
 import { defineComponent, onActivated, ref } from 'vue';
 import { useUserDetails } from '@/stores/userDetails';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { LoginPageV2, LoginModes } from 'corecomponentshj';
 import { TYPE, useToast } from 'vue-toastification';
 import type { CallbackTypes } from 'vue3-google-login';
@@ -27,6 +27,7 @@ export default defineComponent({
 	setup() {
 		const userDetails = useUserDetails();
 		const router = useRouter();
+		const route = useRoute();
 		const toast = useToast();
 
 		const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
@@ -55,7 +56,12 @@ export default defineComponent({
 				userDetails.userName = response.userName;
 				userDetails.userEmail = response.email;
 				userDetails.userProfilePicUrl = response.profilePictureURL;
-				router.push('/MyCollection');
+
+				if (route.query.redirect != null) {
+					router.push(route.query.redirect.toString());
+				} else {
+					router.push('/MyCollection');
+				}
 			}
 			if (googleLoginCall.status === 401) {
 				toast('Not able to authenticate', {
