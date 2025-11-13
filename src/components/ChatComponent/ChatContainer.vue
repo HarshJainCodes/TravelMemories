@@ -69,6 +69,7 @@ import { marked } from 'marked';
 import RenderChat from './RenderChat.vue';
 import { ChatTillNow } from './types';
 import { SAMPLE_PROMPTS } from './Constants';
+import { BACKEND_URL, CHATBOT_URL } from '../Queries';
 
 export default defineComponent({
 	name: 'ChatContainer',
@@ -102,7 +103,7 @@ export default defineComponent({
 			});
 			scrollToBottom();
 
-			const call = await fetch('https://mcpservermemories.harshjain17.com/Testing', {
+			const call = await fetch(`${BACKEND_URL}/AIChat`, {
 				method: 'POST',
 				credentials: 'include',
 				body: JSON.stringify({
