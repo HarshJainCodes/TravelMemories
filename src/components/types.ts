@@ -26,3 +26,15 @@ export type tripOnMap = {
 	x: number;
 	y: number;
 };
+
+export type subscriptionDetails = {
+	id: number;
+	userEmail: string;
+	subscriptionType: number;
+	planStartDate?: string;
+	planEndDate?: string;
+	planType: number;
+	storageCapacityInGB: number;
+	storageUsedInGB: number;
+	user?: null;
+};

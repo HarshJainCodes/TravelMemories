@@ -1,17 +1,36 @@
 import { useQuery } from '@tanstack/vue-query';
 import { computed, Ref, ref } from 'vue';
-import { tripData, tripUploadPayload } from './types';
+import { subscriptionDetails, tripData, tripUploadPayload } from './types';
 import { useUserDetails } from '@/stores/userDetails';
 
+// backend url
 const PROD_URL = 'https://travelmemoriesbackend.harshjain17.com';
 const LOCAL_URL = 'https://localhost:7221';
 
-export const BACKEND_URL = PROD_URL;
+// chatbot url
+const CHATBOT_PROD_URL = 'https://mcpservermemories.harshjain17.com';
+const CHATBOT_LOCAL_URL = 'https://localhost:7210';
+
+export const BACKEND_URL = LOCAL_URL;
+export const CHATBOT_URL = CHATBOT_LOCAL_URL;
 
 const DEFAULT_OPTIONS = {
 	cacheTime: Infinity,
 	staleTime: Infinity,
 	refetchOnMount: false,
+};
+
+const getSubscriptionDetails = async (): Promise<subscriptionDetails> => {
+	const response = await fetch(`${BACKEND_URL}/Subscription/GetSubscriptionDetails`, {
+		method: 'GET',
+		credentials: 'include',
+	});
+
+	if (response.status === 200) {
+		return response.json();
+	} else {
+		throw new Error('Failed to fetch subscription details');
+	}
 };
 
 const imageDataQueryFunc = async (): Promise<tripData[]> => {
@@ -45,7 +64,11 @@ export const uploadImageQueryFunc = async (tripData: tripUploadPayload) => {
 		},
 	);
 
-	return res.text();
+	if (res.status === 200) {
+		return await res.text();
+	} else {
+		throw new Error(await res.text());
+	}
 };
 
 const useImagesQuery = () => {
@@ -57,6 +80,30 @@ const useImagesQuery = () => {
 		queryFn: imageDataQueryFunc,
 		...DEFAULT_OPTIONS,
 		enabled: () => userEmail.value !== '',
+	});
+};
+
+export const useSubscriptionDetails = () => {
+	const userDetails = useUserDetails();
+	const userEmail = computed(() => userDetails.userEmail);
+
+	return useQuery({
+		queryKey: ['subscriptionDetails', userEmail],
+		queryFn: getSubscriptionDetails,
+		...DEFAULT_OPTIONS,
+		select: (data) => data,
+		enabled: () => userEmail.value !== '',
+	});
+};
+
+export const updateSubscription = async (payload) => {
+	const response = await fetch(`${BACKEND_URL}/Subscription/UpdateSubscription/AdminBypass`, {
+		method: 'POST',
+		credentials: 'include',
+		body: JSON.stringify(payload),
+		headers: {
+			'Content-Type': 'application/json',
+		},
 	});
 };
 

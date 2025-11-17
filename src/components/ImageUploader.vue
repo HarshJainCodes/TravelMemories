@@ -113,8 +113,9 @@ export default defineComponent({
 				});
 				router.push('/MyCollection');
 			},
-			onError: () => {
-				toast('Some error occured in uploading the image', {
+			onError: (e) => {
+				console.log(e.message);
+				toast(e.message, {
 					type: TYPE.ERROR,
 				});
 			},

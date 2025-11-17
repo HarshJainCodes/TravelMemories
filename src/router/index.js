@@ -4,6 +4,7 @@ import ImageUploader from '@/components/ImageUploader.vue';
 import LoginView from '@/views/LoginView.vue';
 import DiaryContainer from '@/components/DiaryContainer.vue';
 import ApiPage from '@/components/ApiPage.vue';
+import PricingPage from '@/components/PricingPage/PricingPageContainer.vue';
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
@@ -13,6 +14,7 @@ const router = createRouter({
 		{ path: '/login', name: 'login', component: LoginView },
 		{ path: '/MyCollection', name: 'MyCollection', component: DiaryContainer },
 		{ path: '/api', name: 'api', component: ApiPage },
+		{ path: '/Pricing', name: 'Pricing', component: PricingPage },
 	],
 });
 

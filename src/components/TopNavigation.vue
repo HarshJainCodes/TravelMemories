@@ -223,7 +223,8 @@ export default defineComponent({
 						<template #prepend>
 							<v-icon icon="mdi-sd"></v-icon>
 						</template>
-						0.2 GB Used
+						{{ subscriptionData?.storageUsedInGB.toFixed(2) }} /
+						{{ subscriptionData?.storageCapacityInGB }} GB Used
 					</v-btn>
 
 					<div v-if="!isLoggedIn" class="d-flex">
@@ -366,11 +367,11 @@ export default defineComponent({
 
 <script lang="ts">
 import { useUserDetails } from '@/stores/userDetails';
-import { defineComponent, ref } from 'vue';
+import { computed, defineComponent, ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useDisplay } from 'vuetify';
 import { useRouter } from 'vue-router';
-import { BACKEND_URL } from './Queries';
+import { BACKEND_URL, useSubscriptionDetails } from './Queries';
 import demo_user_img from '../assets/images/demo-user.png';
 import { MIDDLE_NAV_LINKS } from './Constants/TopNavigation';
 
@@ -380,6 +381,9 @@ export default defineComponent({
 		const { hasCompletedLoginCall, isLoggedIn, userProfilePicUrl, userEmail, userName } =
 			storeToRefs(useUserDetails());
 		const { reDirectIfNotLoggedIn } = useUserDetails();
+		const subscriptionDetails = useSubscriptionDetails();
+
+		const subscriptionData = computed(() => subscriptionDetails.data.value);
 
 		const router = useRouter();
 		const { mobile } = useDisplay();
@@ -432,6 +436,7 @@ export default defineComponent({
 			showMobileNavLinks,
 			demo_user_img,
 			MIDDLE_NAV_LINKS,
+			subscriptionData,
 			toggleShowMobileNavLinks,
 			onClickLogin,
 			clickOnWebsiteName,
