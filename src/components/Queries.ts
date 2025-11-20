@@ -11,13 +11,40 @@ const LOCAL_URL = 'https://localhost:7221';
 const CHATBOT_PROD_URL = 'https://mcpservermemories.harshjain17.com';
 const CHATBOT_LOCAL_URL = 'https://localhost:7210';
 
-export const BACKEND_URL = LOCAL_URL;
-export const CHATBOT_URL = CHATBOT_LOCAL_URL;
+export const BACKEND_URL = PROD_URL;
+export const CHATBOT_URL = CHATBOT_PROD_URL;
 
 const DEFAULT_OPTIONS = {
 	cacheTime: Infinity,
 	staleTime: Infinity,
 	refetchOnMount: false,
+};
+
+export const getConversationMessages = async (conversationId: string) => {
+	const resposne = await fetch(
+		`${BACKEND_URL}/AIChat/GetMessages?conversationId=${conversationId}`,
+		{
+			method: 'GET',
+			credentials: 'include',
+		},
+	);
+
+	if (resposne.status === 200) {
+		return await resposne.json();
+	}
+	throw new Error(`Failed to get conversation for conversation id ${conversationId}`);
+};
+
+export const getSideConversationsList = async () => {
+	const response = await fetch(`${BACKEND_URL}/AIChat/Conversations`, {
+		method: 'GET',
+		credentials: 'include',
+	});
+
+	if (response.status === 200) {
+		return await response.json();
+	}
+	throw new Error('Failed to fetch side conversations');
 };
 
 const getSubscriptionDetails = async (): Promise<subscriptionDetails> => {
