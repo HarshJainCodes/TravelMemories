@@ -11,7 +11,9 @@ export default defineConfig({
 		https: true,
 		host: true,
 	},
-	plugins: [vue(), vueDevTools(), mkcert()],
+	plugins: [vue(), vueDevTools(), mkcert({
+        certFileName: 'travel-memories'
+    })],
 	resolve: {
 		alias: {
 			'@': fileURLToPath(new URL('./src', import.meta.url)),
