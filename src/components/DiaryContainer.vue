@@ -49,7 +49,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onActivated, ref } from 'vue';
+import { defineComponent, onActivated, ref, watch } from 'vue';
 import MapContainer from './MapContainer.vue';
 import TimeLine from './TimeLine.vue';
 import { useDisplay } from 'vuetify/lib/framework.mjs';
@@ -58,6 +58,7 @@ import { useUserDetails } from '@/stores/userDetails';
 import { useImages } from './Queries';
 import mapboxgl from 'mapbox-gl';
 import ChatContainer from './ChatComponent/ChatContainer.vue';
+import { useRoute, useRouter } from 'vue-router';
 
 export default defineComponent({
 	components: {
@@ -68,6 +69,9 @@ export default defineComponent({
 	setup() {
 		const { mdAndUp, mdAndDown, mobile } = useDisplay();
 		const mapInstance: mapboxgl.Map = ref(null);
+
+		const route = useRoute();
+		const router = useRouter();
 
 		const currentWindow = ref(0);
 
@@ -90,6 +94,52 @@ export default defineComponent({
 
 		onActivated(() => {
 			userDetails.reDirectIfNotLoggedIn();
+		});
+
+		watch(currentWindow, (newVal) => {
+			if (newVal === 0) {
+				router.push({
+					name: 'MyCollection',
+					query: {
+						view: 'map',
+					},
+				});
+			} else if (newVal === 1) {
+				router.push({
+					name: 'MyCollection',
+					query: {
+						view: 'chat',
+					},
+				});
+			}
+		});
+
+		watch(
+			() => route.query,
+			(newQuery) => {
+				const view = newQuery.view;
+				if (view === 'map') {
+					currentWindow.value = 0;
+				} else if (view === 'chat') {
+					currentWindow.value = 1;
+				}
+			},
+		);
+
+		onActivated(() => {
+			const view = route.query.view;
+			if (view === 'map') {
+				currentWindow.value = 0;
+			} else if (view === 'chat') {
+				currentWindow.value = 1;
+			} else {
+				router.push({
+					name: 'MyCollection',
+					query: {
+						view: 'map',
+					},
+				});
+			}
 		});
 
 		return {

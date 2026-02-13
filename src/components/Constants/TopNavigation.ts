@@ -1,7 +1,7 @@
 export const MIDDLE_NAV_LINKS = [
 	{
 		name: 'Travel Diary',
-		link: '/MyCollection',
+		link: '/MyCollection?view=map',
 		external: false,
 	},
 	{

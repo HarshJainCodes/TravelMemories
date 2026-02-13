@@ -92,7 +92,12 @@ export default defineComponent({
 			if (!userDetails.isLoggedIn) {
 				router.push('/Login');
 			} else {
-				router.push('MyCollection');
+				router.push({
+					name: 'MyCollection',
+					query: {
+						view: 'map',
+					},
+				});
 			}
 		};
 
