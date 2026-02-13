@@ -4,6 +4,7 @@ import { computed, Ref, ref } from 'vue';
 
 export const useChatbot = defineStore('chatbout-store', () => {
 	const currentConversationId: Ref<string | null> = ref(null);
+	const currentlyStreamingMessages = ref(false);
 
 	const conversations = useSideConversationsList();
 	const sideConversations = computed(() => conversations.data.value || []);
@@ -11,5 +12,6 @@ export const useChatbot = defineStore('chatbout-store', () => {
 	return {
 		currentConversationId,
 		sideConversations,
+		currentlyStreamingMessages,
 	};
 });

@@ -6,11 +6,12 @@
 			elevation="5"
 		>
 			<div class="ma-3 w-100 d-flex justify-center text-h6">Recent Conversations</div>
-			<v-list>
+			<v-list active-class="text-teal-lighten-1" activatable>
 				<v-list-item
 					class="conversation-item"
 					v-for="item in sideConversations"
 					:key="item.conversationId"
+					:active="item.conversationId === currentConversationId"
 					@click="(e) => onClickConversation(item.conversationId)"
 				>
 					{{ item.conversationName }}
@@ -26,8 +27,10 @@
 								></v-icon>
 							</template>
 
-							<v-list>
+							<v-list density="compact">
+								<v-list-item prepend-icon="mdi-pencil"> Rename </v-list-item>
 								<v-list-item
+									prepend-icon="mdi-delete"
 									@click="
 										() => {
 											showDeleteDialog = true;
@@ -35,7 +38,7 @@
 										}
 									"
 								>
-									Delete Conversation
+									<v-list-item-title> Delete </v-list-item-title>
 								</v-list-item>
 							</v-list>
 						</v-menu>
@@ -104,7 +107,14 @@
 							<v-icon icon="mdi-plus" class="mx-2" @click="() => {}"></v-icon>
 							<v-icon icon="mdi-tune" class="mx-2" @click="() => {}"></v-icon>
 							<v-spacer></v-spacer>
-							<v-icon icon="mdi-send"></v-icon>
+							<v-icon
+								:icon="
+									currentlyStreamingMessages
+										? 'mdi-stop-circle-outline'
+										: 'mdi-send'
+								"
+								@click="requestStopChat"
+							></v-icon>
 						</div>
 					</v-card>
 				</div>
@@ -147,7 +157,8 @@ export default defineComponent({
 		RenderChat,
 	},
 	setup() {
-		const { currentConversationId, sideConversations } = storeToRefs(useChatbot());
+		const { currentConversationId, sideConversations, currentlyStreamingMessages } =
+			storeToRefs(useChatbot());
 
 		const chatContainerRef: Ref<HTMLElement | null> = ref(null);
 		const enteredPrompt = ref('');
@@ -169,8 +180,6 @@ export default defineComponent({
 				});
 			}
 		};
-
-		// useDeleteConversation(conversationIdToDelete);
 
 		const deleteConversation = useMutation({
 			mutationFn: deleteConversationId,
@@ -195,8 +204,25 @@ export default defineComponent({
 			deleteConversation.mutate(conversationIdToDelete);
 		};
 
+		const requestStopChat = async () => {
+			if (!currentlyStreamingMessages.value) {
+				onPressEnter();
+				return;
+			}
+
+			await fetch(
+				`${BACKEND_URL}/AIChat/StopChat?conversationId=${currentConversationId.value}`,
+				{
+					method: 'GET',
+					credentials: 'include',
+				},
+			);
+		};
+
 		const onPressEnter = async () => {
 			// send the response to the api.
+			if (currentlyStreamingMessages.value) return;
+			currentlyStreamingMessages.value = true;
 
 			chatTillNow.value.push({
 				key: 'something-random',
@@ -254,6 +280,7 @@ export default defineComponent({
 			};
 
 			eventSource.addEventListener('done', () => {
+				currentlyStreamingMessages.value = false;
 				eventSource.close();
 			});
 		};
@@ -286,10 +313,13 @@ export default defineComponent({
 			sideConversations,
 			showDeleteDialog,
 			conversationIdToBeDeleted,
+			currentConversationId,
+			currentlyStreamingMessages,
 			onPressEnter,
 			onClickExistingPrompt,
 			onClickConversation,
 			onDeleteConversation,
+			requestStopChat,
 		};
 	},
 });
