@@ -213,8 +213,6 @@ export default defineComponent({
 			conversationName: null,
 		});
 
-		const renameInputRef: Ref<HTMLElement[] | null> = ref(null);
-
 		const queryClient = useQueryClient();
 
 		const onClickRename = (item) => {
@@ -222,10 +220,6 @@ export default defineComponent({
 				conversationId: item.conversationId,
 				conversationName: item.conversationName,
 			};
-
-			nextTick(() => {
-				renameInputRef.value?.[0].$el.querySelector('input').select();
-			});
 		};
 
 		const scrollToBottom = () => {
@@ -399,7 +393,6 @@ export default defineComponent({
 			currentConversationId,
 			currentlyStreamingMessages,
 			conversationToBeRenamed,
-			renameInputRef,
 			mobile,
 			openDrawer,
 			onClickMenuIcon,

@@ -12,7 +12,7 @@
 		>
 			<v-text-field
 				v-if="conversationToBeRenamed.conversationId === item.conversationId"
-				ref="renameInputRef"
+				ref="inputRef"
 				v-model="conversationToBeRenamed.conversationName"
 				density="compact"
 				@click.stop
@@ -60,7 +60,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, nextTick, ref } from 'vue';
 
 export default defineComponent({
 	name: 'RecentConversations',
@@ -86,12 +86,18 @@ export default defineComponent({
 		'rename-conversation-id',
 	],
 	setup(props, { emit }) {
+		const inputRef = ref(null);
+
 		const onClickConversation = (conversationId: string) => {
 			emit('click-conversation', conversationId);
 		};
 
 		const onClickRename = (conversation) => {
 			emit('click-rename', conversation);
+
+			nextTick(() => {
+				inputRef.value?.[0].$el.querySelector('input').select();
+			});
 		};
 
 		const onRenmaeConversation = () => {
@@ -99,6 +105,7 @@ export default defineComponent({
 		};
 
 		return {
+			inputRef,
 			onClickConversation,
 			onClickRename,
 			onRenmaeConversation,
