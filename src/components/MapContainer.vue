@@ -281,8 +281,8 @@ export default defineComponent({
 
 .map-lg {
 	/* height: 900px; */
-    min-height: 80vh;
-    max-height: 80vh;
+	min-height: 80vh;
+	max-height: 80vh;
 }
 
 canvas,

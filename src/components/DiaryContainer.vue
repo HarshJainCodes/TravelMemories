@@ -119,7 +119,7 @@ export default defineComponent({
 .timeline-lg {
 	width: 20%;
 	min-height: 80vh;
-    max-height: 80vh;
+	max-height: 80vh;
 }
 
 .timeline-mobile {
