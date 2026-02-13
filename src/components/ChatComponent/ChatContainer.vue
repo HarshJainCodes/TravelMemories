@@ -1,55 +1,68 @@
 <template>
-	<div class="d-flex mx-5">
+	<div
+		class="d-flex h-100"
+		:class="{
+			'mx-5': !mobile,
+		}"
+	>
 		<v-card
+			v-if="!mobile"
 			class="ma-5 w-25 h-100"
 			style="min-height: 80vh; max-height: 80vh; overflow-y: auto"
 			elevation="5"
 		>
-			<div class="ma-3 w-100 d-flex justify-center text-h6">Recent Conversations</div>
-			<v-list active-class="text-teal-lighten-1" activatable>
-				<v-list-item
-					class="conversation-item"
-					v-for="item in sideConversations"
-					:key="item.conversationId"
-					:active="item.conversationId === currentConversationId"
-					@click="(e) => onClickConversation(item.conversationId)"
-				>
-					{{ item.conversationName }}
-
-					<template #append>
-						<v-menu>
-							<template #activator="{ props }">
-								<v-icon
-									class="hover-icon"
-									icon="mdi-dots-vertical"
-									v-bind="props"
-									@click.prevent
-								></v-icon>
-							</template>
-
-							<v-list density="compact">
-								<v-list-item prepend-icon="mdi-pencil"> Rename </v-list-item>
-								<v-list-item
-									prepend-icon="mdi-delete"
-									@click="
-										() => {
-											showDeleteDialog = true;
-											conversationIdToBeDeleted = item.conversationId;
-										}
-									"
-								>
-									<v-list-item-title> Delete </v-list-item-title>
-								</v-list-item>
-							</v-list>
-						</v-menu>
-					</template>
-				</v-list-item>
-			</v-list>
+			<recent-conversations
+				:side-conversations="sideConversations"
+				:current-conversation-id="currentConversationId || ''"
+				:conversation-to-be-renamed="conversationToBeRenamed"
+				@click-conversation="onClickConversation"
+				@on-rename-conversation="onRenmaeConversation"
+				@show-delete-dialog="showDeleteDialog = true"
+				@rename-conversation-id="conversationIdToBeDeleted = $event"
+				@click-rename="onClickRename($event)"
+				@rename-conversation="onRenmaeConversation"
+				class="w-100"
+			/>
 		</v-card>
-		<div class="w-75 bg-green ma-5 mx-auto" style="max-height: 80vh">
-			<v-card class="w-100 h-100 d-flex flex-column" elevation="5">
+		<div
+			class="ma-5 mx-auto"
+			style="max-height: 80vh"
+			:class="{
+				'w-100': mobile,
+				'w-75': !mobile,
+			}"
+		>
+			<v-card class="w-100 h-100 d-flex flex-column position-relative" elevation="5">
 				<div class="overflow-auto pt-5 h-100" ref="chatContainerRef">
-					<div class="w-75 mx-auto">
+					<v-icon
+						v-if="mobile"
+						icon="mdi-menu"
+						class="position-absolute"
+						@click="onClickMenuIcon"
+					>
+					</v-icon>
+
+					<v-navigation-drawer v-model="openDrawer" absolute>
+						<recent-conversations
+							:side-conversations="sideConversations"
+							:current-conversation-id="currentConversationId || ''"
+							:conversation-to-be-renamed="conversationToBeRenamed"
+							@click-conversation="onClickConversation"
+							@on-rename-conversation="onRenmaeConversation"
+							@show-delete-dialog="showDeleteDialog = true"
+							@rename-conversation-id="conversationIdToBeDeleted = $event"
+							@click-rename="onClickRename($event)"
+							@rename-conversation="onRenmaeConversation"
+							class="w-100"
+						/>
+					</v-navigation-drawer>
+					<div
+						class="h-100 mx-auto"
+						:class="{
+							'w-100': mobile,
+							'w-75': !mobile,
+						}"
+					>
 						<div class="d-flex justify-center flex-column">
 							<div v-if="chatTillNow.length">
 								<render-chat
@@ -60,28 +73,41 @@
 								/>
 							</div>
 							<div v-else>
-								<div class="w-100 d-flex justify-center">
-									Ask AI about your travel
-								</div>
+								<div v-if="!mobile">
+									<div class="w-100 d-flex justify-center">
+										Ask AI about your travel
+									</div>
 
-								<div class="w-100 mt-5">
-									<div
-										class="w-50 rounded-xl pa-5"
-										style="border: 1px dashed green"
-									>
-										Sample Prompts
+									<div class="w-100 mt-5">
 										<div
-											class="w-100 d-flex flex-column"
-											v-for="prompt in SAMPLE_PROMPTS"
-											:key="prompt"
+											class="w-50 rounded-xl pa-5"
+											style="border: 1px dashed green"
 										>
-											<v-btn
-												class="my-1"
-												variant="outlined"
-												@click="onClickExistingPrompt(prompt)"
+											Sample Prompts
+											<div
+												class="w-100 d-flex flex-column"
+												v-for="prompt in SAMPLE_PROMPTS"
+												:key="prompt"
 											>
-												{{ prompt }}
-											</v-btn>
+												<v-btn
+													class="my-1"
+													variant="outlined"
+													@click="onClickExistingPrompt(prompt)"
+												>
+													{{ prompt }}
+												</v-btn>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div v-else class="h-100">
+									<v-spacer></v-spacer>
+									<div class="w-100 d-flex justify-center">
+										<div class="text-center">
+											<div class="text-h6">AI Chat</div>
+											<div class="text-subtitle-1 mt-2">
+												Ask AI about your travel memories
+											</div>
 										</div>
 									</div>
 								</div>
@@ -137,7 +163,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, nextTick, Ref, ref } from 'vue';
+import { computed, defineComponent, nextTick, Ref, ref } from 'vue';
 import RenderChat from './RenderChat.vue';
 import { ChatTillNow } from './types';
 import { SAMPLE_PROMPTS } from './Constants';
@@ -146,17 +172,22 @@ import {
 	CHATBOT_URL,
 	deleteConversationId,
 	getConversationMessages,
+	renameConversation,
 } from '../Queries';
+import RecentConversations from './RecentConversations.vue';
 import { useChatbot } from '@/stores/chatbot';
 import { storeToRefs } from 'pinia';
 import { useMutation, useQueryClient } from '@tanstack/vue-query';
+import { useDisplay } from 'vuetify/lib/framework.mjs';
 
 export default defineComponent({
 	name: 'ChatContainer',
 	components: {
 		RenderChat,
+		RecentConversations,
 	},
 	setup() {
+		const { mobile } = useDisplay();
 		const { currentConversationId, sideConversations, currentlyStreamingMessages } =
 			storeToRefs(useChatbot());
 
@@ -168,7 +199,34 @@ export default defineComponent({
 		const conversationIdToBeDeleted: Ref<string | null> = ref(null);
 		const conversationIdToDelete: Ref<string | null> = ref(null);
 
+		const openDrawer = ref(false);
+
+		const onClickMenuIcon = () => {
+			openDrawer.value = !openDrawer.value;
+		};
+
+		const conversationToBeRenamed: Ref<{
+			conversationId: string | null;
+			conversationName: string | null;
+		}> = ref({
+			conversationId: null,
+			conversationName: null,
+		});
+
+		const renameInputRef: Ref<HTMLElement[] | null> = ref(null);
+
 		const queryClient = useQueryClient();
+
+		const onClickRename = (item) => {
+			conversationToBeRenamed.value = {
+				conversationId: item.conversationId,
+				conversationName: item.conversationName,
+			};
+
+			nextTick(() => {
+				renameInputRef.value?.[0].$el.querySelector('input').select();
+			});
+		};
 
 		const scrollToBottom = () => {
 			if (chatContainerRef.value !== null) {
@@ -180,6 +238,15 @@ export default defineComponent({
 				});
 			}
 		};
+
+		const renameConversationMutation = useMutation({
+			mutationFn: renameConversation,
+			onSuccess: () => {
+				queryClient.invalidateQueries({
+					queryKey: ['sideConversationsList'],
+				});
+			},
+		});
 
 		const deleteConversation = useMutation({
 			mutationFn: deleteConversationId,
@@ -198,6 +265,22 @@ export default defineComponent({
 				});
 			},
 		});
+
+		const onRenmaeConversation = () => {
+			renameConversationMutation.mutate({
+				conversationId: conversationToBeRenamed.value.conversationId,
+				newName: conversationToBeRenamed.value.conversationName,
+			});
+
+			conversationToBeRenamed.value = {
+				conversationId: null,
+				conversationName: null,
+			};
+
+			queryClient.invalidateQueries({
+				queryKey: ['sideConversationsList'],
+			});
+		};
 
 		const onDeleteConversation = () => {
 			conversationIdToDelete.value = conversationIdToBeDeleted.value;
@@ -315,11 +398,18 @@ export default defineComponent({
 			conversationIdToBeDeleted,
 			currentConversationId,
 			currentlyStreamingMessages,
+			conversationToBeRenamed,
+			renameInputRef,
+			mobile,
+			openDrawer,
+			onClickMenuIcon,
+			onClickRename,
 			onPressEnter,
 			onClickExistingPrompt,
 			onClickConversation,
 			onDeleteConversation,
 			requestStopChat,
+			onRenmaeConversation,
 		};
 	},
 });

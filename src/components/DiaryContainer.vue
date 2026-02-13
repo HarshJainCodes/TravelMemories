@@ -20,7 +20,12 @@
 			</div>
 			<v-window class="w-100 h-100" v-model="currentWindow">
 				<v-window-item :value="0" class="w-100 h-100">
-					<div class="d-flex w-100 h-100">
+					<div
+						class="d-flex w-100 h-100"
+						:class="{
+							'flex-column': mobile,
+						}"
+					>
 						<map-container
 							@map-instance="onReceiveMapInstance"
 							@on-click-timeline="onClickTimeline"

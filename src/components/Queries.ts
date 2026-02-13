@@ -20,8 +20,28 @@ const DEFAULT_OPTIONS = {
 	refetchOnMount: false,
 };
 
+export const renameConversation = async (conversationDetails: {
+	conversationId: string | null;
+	newName: string | null;
+}) => {
+	const res = await fetch(
+		`${BACKEND_URL}/AIChat/RenameConversation?conversationId=${conversationDetails.conversationId}&newName=${conversationDetails.newName}`,
+		{
+			method: 'GET',
+			credentials: 'include',
+		},
+	);
+
+	if (res.status === 200) {
+		return true;
+	}
+
+	throw new Error(
+		`Failed to rename conversation for conversation id ${conversationDetails.conversationId}`,
+	);
+};
+
 export const deleteConversationId = async (conversationId: Ref<string | null>) => {
-	console.log(conversationId);
 	const res = await fetch(`${BACKEND_URL}/AIChat/Delete?conversationId=${conversationId.value}`, {
 		method: 'DELETE',
 		credentials: 'include',
