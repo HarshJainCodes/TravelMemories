@@ -27,7 +27,14 @@
 							</template>
 
 							<v-list>
-								<v-list-item @click="onDeleteConversation(item.conversationId)">
+								<v-list-item
+									@click="
+										() => {
+											showDeleteDialog = true;
+											conversationIdToBeDeleted = item.conversationId;
+										}
+									"
+								>
 									Delete Conversation
 								</v-list-item>
 							</v-list>
@@ -104,6 +111,19 @@
 			</v-card>
 		</div>
 	</div>
+
+	<v-dialog v-model="showDeleteDialog" persistent max-width="400">
+		<v-card title="Delete Conversation ?" text="This will delete the conversation permanently.">
+			<template #append>
+				<v-icon icon="mdi-close" @click="showDeleteDialog = false"> </v-icon>
+			</template>
+			<template #actions>
+				<v-btn @click="showDeleteDialog = false"> Cancel </v-btn>
+
+				<v-btn color="red" variant="flat" @click="onDeleteConversation"> Delete </v-btn>
+			</template>
+		</v-card>
+	</v-dialog>
 </template>
 
 <script lang="ts">
@@ -111,9 +131,15 @@ import { defineComponent, nextTick, Ref, ref } from 'vue';
 import RenderChat from './RenderChat.vue';
 import { ChatTillNow } from './types';
 import { SAMPLE_PROMPTS } from './Constants';
-import { BACKEND_URL, CHATBOT_URL, getConversationMessages } from '../Queries';
+import {
+	BACKEND_URL,
+	CHATBOT_URL,
+	deleteConversationId,
+	getConversationMessages,
+} from '../Queries';
 import { useChatbot } from '@/stores/chatbot';
 import { storeToRefs } from 'pinia';
+import { useMutation, useQueryClient } from '@tanstack/vue-query';
 
 export default defineComponent({
 	name: 'ChatContainer',
@@ -127,6 +153,11 @@ export default defineComponent({
 		const enteredPrompt = ref('');
 
 		const chatTillNow: Ref<Array<ChatTillNow>> = ref([]);
+		const showDeleteDialog = ref(false);
+		const conversationIdToBeDeleted: Ref<string | null> = ref(null);
+		const conversationIdToDelete: Ref<string | null> = ref(null);
+
+		const queryClient = useQueryClient();
 
 		const scrollToBottom = () => {
 			if (chatContainerRef.value !== null) {
@@ -139,21 +170,29 @@ export default defineComponent({
 			}
 		};
 
-		const onDeleteConversation = async (conversationId) => {
-			const res = await fetch(
-				`${BACKEND_URL}/AIChat/Delete?conversationId=${conversationId}`,
-				{
-					method: 'DELETE',
-					credentials: 'include',
-				},
-			);
+		// useDeleteConversation(conversationIdToDelete);
 
-			if (res.status === 204) {
-				console.log('conversation deleted successfully');
-				if (conversationId == currentConversationId.value) {
+		const deleteConversation = useMutation({
+			mutationFn: deleteConversationId,
+			onSuccess: () => {
+				if (currentConversationId.value === conversationIdToDelete.value) {
+					chatTillNow.value = [];
 					currentConversationId.value = null;
 				}
-			}
+
+				conversationIdToDelete.value = null;
+				conversationIdToBeDeleted.value = null;
+				showDeleteDialog.value = false;
+
+				queryClient.invalidateQueries({
+					queryKey: ['sideConversationsList'],
+				});
+			},
+		});
+
+		const onDeleteConversation = () => {
+			conversationIdToDelete.value = conversationIdToBeDeleted.value;
+			deleteConversation.mutate(conversationIdToDelete);
 		};
 
 		const onPressEnter = async () => {
@@ -180,7 +219,12 @@ export default defineComponent({
 			enteredPrompt.value = '';
 
 			const response = await call.json();
-			console.log('conversation id', response.conversationId);
+
+			if (currentConversationId.value === null) {
+				queryClient.invalidateQueries({
+					queryKey: ['sideConversationsList'],
+				});
+			}
 			currentConversationId.value = response.conversationId;
 
 			chatTillNow.value.push({
@@ -240,6 +284,8 @@ export default defineComponent({
 			chatTillNow,
 			SAMPLE_PROMPTS,
 			sideConversations,
+			showDeleteDialog,
+			conversationIdToBeDeleted,
 			onPressEnter,
 			onClickExistingPrompt,
 			onClickConversation,

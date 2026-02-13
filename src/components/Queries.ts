@@ -20,6 +20,20 @@ const DEFAULT_OPTIONS = {
 	refetchOnMount: false,
 };
 
+export const deleteConversationId = async (conversationId: Ref<string | null>) => {
+	console.log(conversationId);
+	const res = await fetch(`${BACKEND_URL}/AIChat/Delete?conversationId=${conversationId.value}`, {
+		method: 'DELETE',
+		credentials: 'include',
+	});
+
+	if (res.status === 204) {
+		return true;
+	}
+
+	throw new Error(`Failed to delete conversation for conversation id ${conversationId}`);
+};
+
 export const getConversationMessages = async (conversationId: string) => {
 	const resposne = await fetch(
 		`${BACKEND_URL}/AIChat/GetMessages?conversationId=${conversationId}`,
@@ -45,6 +59,16 @@ export const getSideConversationsList = async () => {
 		return await response.json();
 	}
 	throw new Error('Failed to fetch side conversations');
+};
+
+export const useSideConversationsList = () => {
+	return useQuery({
+		queryKey: ['sideConversationsList'],
+		queryFn: getSideConversationsList,
+		select: (data) =>
+			data.sort((x, y) => new Date(y.createdAt).getTime() - new Date(x.createdAt).getTime()),
+		...DEFAULT_OPTIONS,
+	});
 };
 
 const getSubscriptionDetails = async (): Promise<subscriptionDetails> => {
