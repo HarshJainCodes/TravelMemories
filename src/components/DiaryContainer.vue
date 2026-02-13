@@ -118,7 +118,8 @@ export default defineComponent({
 
 .timeline-lg {
 	width: 20%;
-	height: 900px;
+	min-height: 80vh;
+    max-height: 80vh;
 }
 
 .timeline-mobile {

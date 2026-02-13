@@ -27,7 +27,9 @@
 							</template>
 
 							<v-list>
-								<v-list-item> Delete Conversation </v-list-item>
+								<v-list-item @click="onDeleteConversation(item.conversationId)">
+									Delete Conversation
+								</v-list-item>
 							</v-list>
 						</v-menu>
 					</template>
@@ -106,7 +108,6 @@
 
 <script lang="ts">
 import { defineComponent, nextTick, Ref, ref } from 'vue';
-import { marked } from 'marked';
 import RenderChat from './RenderChat.vue';
 import { ChatTillNow } from './types';
 import { SAMPLE_PROMPTS } from './Constants';
@@ -138,6 +139,23 @@ export default defineComponent({
 			}
 		};
 
+		const onDeleteConversation = async (conversationId) => {
+			const res = await fetch(
+				`${BACKEND_URL}/AIChat/Delete?conversationId=${conversationId}`,
+				{
+					method: 'DELETE',
+					credentials: 'include',
+				},
+			);
+
+			if (res.status === 204) {
+				console.log('conversation deleted successfully');
+				if (conversationId == currentConversationId.value) {
+					currentConversationId.value = null;
+				}
+			}
+		};
+
 		const onPressEnter = async () => {
 			// send the response to the api.
 
@@ -164,16 +182,36 @@ export default defineComponent({
 			const response = await call.json();
 			console.log('conversation id', response.conversationId);
 			currentConversationId.value = response.conversationId;
-			const markdownToHtml = await marked(response.content);
 
-			if (call.status === 200) {
+			chatTillNow.value.push({
+				key: new Date().toISOString(), // TODO: get individual message id for this
+				isUserPrompt: false,
+				stringToRender: '',
+			});
+			const eventSource = new EventSource(
+				`${BACKEND_URL}/AIChat/StreamResponse?conversationId=${response.conversationId}`,
+				{
+					withCredentials: true,
+				},
+			);
+
+			let eventSourceResponse = '';
+			eventSource.onmessage = async (message) => {
+				if (!message.data) return;
+				eventSourceResponse += message.data;
+
+				chatTillNow.value.pop();
 				chatTillNow.value.push({
-					key: 'something-random',
+					key: new Date().toISOString(), // TODO: get individual message id for this
 					isUserPrompt: false,
-					stringToRender: markdownToHtml,
+					stringToRender: eventSourceResponse,
 				});
 				scrollToBottom();
-			}
+			};
+
+			eventSource.addEventListener('done', () => {
+				eventSource.close();
+			});
 		};
 
 		const onClickConversation = async (conversationId) => {
@@ -205,6 +243,7 @@ export default defineComponent({
 			onPressEnter,
 			onClickExistingPrompt,
 			onClickConversation,
+			onDeleteConversation,
 		};
 	},
 });
