@@ -1,33 +1,50 @@
 <template>
-	<div class="d-flex w-100 h-100 position-relative overflow-hidden">
+	<div class="d-flex w-100 h-100 position-relative">
 		<div
-			id="map"
-			class="w-100"
+			class="w-100 position-relative"
 			:class="{
 				'map-mobile': mobile,
 				'map-lg': !mobile,
 			}"
-		/>
+			style="overflow: hidden"
+		>
+			<div
+				id="map"
+				:class="{
+					'map-mobile': mobile,
+					'map-lg': !mobile,
+				}"
+			></div>
 
-		<div v-if="showLocationCards">
-			<div v-for="(trips, index) in groupedTripData" :key="index" class="z-index-1">
-				<v-list
-					class="position-absolute overflow-y"
-					max-height="200"
-					:style="{
-						top: trips[0].x + 'px',
-						left: trips[0].y + 'px',
-					}"
+			<div v-if="showLocationCards">
+				<div
+					v-for="(trips, index) in groupedTripData"
+					:key="index"
+					class="z-index-1"
+					style="overflow: hidden"
 				>
-					<v-list-item
-						v-for="trip in trips"
-						:key="trip.tripTitle"
-						@click="$emit('on-click-timeline', trip)"
-						density="compact"
+					<div
+						class="position-absolute"
+						:style="{
+							top: trips[0].x + 'px',
+							left: trips[0].y + 'px',
+						}"
 					>
-						{{ trip.tripTitle }}
-					</v-list-item>
-				</v-list>
+						<v-tooltip>
+							<template #activator="{ props }">
+								<v-card
+									v-bind="props"
+									width="120"
+									height="120"
+									:image="trips[0].imageUrls[0]"
+									@click="$emit('on-click-timeline', trips[0])"
+								>
+								</v-card>
+							</template>
+							{{ trips[0].tripTitle }}
+						</v-tooltip>
+					</div>
+				</div>
 			</div>
 		</div>
 
@@ -108,35 +125,35 @@ export default defineComponent({
 		const groupedTripData: Ref<tripOnMap[][]> = ref([]);
 
 		const deckLayers = computed(() => [
-			new IconLayer({
-				id: 'places-icon',
-				data: allTripData.value.filter((d) => {
-					const cameraPos = mapCenter.value; // Get current map center
-					const cameraLngLat = [cameraPos.lng, cameraPos.lat];
-					if (!cameraLngLat) return true;
-
-					// Convert lat/lon to Mercator projection (approximation)
-					const dotProduct = cameraLngLat[0] * d.lon + cameraLngLat[1] * d.lat;
-					return dotProduct > 0; // Show only front-facing icons
-				}),
-				iconAtlas: svgIcon,
-				iconMapping: {
-					marker: { x: 0, y: 0, width: 256, height: 256, anchorY: 64 },
-				},
-				pickable: true,
-				parameters: {
-					cullMode: 'front',
-				},
-				getIcon: (d) => 'marker',
-				getPosition: (d) => [d.lon, d.lat],
-				getSize: () => Math.max(map.value.getZoom() * map.value.getZoom() * 0.3, 20),
-				onClick: (icon) => {
-					emit('on-click-timeline', icon.object);
-				},
-				onHover: ({ object }) => {
-					document.body.style.cursor = object ? 'pointer' : 'default';
-				},
-			}),
+			// we dont actually need the icon layer
+			// new IconLayer({
+			// 	id: 'places-icon',
+			// 	data: allTripData.value.filter((d) => {
+			// 		const cameraPos = mapCenter.value; // Get current map center
+			// 		const cameraLngLat = [cameraPos.lng, cameraPos.lat];
+			// 		if (!cameraLngLat) return true;
+			// 		// Convert lat/lon to Mercator projection (approximation)
+			// 		const dotProduct = cameraLngLat[0] * d.lon + cameraLngLat[1] * d.lat;
+			// 		return dotProduct > 0; // Show only front-facing icons
+			// 	}),
+			// 	iconAtlas: svgIcon,
+			// 	iconMapping: {
+			// 		marker: { x: 0, y: 0, width: 256, height: 256, anchorY: 64 },
+			// 	},
+			// 	pickable: true,
+			// 	parameters: {
+			// 		cullMode: 'front',
+			// 	},
+			// 	getIcon: (d) => 'marker',
+			// 	getPosition: (d) => [d.lon, d.lat],
+			// 	getSize: () => Math.max(map.value.getZoom() * map.value.getZoom() * 0.3, 20),
+			// 	onClick: (icon) => {
+			// 		emit('on-click-timeline', icon.object);
+			// 	},
+			// 	onHover: ({ object }) => {
+			// 		document.body.style.cursor = object ? 'pointer' : 'default';
+			// 	},
+			// }),
 		]);
 
 		const deckOverlay = new DeckOverlay({
