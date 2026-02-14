@@ -18,7 +18,7 @@
 					<v-tab :value="1"> Chat with AI </v-tab>
 				</v-tabs>
 			</div>
-			<v-window class="w-100 h-100" v-model="currentWindow">
+			<v-window class="w-100 h-100" v-model="currentWindow" disabled>
 				<v-window-item :value="0" class="w-100 h-100">
 					<div
 						class="d-flex w-100 h-100"
