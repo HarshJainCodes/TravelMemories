@@ -1,5 +1,16 @@
 <template>
-	<div class="w-100 mt-5 d-flex justify-center text-h6">Recent Conversations</div>
+	<v-btn
+		class="mt-5 mx-4"
+		variant="tonal"
+		prepend-icon="mdi-chat-plus-outline"
+		@click="onClickConversation(null)"
+	>
+		New Chat
+	</v-btn>
+
+	<div class="w-100 mt-4 px-4 d-flex justify-start text-grey-darken-2" style="font-size: small">
+		Your Chats
+	</div>
 
 	<v-list active-class="text-teal-lighten-1" density="compact">
 		<v-list-item

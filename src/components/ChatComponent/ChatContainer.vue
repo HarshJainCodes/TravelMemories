@@ -363,6 +363,11 @@ export default defineComponent({
 		};
 
 		const onClickConversation = async (conversationId) => {
+			if (conversationId === null) {
+				chatTillNow.value = [];
+				currentConversationId.value = null;
+				return;
+			}
 			currentConversationId.value = conversationId;
 			let messages = await getConversationMessages(conversationId);
 
