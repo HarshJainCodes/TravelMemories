@@ -4,11 +4,11 @@ import { subscriptionDetails, tripData, tripUploadPayload } from './types';
 import { useUserDetails } from '@/stores/userDetails';
 
 // backend url
-const PROD_URL = 'https://travelmemoriesbackend.harshjain17.com';
+const PROD_URL = 'https://travelmemories.azurewebsites.net';
 const LOCAL_URL = 'https://localhost:7221';
 
 // chatbot url
-const CHATBOT_PROD_URL = 'https://mcpservermemories.harshjain17.com';
+const CHATBOT_PROD_URL = 'https://mcpservermemories.azurewebsites.net';
 const CHATBOT_LOCAL_URL = 'https://localhost:7210';
 
 export const BACKEND_URL = PROD_URL;
