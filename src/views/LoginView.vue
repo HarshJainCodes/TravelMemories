@@ -171,7 +171,7 @@ export default defineComponent({
 		};
 
 		const onClickResendOtp = async (enteredEmail) => {
-			console.log('sending otp');
+			// console.log('sending otp');
 			await onSendVerficationCode(enteredEmail);
 		};
 
