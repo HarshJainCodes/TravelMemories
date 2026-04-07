@@ -6,7 +6,7 @@ const appInsights = new ApplicationInsights({
 	},
 });
 
-// appInsights.loadAppInsights();
-// appInsights.trackPageView(); // Record the first page load
+appInsights.loadAppInsights();
+appInsights.trackPageView(); // Record the first page load
 
 export default appInsights;
