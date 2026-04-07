@@ -114,7 +114,6 @@ export default defineComponent({
 				router.push('/MyCollection');
 			},
 			onError: (e) => {
-				console.log(e.message);
 				toast(e.message, {
 					type: TYPE.ERROR,
 				});
