@@ -1,1 +1,132 @@
-{"nodes": [{"id": "world_map_image", "label": "World Map Image", "file_type": "image", "source_file": "src/assets/images/world_map.png", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}, {"id": "world_map_travel_route", "label": "Travel Route Visualization", "file_type": "concept", "source_file": "src/assets/images/world_map.png", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}, {"id": "world_map_location_pin", "label": "Location Pin Marker", "file_type": "concept", "source_file": "src/assets/images/world_map.png", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}, {"id": "world_map_airplane_icon", "label": "Airplane Icon", "file_type": "concept", "source_file": "src/assets/images/world_map.png", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}, {"id": "world_map_global_coverage", "label": "Global Geographic Coverage", "file_type": "concept", "source_file": "src/assets/images/world_map.png", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}], "edges": [{"source": "world_map_image", "target": "world_map_travel_route", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "src/assets/images/world_map.png", "source_location": null, "weight": 1.0}, {"source": "world_map_image", "target": "world_map_location_pin", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "src/assets/images/world_map.png", "source_location": null, "weight": 1.0}, {"source": "world_map_image", "target": "world_map_airplane_icon", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "src/assets/images/world_map.png", "source_location": null, "weight": 1.0}, {"source": "world_map_image", "target": "world_map_global_coverage", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "src/assets/images/world_map.png", "source_location": null, "weight": 1.0}, {"source": "world_map_travel_route", "target": "world_map_airplane_icon", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "src/assets/images/world_map.png", "source_location": null, "weight": 1.0}, {"source": "world_map_image", "target": "world_map_location_pin", "relation": "shares_data_with", "confidence": "INFERRED", "confidence_score": 0.85, "source_file": "src/assets/images/world_map.png", "source_location": null, "weight": 0.85}, {"source": "world_map_image", "target": "world_map_global_coverage", "relation": "shares_data_with", "confidence": "INFERRED", "confidence_score": 0.8, "source_file": "src/assets/images/world_map.png", "source_location": null, "weight": 0.8}], "hyperedges": []}
+{
+	"nodes": [
+		{
+			"id": "world_map_image",
+			"label": "World Map Image",
+			"file_type": "image",
+			"source_file": "src/assets/images/world_map.png",
+			"source_location": null,
+			"source_url": null,
+			"captured_at": null,
+			"author": null,
+			"contributor": null
+		},
+		{
+			"id": "world_map_travel_route",
+			"label": "Travel Route Visualization",
+			"file_type": "concept",
+			"source_file": "src/assets/images/world_map.png",
+			"source_location": null,
+			"source_url": null,
+			"captured_at": null,
+			"author": null,
+			"contributor": null
+		},
+		{
+			"id": "world_map_location_pin",
+			"label": "Location Pin Marker",
+			"file_type": "concept",
+			"source_file": "src/assets/images/world_map.png",
+			"source_location": null,
+			"source_url": null,
+			"captured_at": null,
+			"author": null,
+			"contributor": null
+		},
+		{
+			"id": "world_map_airplane_icon",
+			"label": "Airplane Icon",
+			"file_type": "concept",
+			"source_file": "src/assets/images/world_map.png",
+			"source_location": null,
+			"source_url": null,
+			"captured_at": null,
+			"author": null,
+			"contributor": null
+		},
+		{
+			"id": "world_map_global_coverage",
+			"label": "Global Geographic Coverage",
+			"file_type": "concept",
+			"source_file": "src/assets/images/world_map.png",
+			"source_location": null,
+			"source_url": null,
+			"captured_at": null,
+			"author": null,
+			"contributor": null
+		}
+	],
+	"edges": [
+		{
+			"source": "world_map_image",
+			"target": "world_map_travel_route",
+			"relation": "conceptually_related_to",
+			"confidence": "EXTRACTED",
+			"confidence_score": 1.0,
+			"source_file": "src/assets/images/world_map.png",
+			"source_location": null,
+			"weight": 1.0
+		},
+		{
+			"source": "world_map_image",
+			"target": "world_map_location_pin",
+			"relation": "conceptually_related_to",
+			"confidence": "EXTRACTED",
+			"confidence_score": 1.0,
+			"source_file": "src/assets/images/world_map.png",
+			"source_location": null,
+			"weight": 1.0
+		},
+		{
+			"source": "world_map_image",
+			"target": "world_map_airplane_icon",
+			"relation": "conceptually_related_to",
+			"confidence": "EXTRACTED",
+			"confidence_score": 1.0,
+			"source_file": "src/assets/images/world_map.png",
+			"source_location": null,
+			"weight": 1.0
+		},
+		{
+			"source": "world_map_image",
+			"target": "world_map_global_coverage",
+			"relation": "conceptually_related_to",
+			"confidence": "EXTRACTED",
+			"confidence_score": 1.0,
+			"source_file": "src/assets/images/world_map.png",
+			"source_location": null,
+			"weight": 1.0
+		},
+		{
+			"source": "world_map_travel_route",
+			"target": "world_map_airplane_icon",
+			"relation": "conceptually_related_to",
+			"confidence": "EXTRACTED",
+			"confidence_score": 1.0,
+			"source_file": "src/assets/images/world_map.png",
+			"source_location": null,
+			"weight": 1.0
+		},
+		{
+			"source": "world_map_image",
+			"target": "world_map_location_pin",
+			"relation": "shares_data_with",
+			"confidence": "INFERRED",
+			"confidence_score": 0.85,
+			"source_file": "src/assets/images/world_map.png",
+			"source_location": null,
+			"weight": 0.85
+		},
+		{
+			"source": "world_map_image",
+			"target": "world_map_global_coverage",
+			"relation": "shares_data_with",
+			"confidence": "INFERRED",
+			"confidence_score": 0.8,
+			"source_file": "src/assets/images/world_map.png",
+			"source_location": null,
+			"weight": 0.8
+		}
+	],
+	"hyperedges": []
+}

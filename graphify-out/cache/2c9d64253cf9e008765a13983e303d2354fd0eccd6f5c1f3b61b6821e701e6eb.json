@@ -1,1 +1,80 @@
-{"nodes": [{"id": "no_image_placeholder", "label": "No Image Placeholder Asset", "file_type": "image", "source_file": "src/assets/images/no_image.png", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}, {"id": "no_image_fallback_ui", "label": "No Image Fallback UI State", "file_type": "concept", "source_file": "src/assets/images/no_image.png", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}, {"id": "photo_collection_empty_state", "label": "Photo Collection Empty State", "file_type": "concept", "source_file": "src/assets/images/no_image.png", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}], "edges": [{"source": "no_image_placeholder", "target": "no_image_fallback_ui", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "src/assets/images/no_image.png", "source_location": null, "weight": 1.0}, {"source": "no_image_placeholder", "target": "photo_collection_empty_state", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "src/assets/images/no_image.png", "source_location": null, "weight": 1.0}, {"source": "no_image_fallback_ui", "target": "photo_collection_empty_state", "relation": "conceptually_related_to", "confidence": "INFERRED", "confidence_score": 0.9, "source_file": "src/assets/images/no_image.png", "source_location": null, "weight": 0.9}, {"source": "no_image_placeholder", "target": "no_image_placeholder", "relation": "conceptually_related_to", "confidence": "INFERRED", "confidence_score": 0.85, "source_file": "src/assets/images/no_image.png", "source_location": null, "weight": 0.85}], "hyperedges": []}
+{
+	"nodes": [
+		{
+			"id": "no_image_placeholder",
+			"label": "No Image Placeholder Asset",
+			"file_type": "image",
+			"source_file": "src/assets/images/no_image.png",
+			"source_location": null,
+			"source_url": null,
+			"captured_at": null,
+			"author": null,
+			"contributor": null
+		},
+		{
+			"id": "no_image_fallback_ui",
+			"label": "No Image Fallback UI State",
+			"file_type": "concept",
+			"source_file": "src/assets/images/no_image.png",
+			"source_location": null,
+			"source_url": null,
+			"captured_at": null,
+			"author": null,
+			"contributor": null
+		},
+		{
+			"id": "photo_collection_empty_state",
+			"label": "Photo Collection Empty State",
+			"file_type": "concept",
+			"source_file": "src/assets/images/no_image.png",
+			"source_location": null,
+			"source_url": null,
+			"captured_at": null,
+			"author": null,
+			"contributor": null
+		}
+	],
+	"edges": [
+		{
+			"source": "no_image_placeholder",
+			"target": "no_image_fallback_ui",
+			"relation": "conceptually_related_to",
+			"confidence": "EXTRACTED",
+			"confidence_score": 1.0,
+			"source_file": "src/assets/images/no_image.png",
+			"source_location": null,
+			"weight": 1.0
+		},
+		{
+			"source": "no_image_placeholder",
+			"target": "photo_collection_empty_state",
+			"relation": "conceptually_related_to",
+			"confidence": "EXTRACTED",
+			"confidence_score": 1.0,
+			"source_file": "src/assets/images/no_image.png",
+			"source_location": null,
+			"weight": 1.0
+		},
+		{
+			"source": "no_image_fallback_ui",
+			"target": "photo_collection_empty_state",
+			"relation": "conceptually_related_to",
+			"confidence": "INFERRED",
+			"confidence_score": 0.9,
+			"source_file": "src/assets/images/no_image.png",
+			"source_location": null,
+			"weight": 0.9
+		},
+		{
+			"source": "no_image_placeholder",
+			"target": "no_image_placeholder",
+			"relation": "conceptually_related_to",
+			"confidence": "INFERRED",
+			"confidence_score": 0.85,
+			"source_file": "src/assets/images/no_image.png",
+			"source_location": null,
+			"weight": 0.85
+		}
+	],
+	"hyperedges": []
+}

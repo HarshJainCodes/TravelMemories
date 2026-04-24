@@ -1,1 +1,163 @@
-{"nodes": [{"id": "readme_travel_diary", "label": "Travel Diary Application (README)", "file_type": "document", "source_file": "README.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}, {"id": "readme_backend_repo", "label": "Travel Memories Backend Repo", "file_type": "document", "source_file": "README.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}, {"id": "readme_sql_server", "label": "SQL Server (Image Metadata Storage)", "file_type": "document", "source_file": "README.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}, {"id": "readme_blob_storage", "label": "Azure Blob Storage (Image Files)", "file_type": "document", "source_file": "README.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}, {"id": "readme_jwt_tokens", "label": "JWT Token Auth (Backend)", "file_type": "document", "source_file": "README.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}, {"id": "readme_efcore", "label": "EF Core Migrations", "file_type": "document", "source_file": "README.md", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}], "edges": [{"source": "readme_travel_diary", "target": "claudemd_travel_memories_project", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "README.md", "source_location": null, "weight": 1.0}, {"source": "readme_travel_diary", "target": "readme_backend_repo", "relation": "references", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "README.md", "source_location": null, "weight": 1.0}, {"source": "readme_backend_repo", "target": "readme_sql_server", "relation": "references", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "README.md", "source_location": null, "weight": 1.0}, {"source": "readme_backend_repo", "target": "readme_blob_storage", "relation": "references", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "README.md", "source_location": null, "weight": 1.0}, {"source": "readme_backend_repo", "target": "readme_jwt_tokens", "relation": "references", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "README.md", "source_location": null, "weight": 1.0}, {"source": "readme_backend_repo", "target": "readme_efcore", "relation": "references", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "README.md", "source_location": null, "weight": 1.0}, {"source": "readme_backend_repo", "target": "claudemd_azure_app_insights", "relation": "references", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "README.md", "source_location": null, "weight": 1.0}, {"source": "claudemd_queries_ts", "target": "claudemd_dotnet_backend", "relation": "references", "confidence": "INFERRED", "confidence_score": 0.9, "source_file": "README.md", "source_location": null, "weight": 0.9}, {"source": "readme_blob_storage", "target": "readme_sql_server", "relation": "semantically_similar_to", "confidence": "INFERRED", "confidence_score": 0.7, "source_file": "README.md", "source_location": null, "weight": 0.7}], "hyperedges": []}
+{
+	"nodes": [
+		{
+			"id": "readme_travel_diary",
+			"label": "Travel Diary Application (README)",
+			"file_type": "document",
+			"source_file": "README.md",
+			"source_location": null,
+			"source_url": null,
+			"captured_at": null,
+			"author": null,
+			"contributor": null
+		},
+		{
+			"id": "readme_backend_repo",
+			"label": "Travel Memories Backend Repo",
+			"file_type": "document",
+			"source_file": "README.md",
+			"source_location": null,
+			"source_url": null,
+			"captured_at": null,
+			"author": null,
+			"contributor": null
+		},
+		{
+			"id": "readme_sql_server",
+			"label": "SQL Server (Image Metadata Storage)",
+			"file_type": "document",
+			"source_file": "README.md",
+			"source_location": null,
+			"source_url": null,
+			"captured_at": null,
+			"author": null,
+			"contributor": null
+		},
+		{
+			"id": "readme_blob_storage",
+			"label": "Azure Blob Storage (Image Files)",
+			"file_type": "document",
+			"source_file": "README.md",
+			"source_location": null,
+			"source_url": null,
+			"captured_at": null,
+			"author": null,
+			"contributor": null
+		},
+		{
+			"id": "readme_jwt_tokens",
+			"label": "JWT Token Auth (Backend)",
+			"file_type": "document",
+			"source_file": "README.md",
+			"source_location": null,
+			"source_url": null,
+			"captured_at": null,
+			"author": null,
+			"contributor": null
+		},
+		{
+			"id": "readme_efcore",
+			"label": "EF Core Migrations",
+			"file_type": "document",
+			"source_file": "README.md",
+			"source_location": null,
+			"source_url": null,
+			"captured_at": null,
+			"author": null,
+			"contributor": null
+		}
+	],
+	"edges": [
+		{
+			"source": "readme_travel_diary",
+			"target": "claudemd_travel_memories_project",
+			"relation": "conceptually_related_to",
+			"confidence": "EXTRACTED",
+			"confidence_score": 1.0,
+			"source_file": "README.md",
+			"source_location": null,
+			"weight": 1.0
+		},
+		{
+			"source": "readme_travel_diary",
+			"target": "readme_backend_repo",
+			"relation": "references",
+			"confidence": "EXTRACTED",
+			"confidence_score": 1.0,
+			"source_file": "README.md",
+			"source_location": null,
+			"weight": 1.0
+		},
+		{
+			"source": "readme_backend_repo",
+			"target": "readme_sql_server",
+			"relation": "references",
+			"confidence": "EXTRACTED",
+			"confidence_score": 1.0,
+			"source_file": "README.md",
+			"source_location": null,
+			"weight": 1.0
+		},
+		{
+			"source": "readme_backend_repo",
+			"target": "readme_blob_storage",
+			"relation": "references",
+			"confidence": "EXTRACTED",
+			"confidence_score": 1.0,
+			"source_file": "README.md",
+			"source_location": null,
+			"weight": 1.0
+		},
+		{
+			"source": "readme_backend_repo",
+			"target": "readme_jwt_tokens",
+			"relation": "references",
+			"confidence": "EXTRACTED",
+			"confidence_score": 1.0,
+			"source_file": "README.md",
+			"source_location": null,
+			"weight": 1.0
+		},
+		{
+			"source": "readme_backend_repo",
+			"target": "readme_efcore",
+			"relation": "references",
+			"confidence": "EXTRACTED",
+			"confidence_score": 1.0,
+			"source_file": "README.md",
+			"source_location": null,
+			"weight": 1.0
+		},
+		{
+			"source": "readme_backend_repo",
+			"target": "claudemd_azure_app_insights",
+			"relation": "references",
+			"confidence": "EXTRACTED",
+			"confidence_score": 1.0,
+			"source_file": "README.md",
+			"source_location": null,
+			"weight": 1.0
+		},
+		{
+			"source": "claudemd_queries_ts",
+			"target": "claudemd_dotnet_backend",
+			"relation": "references",
+			"confidence": "INFERRED",
+			"confidence_score": 0.9,
+			"source_file": "README.md",
+			"source_location": null,
+			"weight": 0.9
+		},
+		{
+			"source": "readme_blob_storage",
+			"target": "readme_sql_server",
+			"relation": "semantically_similar_to",
+			"confidence": "INFERRED",
+			"confidence_score": 0.7,
+			"source_file": "README.md",
+			"source_location": null,
+			"weight": 0.7
+		}
+	],
+	"hyperedges": []
+}

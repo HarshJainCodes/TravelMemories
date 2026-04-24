@@ -1,1 +1,101 @@
-{"nodes": [{"id": "test_upload_img_group_photo", "label": "Group Photo - Indian Festive Occasion", "file_type": "image", "source_file": "cypress/fixtures/test_upload_img.jpg", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}, {"id": "test_upload_img_fixture", "label": "Cypress Test Fixture Image", "file_type": "image", "source_file": "cypress/fixtures/test_upload_img.jpg", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}, {"id": "test_upload_img_indoor_venue", "label": "Indoor Venue - Office or Community Space", "file_type": "image", "source_file": "cypress/fixtures/test_upload_img.jpg", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}, {"id": "test_upload_img_traditional_attire", "label": "Traditional Indian Ethnic Wear (Kurta/Salwar)", "file_type": "image", "source_file": "cypress/fixtures/test_upload_img.jpg", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}], "edges": [{"source": "test_upload_img_fixture", "target": "test_upload_img_group_photo", "relation": "references", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "cypress/fixtures/test_upload_img.jpg", "source_location": null, "weight": 1.0}, {"source": "test_upload_img_group_photo", "target": "test_upload_img_indoor_venue", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "cypress/fixtures/test_upload_img.jpg", "source_location": null, "weight": 1.0}, {"source": "test_upload_img_group_photo", "target": "test_upload_img_traditional_attire", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "cypress/fixtures/test_upload_img.jpg", "source_location": null, "weight": 1.0}, {"source": "test_upload_img_fixture", "target": "test_upload_img_indoor_venue", "relation": "conceptually_related_to", "confidence": "INFERRED", "confidence_score": 0.85, "source_file": "cypress/fixtures/test_upload_img.jpg", "source_location": null, "weight": 0.85}, {"source": "test_upload_img_group_photo", "target": "test_upload_img_traditional_attire", "relation": "rationale_for", "confidence": "INFERRED", "confidence_score": 0.8, "source_file": "cypress/fixtures/test_upload_img.jpg", "source_location": null, "weight": 0.8}], "hyperedges": []}
+{
+	"nodes": [
+		{
+			"id": "test_upload_img_group_photo",
+			"label": "Group Photo - Indian Festive Occasion",
+			"file_type": "image",
+			"source_file": "cypress/fixtures/test_upload_img.jpg",
+			"source_location": null,
+			"source_url": null,
+			"captured_at": null,
+			"author": null,
+			"contributor": null
+		},
+		{
+			"id": "test_upload_img_fixture",
+			"label": "Cypress Test Fixture Image",
+			"file_type": "image",
+			"source_file": "cypress/fixtures/test_upload_img.jpg",
+			"source_location": null,
+			"source_url": null,
+			"captured_at": null,
+			"author": null,
+			"contributor": null
+		},
+		{
+			"id": "test_upload_img_indoor_venue",
+			"label": "Indoor Venue - Office or Community Space",
+			"file_type": "image",
+			"source_file": "cypress/fixtures/test_upload_img.jpg",
+			"source_location": null,
+			"source_url": null,
+			"captured_at": null,
+			"author": null,
+			"contributor": null
+		},
+		{
+			"id": "test_upload_img_traditional_attire",
+			"label": "Traditional Indian Ethnic Wear (Kurta/Salwar)",
+			"file_type": "image",
+			"source_file": "cypress/fixtures/test_upload_img.jpg",
+			"source_location": null,
+			"source_url": null,
+			"captured_at": null,
+			"author": null,
+			"contributor": null
+		}
+	],
+	"edges": [
+		{
+			"source": "test_upload_img_fixture",
+			"target": "test_upload_img_group_photo",
+			"relation": "references",
+			"confidence": "EXTRACTED",
+			"confidence_score": 1.0,
+			"source_file": "cypress/fixtures/test_upload_img.jpg",
+			"source_location": null,
+			"weight": 1.0
+		},
+		{
+			"source": "test_upload_img_group_photo",
+			"target": "test_upload_img_indoor_venue",
+			"relation": "conceptually_related_to",
+			"confidence": "EXTRACTED",
+			"confidence_score": 1.0,
+			"source_file": "cypress/fixtures/test_upload_img.jpg",
+			"source_location": null,
+			"weight": 1.0
+		},
+		{
+			"source": "test_upload_img_group_photo",
+			"target": "test_upload_img_traditional_attire",
+			"relation": "conceptually_related_to",
+			"confidence": "EXTRACTED",
+			"confidence_score": 1.0,
+			"source_file": "cypress/fixtures/test_upload_img.jpg",
+			"source_location": null,
+			"weight": 1.0
+		},
+		{
+			"source": "test_upload_img_fixture",
+			"target": "test_upload_img_indoor_venue",
+			"relation": "conceptually_related_to",
+			"confidence": "INFERRED",
+			"confidence_score": 0.85,
+			"source_file": "cypress/fixtures/test_upload_img.jpg",
+			"source_location": null,
+			"weight": 0.85
+		},
+		{
+			"source": "test_upload_img_group_photo",
+			"target": "test_upload_img_traditional_attire",
+			"relation": "rationale_for",
+			"confidence": "INFERRED",
+			"confidence_score": 0.8,
+			"source_file": "cypress/fixtures/test_upload_img.jpg",
+			"source_location": null,
+			"weight": 0.8
+		}
+	],
+	"hyperedges": []
+}

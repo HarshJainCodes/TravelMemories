@@ -29,14 +29,14 @@ npm run test:e2e:dev  # Cypress E2E against dev server (opens Cypress UI)
 
 ### Routing ([src/router/index.js](src/router/index.js))
 
-| Path | Component |
-|---|---|
-| `/` | HomeView (landing) |
-| `/login` | LoginView |
-| `/Upload` | ImageUploader |
+| Path            | Component                             |
+| --------------- | ------------------------------------- |
+| `/`             | HomeView (landing)                    |
+| `/login`        | LoginView                             |
+| `/Upload`       | ImageUploader                         |
 | `/MyCollection` | DiaryContainer (main collection view) |
-| `/api` | ApiPage |
-| `/Pricing` | PricingPage |
+| `/api`          | ApiPage                               |
+| `/Pricing`      | PricingPage                           |
 
 ### State (Pinia stores in [src/stores/](src/stores/))
 
@@ -86,6 +86,7 @@ CI/CD via GitHub Actions → Azure Static Web Apps (see [.github/workflows/](.gi
 This project has a graphify knowledge graph at graphify-out/.
 
 Rules:
+
 - Before answering architecture or codebase questions, read graphify-out/GRAPH_REPORT.md for god nodes and community structure
 - If graphify-out/wiki/index.md exists, navigate it instead of reading raw files
 - For cross-module "how does X relate to Y" questions, prefer `graphify query "<question>"`, `graphify path "<A>" "<B>"`, or `graphify explain "<concept>"` over grep — these traverse the graph's EXTRACTED + INFERRED edges instead of scanning files

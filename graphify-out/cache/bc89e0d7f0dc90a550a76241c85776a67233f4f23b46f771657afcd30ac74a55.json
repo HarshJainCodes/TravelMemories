@@ -1,1 +1,278 @@
-{"nodes": [{"id": "readme_image3_travel_diary_ui", "label": "Travel Diary Main Collection View", "file_type": "image", "source_file": "src/assets/images/readme_image3.png", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}, {"id": "readme_image3_diary_container", "label": "DiaryContainer View", "file_type": "image", "source_file": "src/assets/images/readme_image3.png", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}, {"id": "readme_image3_trip_list_sidebar", "label": "Trip List Sidebar", "file_type": "image", "source_file": "src/assets/images/readme_image3.png", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}, {"id": "readme_image3_photo_viewer", "label": "Photo Viewer Modal", "file_type": "image", "source_file": "src/assets/images/readme_image3.png", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}, {"id": "readme_image3_kedarkantha_trip", "label": "Kedarkantha Summit 2023 Trip", "file_type": "image", "source_file": "src/assets/images/readme_image3.png", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}, {"id": "readme_image3_holi_festival_trip", "label": "Holi Festival 2025 Trip", "file_type": "image", "source_file": "src/assets/images/readme_image3.png", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}, {"id": "readme_image3_igdc_trip", "label": "IGDC 2022 Trip", "file_type": "image", "source_file": "src/assets/images/readme_image3.png", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}, {"id": "readme_image3_lonavala_trip", "label": "Lonavala 31st Dec 2024 Trip", "file_type": "image", "source_file": "src/assets/images/readme_image3.png", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}, {"id": "readme_image3_show_location_cards_toggle", "label": "Show Location Cards Toggle", "file_type": "image", "source_file": "src/assets/images/readme_image3.png", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}, {"id": "readme_image3_nav_bar", "label": "Navigation Bar (Travel Diary / Upload / Logout)", "file_type": "image", "source_file": "src/assets/images/readme_image3.png", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}, {"id": "readme_image3_photo_pagination", "label": "Photo Pagination Strip", "file_type": "image", "source_file": "src/assets/images/readme_image3.png", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}], "edges": [{"source": "readme_image3_travel_diary_ui", "target": "readme_image3_diary_container", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "src/assets/images/readme_image3.png", "source_location": null, "weight": 1.0}, {"source": "readme_image3_diary_container", "target": "readme_image3_trip_list_sidebar", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "src/assets/images/readme_image3.png", "source_location": null, "weight": 1.0}, {"source": "readme_image3_diary_container", "target": "readme_image3_photo_viewer", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "src/assets/images/readme_image3.png", "source_location": null, "weight": 1.0}, {"source": "readme_image3_photo_viewer", "target": "readme_image3_kedarkantha_trip", "relation": "shares_data_with", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "src/assets/images/readme_image3.png", "source_location": null, "weight": 1.0}, {"source": "readme_image3_trip_list_sidebar", "target": "readme_image3_holi_festival_trip", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "src/assets/images/readme_image3.png", "source_location": null, "weight": 1.0}, {"source": "readme_image3_trip_list_sidebar", "target": "readme_image3_igdc_trip", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "src/assets/images/readme_image3.png", "source_location": null, "weight": 1.0}, {"source": "readme_image3_trip_list_sidebar", "target": "readme_image3_kedarkantha_trip", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "src/assets/images/readme_image3.png", "source_location": null, "weight": 1.0}, {"source": "readme_image3_trip_list_sidebar", "target": "readme_image3_lonavala_trip", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "src/assets/images/readme_image3.png", "source_location": null, "weight": 1.0}, {"source": "readme_image3_diary_container", "target": "readme_image3_show_location_cards_toggle", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "src/assets/images/readme_image3.png", "source_location": null, "weight": 1.0}, {"source": "readme_image3_diary_container", "target": "readme_image3_nav_bar", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "src/assets/images/readme_image3.png", "source_location": null, "weight": 1.0}, {"source": "readme_image3_photo_viewer", "target": "readme_image3_photo_pagination", "relation": "conceptually_related_to", "confidence": "EXTRACTED", "confidence_score": 1.0, "source_file": "src/assets/images/readme_image3.png", "source_location": null, "weight": 1.0}, {"source": "readme_image3_nav_bar", "target": "readme_image3_diary_container", "relation": "conceptually_related_to", "confidence": "INFERRED", "confidence_score": 0.85, "source_file": "src/assets/images/readme_image3.png", "source_location": null, "weight": 0.85}, {"source": "readme_image3_show_location_cards_toggle", "target": "readme_image3_photo_viewer", "relation": "conceptually_related_to", "confidence": "INFERRED", "confidence_score": 0.75, "source_file": "src/assets/images/readme_image3.png", "source_location": null, "weight": 0.75}, {"source": "readme_image3_kedarkantha_trip", "target": "readme_image3_photo_pagination", "relation": "shares_data_with", "confidence": "INFERRED", "confidence_score": 0.8, "source_file": "src/assets/images/readme_image3.png", "source_location": null, "weight": 0.8}, {"source": "readme_image3_trip_list_sidebar", "target": "readme_image3_photo_viewer", "relation": "shares_data_with", "confidence": "INFERRED", "confidence_score": 0.85, "source_file": "src/assets/images/readme_image3.png", "source_location": null, "weight": 0.85}], "hyperedges": []}
+{
+	"nodes": [
+		{
+			"id": "readme_image3_travel_diary_ui",
+			"label": "Travel Diary Main Collection View",
+			"file_type": "image",
+			"source_file": "src/assets/images/readme_image3.png",
+			"source_location": null,
+			"source_url": null,
+			"captured_at": null,
+			"author": null,
+			"contributor": null
+		},
+		{
+			"id": "readme_image3_diary_container",
+			"label": "DiaryContainer View",
+			"file_type": "image",
+			"source_file": "src/assets/images/readme_image3.png",
+			"source_location": null,
+			"source_url": null,
+			"captured_at": null,
+			"author": null,
+			"contributor": null
+		},
+		{
+			"id": "readme_image3_trip_list_sidebar",
+			"label": "Trip List Sidebar",
+			"file_type": "image",
+			"source_file": "src/assets/images/readme_image3.png",
+			"source_location": null,
+			"source_url": null,
+			"captured_at": null,
+			"author": null,
+			"contributor": null
+		},
+		{
+			"id": "readme_image3_photo_viewer",
+			"label": "Photo Viewer Modal",
+			"file_type": "image",
+			"source_file": "src/assets/images/readme_image3.png",
+			"source_location": null,
+			"source_url": null,
+			"captured_at": null,
+			"author": null,
+			"contributor": null
+		},
+		{
+			"id": "readme_image3_kedarkantha_trip",
+			"label": "Kedarkantha Summit 2023 Trip",
+			"file_type": "image",
+			"source_file": "src/assets/images/readme_image3.png",
+			"source_location": null,
+			"source_url": null,
+			"captured_at": null,
+			"author": null,
+			"contributor": null
+		},
+		{
+			"id": "readme_image3_holi_festival_trip",
+			"label": "Holi Festival 2025 Trip",
+			"file_type": "image",
+			"source_file": "src/assets/images/readme_image3.png",
+			"source_location": null,
+			"source_url": null,
+			"captured_at": null,
+			"author": null,
+			"contributor": null
+		},
+		{
+			"id": "readme_image3_igdc_trip",
+			"label": "IGDC 2022 Trip",
+			"file_type": "image",
+			"source_file": "src/assets/images/readme_image3.png",
+			"source_location": null,
+			"source_url": null,
+			"captured_at": null,
+			"author": null,
+			"contributor": null
+		},
+		{
+			"id": "readme_image3_lonavala_trip",
+			"label": "Lonavala 31st Dec 2024 Trip",
+			"file_type": "image",
+			"source_file": "src/assets/images/readme_image3.png",
+			"source_location": null,
+			"source_url": null,
+			"captured_at": null,
+			"author": null,
+			"contributor": null
+		},
+		{
+			"id": "readme_image3_show_location_cards_toggle",
+			"label": "Show Location Cards Toggle",
+			"file_type": "image",
+			"source_file": "src/assets/images/readme_image3.png",
+			"source_location": null,
+			"source_url": null,
+			"captured_at": null,
+			"author": null,
+			"contributor": null
+		},
+		{
+			"id": "readme_image3_nav_bar",
+			"label": "Navigation Bar (Travel Diary / Upload / Logout)",
+			"file_type": "image",
+			"source_file": "src/assets/images/readme_image3.png",
+			"source_location": null,
+			"source_url": null,
+			"captured_at": null,
+			"author": null,
+			"contributor": null
+		},
+		{
+			"id": "readme_image3_photo_pagination",
+			"label": "Photo Pagination Strip",
+			"file_type": "image",
+			"source_file": "src/assets/images/readme_image3.png",
+			"source_location": null,
+			"source_url": null,
+			"captured_at": null,
+			"author": null,
+			"contributor": null
+		}
+	],
+	"edges": [
+		{
+			"source": "readme_image3_travel_diary_ui",
+			"target": "readme_image3_diary_container",
+			"relation": "conceptually_related_to",
+			"confidence": "EXTRACTED",
+			"confidence_score": 1.0,
+			"source_file": "src/assets/images/readme_image3.png",
+			"source_location": null,
+			"weight": 1.0
+		},
+		{
+			"source": "readme_image3_diary_container",
+			"target": "readme_image3_trip_list_sidebar",
+			"relation": "conceptually_related_to",
+			"confidence": "EXTRACTED",
+			"confidence_score": 1.0,
+			"source_file": "src/assets/images/readme_image3.png",
+			"source_location": null,
+			"weight": 1.0
+		},
+		{
+			"source": "readme_image3_diary_container",
+			"target": "readme_image3_photo_viewer",
+			"relation": "conceptually_related_to",
+			"confidence": "EXTRACTED",
+			"confidence_score": 1.0,
+			"source_file": "src/assets/images/readme_image3.png",
+			"source_location": null,
+			"weight": 1.0
+		},
+		{
+			"source": "readme_image3_photo_viewer",
+			"target": "readme_image3_kedarkantha_trip",
+			"relation": "shares_data_with",
+			"confidence": "EXTRACTED",
+			"confidence_score": 1.0,
+			"source_file": "src/assets/images/readme_image3.png",
+			"source_location": null,
+			"weight": 1.0
+		},
+		{
+			"source": "readme_image3_trip_list_sidebar",
+			"target": "readme_image3_holi_festival_trip",
+			"relation": "conceptually_related_to",
+			"confidence": "EXTRACTED",
+			"confidence_score": 1.0,
+			"source_file": "src/assets/images/readme_image3.png",
+			"source_location": null,
+			"weight": 1.0
+		},
+		{
+			"source": "readme_image3_trip_list_sidebar",
+			"target": "readme_image3_igdc_trip",
+			"relation": "conceptually_related_to",
+			"confidence": "EXTRACTED",
+			"confidence_score": 1.0,
+			"source_file": "src/assets/images/readme_image3.png",
+			"source_location": null,
+			"weight": 1.0
+		},
+		{
+			"source": "readme_image3_trip_list_sidebar",
+			"target": "readme_image3_kedarkantha_trip",
+			"relation": "conceptually_related_to",
+			"confidence": "EXTRACTED",
+			"confidence_score": 1.0,
+			"source_file": "src/assets/images/readme_image3.png",
+			"source_location": null,
+			"weight": 1.0
+		},
+		{
+			"source": "readme_image3_trip_list_sidebar",
+			"target": "readme_image3_lonavala_trip",
+			"relation": "conceptually_related_to",
+			"confidence": "EXTRACTED",
+			"confidence_score": 1.0,
+			"source_file": "src/assets/images/readme_image3.png",
+			"source_location": null,
+			"weight": 1.0
+		},
+		{
+			"source": "readme_image3_diary_container",
+			"target": "readme_image3_show_location_cards_toggle",
+			"relation": "conceptually_related_to",
+			"confidence": "EXTRACTED",
+			"confidence_score": 1.0,
+			"source_file": "src/assets/images/readme_image3.png",
+			"source_location": null,
+			"weight": 1.0
+		},
+		{
+			"source": "readme_image3_diary_container",
+			"target": "readme_image3_nav_bar",
+			"relation": "conceptually_related_to",
+			"confidence": "EXTRACTED",
+			"confidence_score": 1.0,
+			"source_file": "src/assets/images/readme_image3.png",
+			"source_location": null,
+			"weight": 1.0
+		},
+		{
+			"source": "readme_image3_photo_viewer",
+			"target": "readme_image3_photo_pagination",
+			"relation": "conceptually_related_to",
+			"confidence": "EXTRACTED",
+			"confidence_score": 1.0,
+			"source_file": "src/assets/images/readme_image3.png",
+			"source_location": null,
+			"weight": 1.0
+		},
+		{
+			"source": "readme_image3_nav_bar",
+			"target": "readme_image3_diary_container",
+			"relation": "conceptually_related_to",
+			"confidence": "INFERRED",
+			"confidence_score": 0.85,
+			"source_file": "src/assets/images/readme_image3.png",
+			"source_location": null,
+			"weight": 0.85
+		},
+		{
+			"source": "readme_image3_show_location_cards_toggle",
+			"target": "readme_image3_photo_viewer",
+			"relation": "conceptually_related_to",
+			"confidence": "INFERRED",
+			"confidence_score": 0.75,
+			"source_file": "src/assets/images/readme_image3.png",
+			"source_location": null,
+			"weight": 0.75
+		},
+		{
+			"source": "readme_image3_kedarkantha_trip",
+			"target": "readme_image3_photo_pagination",
+			"relation": "shares_data_with",
+			"confidence": "INFERRED",
+			"confidence_score": 0.8,
+			"source_file": "src/assets/images/readme_image3.png",
+			"source_location": null,
+			"weight": 0.8
+		},
+		{
+			"source": "readme_image3_trip_list_sidebar",
+			"target": "readme_image3_photo_viewer",
+			"relation": "shares_data_with",
+			"confidence": "INFERRED",
+			"confidence_score": 0.85,
+			"source_file": "src/assets/images/readme_image3.png",
+			"source_location": null,
+			"weight": 0.85
+		}
+	],
+	"hyperedges": []
+}

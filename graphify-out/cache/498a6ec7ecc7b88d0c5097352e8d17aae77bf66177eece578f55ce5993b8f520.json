@@ -1,1 +1,13 @@
-{"nodes": [{"id": "d_webdev_travelmemories_src_components_chatcomponent_chatcontainer_vue", "label": "ChatContainer.vue", "file_type": "code", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\ChatComponent\\ChatContainer.vue", "source_location": "L1"}], "edges": [], "raw_calls": []}
+{
+	"nodes": [
+		{
+			"id": "d_webdev_travelmemories_src_components_chatcomponent_chatcontainer_vue",
+			"label": "ChatContainer.vue",
+			"file_type": "code",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\ChatComponent\\ChatContainer.vue",
+			"source_location": "L1"
+		}
+	],
+	"edges": [],
+	"raw_calls": []
+}

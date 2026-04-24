@@ -1,1 +1,17 @@
-{"nodes": [{"id": "claudemd_types_ts", "label": "types.ts (Centralized TypeScript Types)", "file_type": "code", "source_file": "src/components/types.ts", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}], "edges": [], "hyperedges": []}
+{
+	"nodes": [
+		{
+			"id": "claudemd_types_ts",
+			"label": "types.ts (Centralized TypeScript Types)",
+			"file_type": "code",
+			"source_file": "src/components/types.ts",
+			"source_location": null,
+			"source_url": null,
+			"captured_at": null,
+			"author": null,
+			"contributor": null
+		}
+	],
+	"edges": [],
+	"hyperedges": []
+}

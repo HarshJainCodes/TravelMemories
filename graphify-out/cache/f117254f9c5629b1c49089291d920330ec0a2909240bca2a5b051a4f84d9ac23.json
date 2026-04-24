@@ -1,1 +1,112 @@
-{"nodes": [{"id": "d_webdev_travelmemories_src_components_pricingpage_pricingcard_vue", "label": "PricingCard.vue", "file_type": "code", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingCard.vue", "source_location": "L1"}, {"id": "pricingcard_setup", "label": "setup()", "file_type": "code", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingCard.vue", "source_location": "L96"}], "edges": [{"source": "d_webdev_travelmemories_src_components_pricingpage_pricingcard_vue", "target": "pinia", "relation": "imports_from", "confidence": "EXTRACTED", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingCard.vue", "source_location": "L52", "weight": 1.0}, {"source": "d_webdev_travelmemories_src_components_pricingpage_pricingcard_vue", "target": "vue", "relation": "imports_from", "confidence": "EXTRACTED", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingCard.vue", "source_location": "L53", "weight": 1.0}, {"source": "d_webdev_travelmemories_src_components_pricingpage_pricingcard_vue", "target": "vue_router", "relation": "imports_from", "confidence": "EXTRACTED", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingCard.vue", "source_location": "L54", "weight": 1.0}, {"source": "d_webdev_travelmemories_src_components_pricingpage_pricingcard_vue", "target": "d_webdev_travelmemories_src_components_queries", "relation": "imports_from", "confidence": "EXTRACTED", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingCard.vue", "source_location": "L55", "weight": 1.0}, {"source": "d_webdev_travelmemories_src_components_pricingpage_pricingcard_vue", "target": "d_webdev_travelmemories_src_components_pricingpage_types", "relation": "imports_from", "confidence": "EXTRACTED", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingCard.vue", "source_location": "L56", "weight": 1.0}, {"source": "d_webdev_travelmemories_src_components_pricingpage_pricingcard_vue", "target": "pricingcard_setup", "relation": "contains", "confidence": "EXTRACTED", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingCard.vue", "source_location": "L96", "weight": 1.0}], "raw_calls": [{"caller_nid": "pricingcard_setup", "callee": "storeToRefs", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingCard.vue", "source_location": "L97"}, {"caller_nid": "pricingcard_setup", "callee": "useUserDetails", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingCard.vue", "source_location": "L97"}, {"caller_nid": "pricingcard_setup", "callee": "useRouter", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingCard.vue", "source_location": "L98"}, {"caller_nid": "pricingcard_setup", "callee": "useSubscriptionDetails", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingCard.vue", "source_location": "L99"}, {"caller_nid": "pricingcard_setup", "callee": "computed", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingCard.vue", "source_location": "L137"}, {"caller_nid": "pricingcard_setup", "callee": "computed", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingCard.vue", "source_location": "L138"}]}
+{
+	"nodes": [
+		{
+			"id": "d_webdev_travelmemories_src_components_pricingpage_pricingcard_vue",
+			"label": "PricingCard.vue",
+			"file_type": "code",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingCard.vue",
+			"source_location": "L1"
+		},
+		{
+			"id": "pricingcard_setup",
+			"label": "setup()",
+			"file_type": "code",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingCard.vue",
+			"source_location": "L96"
+		}
+	],
+	"edges": [
+		{
+			"source": "d_webdev_travelmemories_src_components_pricingpage_pricingcard_vue",
+			"target": "pinia",
+			"relation": "imports_from",
+			"confidence": "EXTRACTED",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingCard.vue",
+			"source_location": "L52",
+			"weight": 1.0
+		},
+		{
+			"source": "d_webdev_travelmemories_src_components_pricingpage_pricingcard_vue",
+			"target": "vue",
+			"relation": "imports_from",
+			"confidence": "EXTRACTED",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingCard.vue",
+			"source_location": "L53",
+			"weight": 1.0
+		},
+		{
+			"source": "d_webdev_travelmemories_src_components_pricingpage_pricingcard_vue",
+			"target": "vue_router",
+			"relation": "imports_from",
+			"confidence": "EXTRACTED",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingCard.vue",
+			"source_location": "L54",
+			"weight": 1.0
+		},
+		{
+			"source": "d_webdev_travelmemories_src_components_pricingpage_pricingcard_vue",
+			"target": "d_webdev_travelmemories_src_components_queries",
+			"relation": "imports_from",
+			"confidence": "EXTRACTED",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingCard.vue",
+			"source_location": "L55",
+			"weight": 1.0
+		},
+		{
+			"source": "d_webdev_travelmemories_src_components_pricingpage_pricingcard_vue",
+			"target": "d_webdev_travelmemories_src_components_pricingpage_types",
+			"relation": "imports_from",
+			"confidence": "EXTRACTED",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingCard.vue",
+			"source_location": "L56",
+			"weight": 1.0
+		},
+		{
+			"source": "d_webdev_travelmemories_src_components_pricingpage_pricingcard_vue",
+			"target": "pricingcard_setup",
+			"relation": "contains",
+			"confidence": "EXTRACTED",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingCard.vue",
+			"source_location": "L96",
+			"weight": 1.0
+		}
+	],
+	"raw_calls": [
+		{
+			"caller_nid": "pricingcard_setup",
+			"callee": "storeToRefs",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingCard.vue",
+			"source_location": "L97"
+		},
+		{
+			"caller_nid": "pricingcard_setup",
+			"callee": "useUserDetails",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingCard.vue",
+			"source_location": "L97"
+		},
+		{
+			"caller_nid": "pricingcard_setup",
+			"callee": "useRouter",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingCard.vue",
+			"source_location": "L98"
+		},
+		{
+			"caller_nid": "pricingcard_setup",
+			"callee": "useSubscriptionDetails",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingCard.vue",
+			"source_location": "L99"
+		},
+		{
+			"caller_nid": "pricingcard_setup",
+			"callee": "computed",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingCard.vue",
+			"source_location": "L137"
+		},
+		{
+			"caller_nid": "pricingcard_setup",
+			"callee": "computed",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingCard.vue",
+			"source_location": "L138"
+		}
+	]
+}

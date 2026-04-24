@@ -1,1 +1,13 @@
-{"nodes": [{"id": "d_webdev_travelmemories_src_components_pricingpage_types_ts", "label": "Types.ts", "file_type": "code", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\Types.ts", "source_location": "L1"}], "edges": [], "raw_calls": []}
+{
+	"nodes": [
+		{
+			"id": "d_webdev_travelmemories_src_components_pricingpage_types_ts",
+			"label": "Types.ts",
+			"file_type": "code",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\Types.ts",
+			"source_location": "L1"
+		}
+	],
+	"edges": [],
+	"raw_calls": []
+}

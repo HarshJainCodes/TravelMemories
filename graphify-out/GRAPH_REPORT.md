@@ -1,15 +1,18 @@
-# Graph Report - D:\WebDev\TravelMemories  (2026-04-25)
+# Graph Report - D:\WebDev\TravelMemories (2026-04-25)
 
 ## Corpus Check
+
 - 51 files · ~313,375 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
+
 - 198 nodes · 187 edges · 22 communities detected
 - Extraction: 79% EXTRACTED · 21% INFERRED · 0% AMBIGUOUS · INFERRED: 39 edges (avg confidence: 0.82)
 - Token cost: 0 input · 0 output
 
 ## Community Hubs (Navigation)
+
 - [[_COMMUNITY_Telemetry & Core Components|Telemetry & Core Components]]
 - [[_COMMUNITY_Server State & Query Layer|Server State & Query Layer]]
 - [[_COMMUNITY_Map View with Trip Data|Map View with Trip Data]]
@@ -34,6 +37,7 @@
 - [[_COMMUNITY_Centralized Types|Centralized Types]]
 
 ## God Nodes (most connected - your core abstractions)
+
 1. `Vue 3 SPA` - 8 edges
 2. `Travel Diary Main UI Screenshot` - 7 edges
 3. `Travel Memories Backend Repo` - 6 edges
@@ -46,18 +50,20 @@
 10. `DiaryContainer View` - 5 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `main.js (Vue App Bootstrap)` --implements--> `Vue 3 SPA`  [INFERRED]
+
+- `main.js (Vue App Bootstrap)` --implements--> `Vue 3 SPA` [INFERRED]
   src/main.js → CLAUDE.md
-- `Cookie-Based Authentication` --semantically_similar_to--> `JWT Token Auth (Backend)`  [INFERRED] [semantically similar]
+- `Cookie-Based Authentication` --semantically_similar_to--> `JWT Token Auth (Backend)` [INFERRED] [semantically similar]
   CLAUDE.md → README.md
-- `Queries.ts (Server State Definitions)` --references--> `.NET Backend API`  [INFERRED]
+- `Queries.ts (Server State Definitions)` --references--> `.NET Backend API` [INFERRED]
   src/components/Queries.ts → CLAUDE.md
-- `setup()` --calls--> `useImages()`  [INFERRED]
+- `setup()` --calls--> `useImages()` [INFERRED]
   D:\WebDev\TravelMemories\src\components\DiaryContainer.vue → D:\WebDev\TravelMemories\src\components\Queries.ts
-- `setup()` --calls--> `useSubscriptionDetails()`  [INFERRED]
+- `setup()` --calls--> `useSubscriptionDetails()` [INFERRED]
   D:\WebDev\TravelMemories\src\components\PricingPage\PricingCard.vue → D:\WebDev\TravelMemories\src\components\Queries.ts
 
 ## Hyperedges (group relationships)
+
 - **Authentication Flow: checkLogin + userDetails store + cookie-based auth** — claudemd_check_login, claudemd_store_userdetails, claudemd_cookie_auth [EXTRACTED 0.95]
 - **Server State Pipeline: TanStack Vue Query + Queries.ts + .NET Backend** — claudemd_tanstack_vue_query, claudemd_queries_ts, claudemd_dotnet_backend [EXTRACTED 0.92]
 - **Code Quality Enforcement: Husky + ESLint + Prettier** — claudemd_husky_precommit, claudemd_eslint_config, claudemd_prettier_config [EXTRACTED 0.95]
@@ -65,94 +71,117 @@
 ## Communities
 
 ### Community 0 - "Telemetry & Core Components"
+
 Cohesion: 0.11
 Nodes (20): appInsights.js (Telemetry Setup), Azure Application Insights, .NET Backend API, Mapbox GL + Deck.gl, Queries.ts (Server State Definitions), Router (index.js), TanStack Vue Query, Travel Memories Project (+12 more)
 
 ### Community 1 - "Server State & Query Layer"
+
 Cohesion: 0.27
 Nodes (12): deleteConversationId(), getConversationMessages(), getSideConversationsList(), getSubscriptionDetails(), imageDataQueryFunc(), renameConversation(), updateSubscription(), uploadImageQueryFunc() (+4 more)
 
 ### Community 2 - "Map View with Trip Data"
+
 Cohesion: 0.25
 Nodes (14): Latitude/Longitude Coordinate Display, Dark/Light Mode Toggle Button, GitHub Link in Navbar, Trip: Holi Festival 2025, Trip: IGDC 2022, India/South Asia Map Region, Trip: Kedarkantha Summit 2023, Trip: Lonavala 31st Dec 2024 (+6 more)
 
 ### Community 3 - "Landing Page & Navigation"
+
 Cohesion: 0.27
 Nodes (11): GitHub Link Icon, HomeView Landing Page, Location Pin Marker on Map, Logout Navigation Link, Map-Based Photo Viewing Feature, Navigation Bar, Start Creating Call-To-Action Button, Light/Dark Theme Toggle Button (+3 more)
 
 ### Community 4 - "Collection View & Trips"
+
 Cohesion: 0.25
 Nodes (11): DiaryContainer View, Holi Festival 2025 Trip, IGDC 2022 Trip, Kedarkantha Summit 2023 Trip, Lonavala 31st Dec 2024 Trip, Navigation Bar (Travel Diary / Upload / Logout), Photo Pagination Strip, Photo Viewer Modal (+3 more)
 
 ### Community 5 - "Core Component Composition"
+
 Cohesion: 0.22
 Nodes (2): setup(), setup()
 
 ### Community 6 - "App Bootstrap & Layout"
+
 Cohesion: 0.29
 Nodes (2): setup(), setup()
 
 ### Community 7 - "Auth & Chatbot System"
+
 Cohesion: 0.25
 Nodes (8): ChatComponent (AI Chatbot), checkLogin() Auth Initializer, Cookie-Based Authentication, MCP Server (Chatbot Backend), Pinia State Management, Pinia Store: chatbot.ts (Conversation State), Pinia Store: UIMode.ts (Theme), Pinia Store: userDetails.js (Auth)
 
 ### Community 8 - "Login & Verification Flow"
+
 Cohesion: 0.6
 Nodes (4): onClickResendOtp(), onClickVerifyOtp(), onSendVerficationCode(), setup()
 
 ### Community 9 - "Pricing Page"
+
 Cohesion: 0.4
 Nodes (2): setup(), setup()
 
 ### Community 10 - "Router & Home View"
+
 Cohesion: 0.4
 Nodes (1): setup()
 
 ### Community 11 - "User Profile Assets"
+
 Cohesion: 0.5
 Nodes (5): Demo User Avatar Image, Generic User Placeholder Icon, Placeholder Profile Picture, User Entity (Demo/Anonymous), User Details Store
 
 ### Community 12 - "World Map Illustration"
+
 Cohesion: 0.5
 Nodes (5): Airplane Icon, Global Geographic Coverage, World Map Image, Location Pin Marker, Travel Route Visualization
 
 ### Community 13 - "Test Fixture Assets"
+
 Cohesion: 0.67
 Nodes (4): Cypress Test Fixture Image, Group Photo - Indian Festive Occasion, Indoor Venue - Office or Community Space, Traditional Indian Ethnic Wear (Kurta/Salwar)
 
 ### Community 14 - "Brand Identity & Logo"
+
 Cohesion: 0.67
 Nodes (3): Geographic Location Pin, Travel Memories Brand Identity, App Logo SVG (Location Pin Icon)
 
 ### Community 15 - "API Documentation"
+
 Cohesion: 0.67
 Nodes (1): setup()
 
 ### Community 16 - "Chat History"
+
 Cohesion: 0.67
 Nodes (1): setup()
 
 ### Community 17 - "Chat Rendering"
+
 Cohesion: 0.67
 Nodes (1): setup()
 
 ### Community 18 - "Code Quality Tools"
+
 Cohesion: 0.67
 Nodes (3): ESLint Config, Husky Pre-commit Hook, Prettier Code Style Config
 
 ### Community 19 - "Empty State UI"
+
 Cohesion: 1.33
 Nodes (3): No Image Fallback UI State, No Image Placeholder Asset, Photo Collection Empty State
 
 ### Community 22 - "CI/CD Pipeline"
+
 Cohesion: 1.0
 Nodes (2): Azure Static Web Apps (Deployment), GitHub Actions CI/CD
 
 ### Community 65 - "Centralized Types"
+
 Cohesion: 1.0
 Nodes (1): types.ts (Centralized TypeScript Types)
 
 ## Knowledge Gaps
+
 - **25 isolated node(s):** `Vuetify 3`, `vue3-google-login (Google OAuth)`, `Pinia Store: UIMode.ts (Theme)`, `types.ts (Centralized TypeScript Types)`, `appInsights.js (Telemetry Setup)` (+20 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **Thin community `Core Component Composition`** (10 nodes): `ChatContainer.vue`, `DiaryContainer.vue`, `MapContainer.vue`, `TimeLine.vue`, `setup()`, `ChatContainer.vue`, `DiaryContainer.vue`, `MapContainer.vue`, `TimeLine.vue`, `setup()`
@@ -175,6 +204,7 @@ Nodes (1): types.ts (Centralized TypeScript Types)
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 
 ## Suggested Questions
+
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `Vue 3 SPA` connect `Telemetry & Core Components` to `Auth & Chatbot System`?**

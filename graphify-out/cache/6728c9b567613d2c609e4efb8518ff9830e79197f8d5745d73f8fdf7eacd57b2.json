@@ -1,1 +1,37 @@
-{"nodes": [{"id": "d_webdev_travelmemories_src_components_chatcomponent_recentconversations_vue", "label": "RecentConversations.vue", "file_type": "code", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\ChatComponent\\RecentConversations.vue", "source_location": "L1"}, {"id": "recentconversations_setup", "label": "setup()", "file_type": "code", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\ChatComponent\\RecentConversations.vue", "source_location": "L99"}], "edges": [{"source": "d_webdev_travelmemories_src_components_chatcomponent_recentconversations_vue", "target": "recentconversations_setup", "relation": "contains", "confidence": "EXTRACTED", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\ChatComponent\\RecentConversations.vue", "source_location": "L99", "weight": 1.0}], "raw_calls": [{"caller_nid": "recentconversations_setup", "callee": "ref", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\ChatComponent\\RecentConversations.vue", "source_location": "L100"}]}
+{
+	"nodes": [
+		{
+			"id": "d_webdev_travelmemories_src_components_chatcomponent_recentconversations_vue",
+			"label": "RecentConversations.vue",
+			"file_type": "code",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\ChatComponent\\RecentConversations.vue",
+			"source_location": "L1"
+		},
+		{
+			"id": "recentconversations_setup",
+			"label": "setup()",
+			"file_type": "code",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\ChatComponent\\RecentConversations.vue",
+			"source_location": "L99"
+		}
+	],
+	"edges": [
+		{
+			"source": "d_webdev_travelmemories_src_components_chatcomponent_recentconversations_vue",
+			"target": "recentconversations_setup",
+			"relation": "contains",
+			"confidence": "EXTRACTED",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\ChatComponent\\RecentConversations.vue",
+			"source_location": "L99",
+			"weight": 1.0
+		}
+	],
+	"raw_calls": [
+		{
+			"caller_nid": "recentconversations_setup",
+			"callee": "ref",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\ChatComponent\\RecentConversations.vue",
+			"source_location": "L100"
+		}
+	]
+}

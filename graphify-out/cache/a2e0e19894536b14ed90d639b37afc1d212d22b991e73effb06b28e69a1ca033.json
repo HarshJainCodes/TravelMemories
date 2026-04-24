@@ -1,1 +1,28 @@
-{"nodes": [{"id": "claudemd_mapcontainer_vue", "label": "MapContainer.vue", "file_type": "code", "source_file": "src/components/MapContainer.vue", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}, {"id": "mapcontainer_vue", "label": "MapContainer.vue", "file_type": "vue", "source_file": "src/components/MapContainer.vue", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}], "edges": [], "hyperedges": []}
+{
+	"nodes": [
+		{
+			"id": "claudemd_mapcontainer_vue",
+			"label": "MapContainer.vue",
+			"file_type": "code",
+			"source_file": "src/components/MapContainer.vue",
+			"source_location": null,
+			"source_url": null,
+			"captured_at": null,
+			"author": null,
+			"contributor": null
+		},
+		{
+			"id": "mapcontainer_vue",
+			"label": "MapContainer.vue",
+			"file_type": "vue",
+			"source_file": "src/components/MapContainer.vue",
+			"source_location": null,
+			"source_url": null,
+			"captured_at": null,
+			"author": null,
+			"contributor": null
+		}
+	],
+	"edges": [],
+	"hyperedges": []
+}

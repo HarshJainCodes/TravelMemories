@@ -1,1 +1,160 @@
-{"nodes": [{"id": "d_webdev_travelmemories_src_components_pricingpage_pricingpagecontainer_vue", "label": "PricingPageContainer.vue", "file_type": "code", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue", "source_location": "L1"}, {"id": "pricingpagecontainer_setup", "label": "setup()", "file_type": "code", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue", "source_location": "L172"}], "edges": [{"source": "d_webdev_travelmemories_src_components_pricingpage_pricingpagecontainer_vue", "target": "pinia", "relation": "imports_from", "confidence": "EXTRACTED", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue", "source_location": "L159", "weight": 1.0}, {"source": "d_webdev_travelmemories_src_components_pricingpage_pricingpagecontainer_vue", "target": "vue", "relation": "imports_from", "confidence": "EXTRACTED", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue", "source_location": "L160", "weight": 1.0}, {"source": "d_webdev_travelmemories_src_components_pricingpage_pricingpagecontainer_vue", "target": "d_webdev_travelmemories_src_components_pricingpage_pricingcard_vue", "relation": "imports_from", "confidence": "EXTRACTED", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue", "source_location": "L161", "weight": 1.0}, {"source": "d_webdev_travelmemories_src_components_pricingpage_pricingpagecontainer_vue", "target": "d_webdev_travelmemories_src_components_pricingpage_types", "relation": "imports_from", "confidence": "EXTRACTED", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue", "source_location": "L162", "weight": 1.0}, {"source": "d_webdev_travelmemories_src_components_pricingpage_pricingpagecontainer_vue", "target": "vue_query", "relation": "imports_from", "confidence": "EXTRACTED", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue", "source_location": "L163", "weight": 1.0}, {"source": "d_webdev_travelmemories_src_components_pricingpage_pricingpagecontainer_vue", "target": "d_webdev_travelmemories_src_components_queries", "relation": "imports_from", "confidence": "EXTRACTED", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue", "source_location": "L164", "weight": 1.0}, {"source": "d_webdev_travelmemories_src_components_pricingpage_pricingpagecontainer_vue", "target": "vue_toastification", "relation": "imports_from", "confidence": "EXTRACTED", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue", "source_location": "L165", "weight": 1.0}, {"source": "d_webdev_travelmemories_src_components_pricingpage_pricingpagecontainer_vue", "target": "pricingpagecontainer_setup", "relation": "contains", "confidence": "EXTRACTED", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue", "source_location": "L172", "weight": 1.0}], "raw_calls": [{"caller_nid": "pricingpagecontainer_setup", "callee": "storeToRefs", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue", "source_location": "L173"}, {"caller_nid": "pricingpagecontainer_setup", "callee": "useUserDetails", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue", "source_location": "L173"}, {"caller_nid": "pricingpagecontainer_setup", "callee": "useQueryClient", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue", "source_location": "L174"}, {"caller_nid": "pricingpagecontainer_setup", "callee": "useToast", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue", "source_location": "L175"}, {"caller_nid": "pricingpagecontainer_setup", "callee": "ref", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue", "source_location": "L177"}, {"caller_nid": "pricingpagecontainer_setup", "callee": "useMutation", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue", "source_location": "L179"}, {"caller_nid": "pricingpagecontainer_setup", "callee": "ref", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue", "source_location": "L192"}, {"caller_nid": "pricingpagecontainer_setup", "callee": "ref", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue", "source_location": "L209"}, {"caller_nid": "pricingpagecontainer_setup", "callee": "mutate", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue", "source_location": "L250"}, {"caller_nid": "pricingpagecontainer_setup", "callee": "[\n\t\t\t{\n\t\t\t\ttype: 'Free',\n\t\t\t\ticon: 'mdi-flash',\n\t\t\t\tsubtitle: 'Perfect for individuals and light users',\n\t\t\t\tprice: 0,\n\t\t\t\ttimePeriod: 'month',\n\t\t\t\tplanBenifits: ['5 GB storage /month', 'Download/Upload images'],\n\t\t\t},\n\t\t\t{\n\t\t\t\ttype: 'Basic',\n\t\t\t\ticon: 'mdi-rocket-launch',\n\t\t\t\tsubtitle: 'Best for professional creators',\n\t\t\t\tprice: 83,\n\t\t\t\ttimePeriod: 'month',\n\t\t\t\tplanBenifits: [\n\t\t\t\t\t'30 GB storage /month',\n\t\t\t\t\t'Download/Upload images',\n\t\t\t\t\t'Get Insights on your trips using AI',\n\t\t\t\t\t'Basic customer support',\n\t\t\t\t\t'API support (Coming soon)',\n\t\t\t\t],\n\t\t\t\tstrikeThroughPrice: 99,\n\t\t\t},\n\t\t\t{\n\t\t\t\ttype: 'Pro',\n\t\t\t\ticon: 'mdi-crown',\n\t\t\t\tsubtitle: 'Best for user with heavy data and usage',\n\t\t\t\tprice: 250,\n\t\t\t\ttimePeriod: 'month',\n\t\t\t\tplanBenifits: [\n\t\t\t\t\t'100 GB storage /month',\n\t\t\t\t\t'Download/Upload images',\n\t\t\t\t\t'Get Insights on your trips using AI',\n\t\t\t\t\t'Priority customer support',\n\t\t\t\t\t'API support (Coming soon)',\n\t\t\t\t],\n\t\t\t\tstrikeThroughPrice: 299,\n\t\t\t},\n\t\t];\n\n\t\tconst pricingCardInfo = computed(() =>\n\t\t\tcurrentTab.value === 0 ? pricingDetailsMonthly : pricingDetailsYearly,\n\t\t)", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue", "source_location": "L250"}, {"caller_nid": "pricingpagecontainer_setup", "callee": "[\n\t\t\t{\n\t\t\t\ttype: 'Free',\n\t\t\t\ticon: 'mdi-flash',\n\t\t\t\tsubtitle: 'Perfect for individuals and light users',\n\t\t\t\tprice: 0,\n\t\t\t\ttimePeriod: 'month',\n\t\t\t\tplanBenifits: ['5 GB storage /month', 'Download/Upload images'],\n\t\t\t},\n\t\t\t{\n\t\t\t\ttype: 'Basic',\n\t\t\t\ticon: 'mdi-rocket-launch',\n\t\t\t\tsubtitle: 'Best for professional creators',\n\t\t\t\tprice: 83,\n\t\t\t\ttimePeriod: 'month',\n\t\t\t\tplanBenifits: [\n\t\t\t\t\t'30 GB storage /month',\n\t\t\t\t\t'Download/Upload images',\n\t\t\t\t\t'Get Insights on your trips using AI',\n\t\t\t\t\t'Basic customer support',\n\t\t\t\t\t'API support (Coming soon)',\n\t\t\t\t],\n\t\t\t\tstrikeThroughPrice: 99,\n\t\t\t},\n\t\t\t{\n\t\t\t\ttype: 'Pro',\n\t\t\t\ticon: 'mdi-crown',\n\t\t\t\tsubtitle: 'Best for user with heavy data and usage',\n\t\t\t\tprice: 250,\n\t\t\t\ttimePeriod: 'month',\n\t\t\t\tplanBenifits: [\n\t\t\t\t\t'100 GB storage /month',\n\t\t\t\t\t'Download/Upload images',\n\t\t\t\t\t'Get Insights on your trips using AI',\n\t\t\t\t\t'Priority customer support',\n\t\t\t\t\t'API support (Coming soon)',\n\t\t\t\t],\n\t\t\t\tstrikeThroughPrice: 299,\n\t\t\t},\n\t\t]", "source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue", "source_location": "L250"}]}
+{
+	"nodes": [
+		{
+			"id": "d_webdev_travelmemories_src_components_pricingpage_pricingpagecontainer_vue",
+			"label": "PricingPageContainer.vue",
+			"file_type": "code",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue",
+			"source_location": "L1"
+		},
+		{
+			"id": "pricingpagecontainer_setup",
+			"label": "setup()",
+			"file_type": "code",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue",
+			"source_location": "L172"
+		}
+	],
+	"edges": [
+		{
+			"source": "d_webdev_travelmemories_src_components_pricingpage_pricingpagecontainer_vue",
+			"target": "pinia",
+			"relation": "imports_from",
+			"confidence": "EXTRACTED",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue",
+			"source_location": "L159",
+			"weight": 1.0
+		},
+		{
+			"source": "d_webdev_travelmemories_src_components_pricingpage_pricingpagecontainer_vue",
+			"target": "vue",
+			"relation": "imports_from",
+			"confidence": "EXTRACTED",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue",
+			"source_location": "L160",
+			"weight": 1.0
+		},
+		{
+			"source": "d_webdev_travelmemories_src_components_pricingpage_pricingpagecontainer_vue",
+			"target": "d_webdev_travelmemories_src_components_pricingpage_pricingcard_vue",
+			"relation": "imports_from",
+			"confidence": "EXTRACTED",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue",
+			"source_location": "L161",
+			"weight": 1.0
+		},
+		{
+			"source": "d_webdev_travelmemories_src_components_pricingpage_pricingpagecontainer_vue",
+			"target": "d_webdev_travelmemories_src_components_pricingpage_types",
+			"relation": "imports_from",
+			"confidence": "EXTRACTED",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue",
+			"source_location": "L162",
+			"weight": 1.0
+		},
+		{
+			"source": "d_webdev_travelmemories_src_components_pricingpage_pricingpagecontainer_vue",
+			"target": "vue_query",
+			"relation": "imports_from",
+			"confidence": "EXTRACTED",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue",
+			"source_location": "L163",
+			"weight": 1.0
+		},
+		{
+			"source": "d_webdev_travelmemories_src_components_pricingpage_pricingpagecontainer_vue",
+			"target": "d_webdev_travelmemories_src_components_queries",
+			"relation": "imports_from",
+			"confidence": "EXTRACTED",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue",
+			"source_location": "L164",
+			"weight": 1.0
+		},
+		{
+			"source": "d_webdev_travelmemories_src_components_pricingpage_pricingpagecontainer_vue",
+			"target": "vue_toastification",
+			"relation": "imports_from",
+			"confidence": "EXTRACTED",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue",
+			"source_location": "L165",
+			"weight": 1.0
+		},
+		{
+			"source": "d_webdev_travelmemories_src_components_pricingpage_pricingpagecontainer_vue",
+			"target": "pricingpagecontainer_setup",
+			"relation": "contains",
+			"confidence": "EXTRACTED",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue",
+			"source_location": "L172",
+			"weight": 1.0
+		}
+	],
+	"raw_calls": [
+		{
+			"caller_nid": "pricingpagecontainer_setup",
+			"callee": "storeToRefs",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue",
+			"source_location": "L173"
+		},
+		{
+			"caller_nid": "pricingpagecontainer_setup",
+			"callee": "useUserDetails",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue",
+			"source_location": "L173"
+		},
+		{
+			"caller_nid": "pricingpagecontainer_setup",
+			"callee": "useQueryClient",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue",
+			"source_location": "L174"
+		},
+		{
+			"caller_nid": "pricingpagecontainer_setup",
+			"callee": "useToast",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue",
+			"source_location": "L175"
+		},
+		{
+			"caller_nid": "pricingpagecontainer_setup",
+			"callee": "ref",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue",
+			"source_location": "L177"
+		},
+		{
+			"caller_nid": "pricingpagecontainer_setup",
+			"callee": "useMutation",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue",
+			"source_location": "L179"
+		},
+		{
+			"caller_nid": "pricingpagecontainer_setup",
+			"callee": "ref",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue",
+			"source_location": "L192"
+		},
+		{
+			"caller_nid": "pricingpagecontainer_setup",
+			"callee": "ref",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue",
+			"source_location": "L209"
+		},
+		{
+			"caller_nid": "pricingpagecontainer_setup",
+			"callee": "mutate",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue",
+			"source_location": "L250"
+		},
+		{
+			"caller_nid": "pricingpagecontainer_setup",
+			"callee": "[\n\t\t\t{\n\t\t\t\ttype: 'Free',\n\t\t\t\ticon: 'mdi-flash',\n\t\t\t\tsubtitle: 'Perfect for individuals and light users',\n\t\t\t\tprice: 0,\n\t\t\t\ttimePeriod: 'month',\n\t\t\t\tplanBenifits: ['5 GB storage /month', 'Download/Upload images'],\n\t\t\t},\n\t\t\t{\n\t\t\t\ttype: 'Basic',\n\t\t\t\ticon: 'mdi-rocket-launch',\n\t\t\t\tsubtitle: 'Best for professional creators',\n\t\t\t\tprice: 83,\n\t\t\t\ttimePeriod: 'month',\n\t\t\t\tplanBenifits: [\n\t\t\t\t\t'30 GB storage /month',\n\t\t\t\t\t'Download/Upload images',\n\t\t\t\t\t'Get Insights on your trips using AI',\n\t\t\t\t\t'Basic customer support',\n\t\t\t\t\t'API support (Coming soon)',\n\t\t\t\t],\n\t\t\t\tstrikeThroughPrice: 99,\n\t\t\t},\n\t\t\t{\n\t\t\t\ttype: 'Pro',\n\t\t\t\ticon: 'mdi-crown',\n\t\t\t\tsubtitle: 'Best for user with heavy data and usage',\n\t\t\t\tprice: 250,\n\t\t\t\ttimePeriod: 'month',\n\t\t\t\tplanBenifits: [\n\t\t\t\t\t'100 GB storage /month',\n\t\t\t\t\t'Download/Upload images',\n\t\t\t\t\t'Get Insights on your trips using AI',\n\t\t\t\t\t'Priority customer support',\n\t\t\t\t\t'API support (Coming soon)',\n\t\t\t\t],\n\t\t\t\tstrikeThroughPrice: 299,\n\t\t\t},\n\t\t];\n\n\t\tconst pricingCardInfo = computed(() =>\n\t\t\tcurrentTab.value === 0 ? pricingDetailsMonthly : pricingDetailsYearly,\n\t\t)",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue",
+			"source_location": "L250"
+		},
+		{
+			"caller_nid": "pricingpagecontainer_setup",
+			"callee": "[\n\t\t\t{\n\t\t\t\ttype: 'Free',\n\t\t\t\ticon: 'mdi-flash',\n\t\t\t\tsubtitle: 'Perfect for individuals and light users',\n\t\t\t\tprice: 0,\n\t\t\t\ttimePeriod: 'month',\n\t\t\t\tplanBenifits: ['5 GB storage /month', 'Download/Upload images'],\n\t\t\t},\n\t\t\t{\n\t\t\t\ttype: 'Basic',\n\t\t\t\ticon: 'mdi-rocket-launch',\n\t\t\t\tsubtitle: 'Best for professional creators',\n\t\t\t\tprice: 83,\n\t\t\t\ttimePeriod: 'month',\n\t\t\t\tplanBenifits: [\n\t\t\t\t\t'30 GB storage /month',\n\t\t\t\t\t'Download/Upload images',\n\t\t\t\t\t'Get Insights on your trips using AI',\n\t\t\t\t\t'Basic customer support',\n\t\t\t\t\t'API support (Coming soon)',\n\t\t\t\t],\n\t\t\t\tstrikeThroughPrice: 99,\n\t\t\t},\n\t\t\t{\n\t\t\t\ttype: 'Pro',\n\t\t\t\ticon: 'mdi-crown',\n\t\t\t\tsubtitle: 'Best for user with heavy data and usage',\n\t\t\t\tprice: 250,\n\t\t\t\ttimePeriod: 'month',\n\t\t\t\tplanBenifits: [\n\t\t\t\t\t'100 GB storage /month',\n\t\t\t\t\t'Download/Upload images',\n\t\t\t\t\t'Get Insights on your trips using AI',\n\t\t\t\t\t'Priority customer support',\n\t\t\t\t\t'API support (Coming soon)',\n\t\t\t\t],\n\t\t\t\tstrikeThroughPrice: 299,\n\t\t\t},\n\t\t]",
+			"source_file": "D:\\WebDev\\TravelMemories\\src\\components\\PricingPage\\PricingPageContainer.vue",
+			"source_location": "L250"
+		}
+	]
+}

@@ -1,1 +1,17 @@
-{"nodes": [{"id": "claudemd_store_uimode", "label": "Pinia Store: UIMode.ts (Theme)", "file_type": "code", "source_file": "src/stores/UIMode.ts", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}], "edges": [], "hyperedges": []}
+{
+	"nodes": [
+		{
+			"id": "claudemd_store_uimode",
+			"label": "Pinia Store: UIMode.ts (Theme)",
+			"file_type": "code",
+			"source_file": "src/stores/UIMode.ts",
+			"source_location": null,
+			"source_url": null,
+			"captured_at": null,
+			"author": null,
+			"contributor": null
+		}
+	],
+	"edges": [],
+	"hyperedges": []
+}
