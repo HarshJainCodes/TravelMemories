@@ -36,8 +36,8 @@ export default defineComponent({
 		const currentLoginTab = ref(0);
 
 		// google login methods
-		const onGoogleAuthenticated: CallbackTypes.TokenResponseCallback = async (res) => {
-			const google_jwt = res.access_token;
+		const onGoogleAuthenticated: CallbackTypes.CredentialCallback = async (res) => {
+			const google_jwt = res.credential;
 
 			const googleLoginCall = await fetch(`${BACKEND_URL}/auth/googleLogin`, {
 				method: 'POST',
