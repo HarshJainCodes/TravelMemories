@@ -135,7 +135,7 @@ export default defineComponent({
 
 		const onFilesChanged = (files: File[]) => {
 			files.forEach((file) => {
-				if (!(file.type.startsWith('image') || file.name.endsWith('.HEIC'))) {
+				if (!(file.type.startsWith('image') || file.name.endsWith('.HEIC') || file.name.endsWith('.heic'))) {
 					toast('Only Images are supported', {
 						type: TYPE.ERROR,
 					});
